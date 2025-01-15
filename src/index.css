@@ -1,0 +1,273 @@
+/* Regular */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Italic */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Bold */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Bold Italic */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Extra Light */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+/* Extra Light Italic */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-ExtraLightItalic.ttf') format('truetype');
+  font-weight: 200;
+  font-style: italic;
+}
+
+/* Light */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Light Italic */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* Medium */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Medium Italic */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* Semi Bold */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Semi Bold Italic */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* Extra Bold */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* Extra Bold Italic */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+}
+
+/* Black */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* Black Italic */
+@font-face {
+  font-family: 'Mulish';
+  src: url('assets/fonts/Mulish-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+
+
+*{
+  box-sizing: border-box;
+}
+*, :after, :before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*, :after, :before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+html{
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+   scroll-behavior: smooth;
+
+}
+
+
+body {
+  font-family: 'Mulish', '-apple-system', BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  width: 100%;
+  background: #fff;
+  color: #1c1c1c;
+  overflow-x: hidden;
+}
+
+@media screen and (max-width:1000px){
+  body {
+    font-size: 15px !important;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+li{
+  list-style: none;
+}
+a:hover,
+a:focus,
+a{
+  text-decoration: none;
+  color: inherit;
+}
+a,button{
+  outline: none;
+}
+
+
+p,h1,h2,h3,h4,h5,h6,ul,li,a,button,input,span,textarea, select{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+}
+
+
+
+.site-container{
+  position: relative;
+  width: 80%;
+  margin-left: 10%;
+  height: auto;
+}
+
+@media screen and (max-width:1200px){
+  .site-container{
+      width: 90% !important;
+      margin-left: 5% !important;
+      padding: 0px 0px !important;
+  }
+}
+
+.btn-bg{
+  background-color: #0D2818 !important;
+  color: #fff !important;
+  transition: all 0.3s ease-in-out;
+  border-color: #0D2818 !important;
+}
+
+.btn-bg:hover{
+  background-color: #164529 !important;
+  border-color: #164529 !important;
+}
+
+.big-text{
+  font-size: 50px;
+  font-weight: 700;
+}
+
+@media screen and (max-width:1000px){
+  .big-text{
+    font-size: 40px !important;
+  }
+}
+
+@media screen and (max-width:400px){
+  .big-text{
+    font-size: 30px !important;
+  }
+}
+
+.error-message{
+  color: #ff4000;
+  font-size: 12px !important;
+  font-style: italic !important;
+  margin-top: 8px;
+}
+
+
+
+
+
+
+
+/* //////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+.plan_box{
+  display: none !important;
+}
+
+
+.plan_box:nth-child(1),
+.plan_box:nth-child(2){
+  display: block !important;
+}
