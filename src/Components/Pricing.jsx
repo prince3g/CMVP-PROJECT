@@ -12,8 +12,9 @@ import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 
 export default function Pricing() {
     const [plans, setPlans] = useState([]);
-    const [isSubscribing, setIsSubscribing] = useState(null); // Track the plan being subscribed to
-    const [isLoading, setIsLoading] = useState(false); // State to track loading status
+    const [isSubscribing, setIsSubscribing] = useState(null);
+    const [isLoading, setIsLoading] = useState(false); 
+    
 
     const navigate = useNavigate();
     const [flashMessage, setFlashMessage] = useState(""); // State for flash message
