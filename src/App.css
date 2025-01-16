@@ -151,7 +151,9 @@
     border-top-left-radius: 10px !important;
     border-bottom-left-radius: 10px !important;
   }
-
+.first-Nav-link{
+  background-color: transparent !important;
+}
 }
 
 @media screen and (max-width:150px){
@@ -1206,6 +1208,11 @@
 }
 
 
+.Verification_Nav .last-Nav-link,
+.Verification_Nav .nav-content .Nav-Links{
+  display: none !important;
+}
+
 
 
 
@@ -1616,19 +1623,19 @@
   position: relative;
   width: 100%;
   height: auto;
-  min-height: 100vh;
   z-index: 1;
 }
 
 .Top_Plannsia{
   padding-top: 100px;
+  min-height: 400px;
 }
 
 .Top_Plannsia::before{
   content: '';
   position: absolute;
   width: 100%;
-  height: 60%;
+  height: 400px;
   top: 0;
   left: 0;
   z-index: -1000;
@@ -1640,7 +1647,7 @@
 }
 @media screen and (max-width:1000px){
   .Top_Plannsia::before{
-    height: 30% !important;
+    height: 350px !important;
   }
 }
 .TThero-Blam{
@@ -2609,3 +2616,102 @@ text-align: center;
 
 
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* Verification_page */
+
+ .Verification_page{
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+ }
+
+
+ .Verification_Nav .site-container{
+  width: 90% !important;
+  margin-left: 5% !important;
+ }
+
+ .Verification_Nav .site-logo img{
+  max-width: 200px;
+ }
+
+ .Fixed_BG_OO{
+  position: fixed;
+  width: 60%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background-color: #0D2818;
+  color: #fff;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+ }
+
+
+ .Fixed_BG_OO img.Fixed-ImgBg{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -300;
+ }
+
+ .Fixed_BG_OO::before{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -200;
+  background-color: rgba(0,0,0,0.5);
+ }
+
+
+ .Fixed_BG_OO span{
+  position: absolute;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 400px;
+  height:400px;
+ }
+
+ .marked_Img{
+  position: relative;
+  max-width: 100%;
+ }
+
+.comp_Logo{
+  position: relative;
+  max-width: 300px;
+  padding: 10px 10px;
+  height:auto;
+  max-height: 200px;
+  background-color: #fff;
+  object-fit: contain;
+  position: absolute;
+}

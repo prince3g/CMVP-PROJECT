@@ -12,19 +12,24 @@ import Contact from './Components/Contact';
 import Pricing from './Components/Pricing';
 import HowItWorks from './Components/HowItWorks';
 import FAQ from './Components/FAQ';
+import Verification from './Components/Verification';
 
 function App() {
   const location = useLocation(); // Now useLocation works as App is wrapped in Router
 
-  // Check if the current path is /login or /signup
+  // Check for specific paths to determine classes and footer visibility
   const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
+  const isVerificationPage = location.pathname === '/verification';
+
+  // Determine the class for Navbar
+  const navbarClass = isAuthPage ? 'Reg_Nav' : isVerificationPage ? 'Verification_Nav' : '';
 
   return (
     <div className="App">
       <ScrollToTop />
 
-      {/* Add conditional class to Navbar */}
-      <Navbar className={isAuthPage ? 'Reg_Nav' : ''} />
+      {/* Pass the determined class to Navbar */}
+      <Navbar className={navbarClass} />
 
       <div className="App-Pages">
         <Routes>
@@ -37,11 +42,12 @@ function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/verification" element={<Verification />} />
         </Routes>
       </div>
 
       {/* Conditionally hide Footer */}
-      {!isAuthPage && <Footer />}
+      {!isAuthPage && !isVerificationPage && <Footer />}
     </div>
   );
 }
