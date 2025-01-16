@@ -2626,7 +2626,15 @@ text-align: center;
 
 
 
+ /* Verification-Landing-page */
 
+ .Verification-Landing-page{
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  z-index: 1;
+ }
 
 
 
@@ -2639,6 +2647,12 @@ text-align: center;
   width: 100%;
   height: auto;
   min-height: 100vh;
+  transition: all 0.5s ease-in-out;
+ }
+ 
+
+ .Showresult  .Verification_page{
+  transform: translateY(-100%);
  }
 
 
@@ -2714,4 +2728,153 @@ text-align: center;
   background-color: #fff;
   object-fit: contain;
   position: absolute;
+}
+
+
+
+
+/* .activeComp_Intro_Sec */
+
+.Comp_Intro_Sec{
+  position: relative;
+  width: 40%;
+  min-height: auto;
+  min-height: 100vh;
+  padding: 100px 90px;
+  padding-right: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.COm_oopal{
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.COm_oopal h6{
+  font-size: 11px;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.COm_oopal h2 span{
+  background-color: #7BF2AB;
+  padding: 0px 5px;
+  color: #000;
+}
+
+.COm_oopal p{
+  margin-top: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.Verification_Search_Form{
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+  border-top: 1px solid #E2E2E2;
+  padding-top: 20px;
+}
+
+.V_Form_Input{
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.react-datepicker-wrapper{
+  display: block !important;
+  width: 100%;
+}
+.react-datepicker__navigation{
+  width: 20px !important;
+  width:30px !important;
+  background-color: transparent !important;
+}
+.react-datepicker__year-select,
+.react-datepicker__month-dropdown-container select{
+  background-color: #fff !important;
+  border:none !important;
+  outline: none !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+  padding:10px !important;
+}
+
+.V_Form_Input label{
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: block;
+}
+.V_Form_Input input{
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  background-color: transparent;
+  outline: none;
+  padding: 0px 20px;
+  font-size: 15px;
+  color: #000;
+  border: 1px solid #E2E2E2;
+}
+.V_Form_Input input.certNum_Inpt,
+.V_Form_Input input:focus{
+  background-color: #fff;
+  border:2px solid #0D2818;
+}
+.V_Form_Input img{
+  position: absolute;
+  max-width: 30px;
+  z-index: 2;
+  right: 10px;
+}
+.F_V_Form_Input input{
+  padding-right: 35px;
+}
+.F_V_Form_Input input::placeholder{
+  color: #4B4B4B;
+}
+.V_Form_Input button{
+  width: auto;
+  height: 50px;
+  padding: 0px 30px;
+  border-radius: 8px;
+  outline: none;
+  border:none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+@media screen and (max-width:1000px){
+  .V_Form_Input button{
+      font-size: 16px !important;
+  }
+}
+
+
+.HGa_Grid{
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
+  gap: 15px;
+  grid-gap: 15px;
+  margin-bottom: 10px;
 }

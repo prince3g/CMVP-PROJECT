@@ -271,3 +271,23 @@ p,h1,h2,h3,h4,h5,h6,ul,li,a,button,input,span,textarea, select{
 .plan_box:nth-child(2){
   display: block !important;
 }
+
+
+
+.flash-message{
+  position: fixed;
+  z-index: 2000;
+  left: 30%;
+  top: 30px;
+  background-color: #fc474a;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+.flash-message button{
+  margin-left: 10px;
+  font-size: 15px;
+  background-color: transparent;
+}

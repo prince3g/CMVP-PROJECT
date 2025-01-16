@@ -146,6 +146,7 @@ useEffect(() => {
 
 
   return (
+    <div className={`Verification-Landing-page ${showResult ? 'Showresult' : ''}`}>
      <div className='Verification_page'>
       <div className="Fixed_BG_OO">
 
@@ -160,7 +161,6 @@ useEffect(() => {
              <img 
             src={`${config.API_BASE_URL}${organizationDatalogo}`} 
             alt="CEO" 
-            // onError={(e) => { e.target.onerror = null; e.target.src = SampleImage; }}
 
             className="comp_Logo"
         />
@@ -168,6 +168,68 @@ useEffect(() => {
 
          </span>
       </div>
+
+      <div className="Comp_Intro_Sec">
+        <div className="COm_oopal">
+          {/* <h6>Powered by Proliance LTD (ISO 9001:2015 certified company)</h6> */}
+          <h2 className="big-text"><span>{organizationData_name} </span><br></br>  verification portal</h2>
+          <p>Your trusted platform for verifying certificates and documents with ease.</p>
+        </div>
+
+        <div className="seargs_sec">
+           <form className="Verification_Search_Form" onSubmit={handleFormSubmit}>
+            <div className="HGa_Grid">
+              <div className="V_Form_Input">
+                <label>Certificate number</label>
+              <input 
+                  type="text" 
+                  placeholder="Enter certificate number" 
+                  value={certificateNumber}
+                  onChange={(e) => setCertificateNumber(e.target.value)}
+                  // className="certNum_Inpt"
+                  required
+                />
+              </div>
+
+              <div className="V_Form_Input">
+                <label>Enter date</label>
+                   <DatePicker
+                    selected={issuedDate}
+                    onChange={(date) => setIssuedDate(date)}
+                     placeholderText="Issued date"
+                     dateFormat="yyyy/MM/dd"
+                     className="DatePicker_Input"
+                     showYearDropdown
+                     showMonthDropdown
+                    dropdownMode="select"
+                    required
+                 />
+           </div>
+
+           </div>
+
+           {errorMessage && (
+          <FlashMessage
+            message={errorMessage}
+            type="error"
+            onClose={handleCloseFlashMessage}
+          />
+        )}
+
+           <div className="V_Form_Input">
+              <button type="submit" disabled={loading} className="btn-bg" >
+                    {loading ? "Verifying..." : "Verify certificate"}
+                 </button>
+              </div>
+
+           </form>
+        </div>
+      </div>
+     </div>
+
+
+
+
      </div>
   )
 }

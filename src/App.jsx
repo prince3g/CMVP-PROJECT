@@ -15,11 +15,12 @@ import FAQ from './Components/FAQ';
 import Verification from './Components/Verification';
 
 function App() {
-  const location = useLocation(); // Now useLocation works as App is wrapped in Router
+  const location = useLocation();
 
-  // Check for specific paths to determine classes and footer visibility
+  // Check if the current path matches any of the verification routes
   const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
-  const isVerificationPage = location.pathname === '/verification';
+  const isVerificationPage =
+    location.pathname.startsWith('/verification') && location.pathname.split('/').length >= 2;
 
   // Determine the class for Navbar
   const navbarClass = isAuthPage ? 'Reg_Nav' : isVerificationPage ? 'Verification_Nav' : '';
@@ -43,6 +44,7 @@ function App() {
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/verification" element={<Verification />} />
+          <Route path="/verification/:orgID/:OrgName" element={<Verification />} />
         </Routes>
       </div>
 
