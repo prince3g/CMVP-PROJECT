@@ -49,7 +49,7 @@ function Footer() {
                 </div>
             </div>
             <div className='Sub-Foot'>
-                <p><a href='#'>Powered by Proliance LTD (ISO 9001 certified company)</a></p>
+                <p><a href='#'>Powered by Proliance LTD (ISO 9001:2015 certified company)</a></p>
                 <span>© {currentYear} CMVP. All rights reserved.</span>
             </div>
         </div>
