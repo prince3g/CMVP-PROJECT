@@ -11,6 +11,8 @@ import MarkedImg from '../assets/Img/marked.svg';
 
 import CompLogo from '../assets/Img/comp_logo.png';
 
+import Certificate from './Certificate';
+
 
 
 function Verification() {
@@ -128,11 +130,12 @@ useEffect(() => {
   fetchOrganizationData();
 }, [orgID]);
 
-  const handleGoBackClick = () => {
-      setCertificateNumber('');
-      setIssuedDate(null);
-      setShowResult(false);
-  };
+
+const handleGoBack = () => {
+  setCertificateNumber('');
+  setIssuedDate(null);
+  setShowResult(false); // Remove the Showresult class
+};
 
 
 
@@ -171,7 +174,6 @@ useEffect(() => {
 
       <div className="Comp_Intro_Sec">
         <div className="COm_oopal">
-          {/* <h6>Powered by Proliance LTD (ISO 9001:2015 certified company)</h6> */}
           <h2 className="big-text"><span>{organizationData_name} </span><br></br>  verification portal</h2>
           <p>Your trusted platform for verifying certificates and documents with ease.</p>
         </div>
@@ -228,7 +230,22 @@ useEffect(() => {
      </div>
 
 
+     <section className="Search_Reasult_Sec">
+          
+          <div className="site-container">
 
+          {showResult && responseData && (
+            <Certificate data={responseData} onGoBack={handleGoBack} />
+          )}
+
+         </div>
+     </section>
+
+
+          <footer className="very_footer">
+          <a href="https://www.prolianceltd.com/">Powered by Proliance LTD <br></br> (ISO 9001:2015 certified company)</a>
+          <span>© {currentYear} CMVP. All rights reserved.</span>
+          </footer>
 
      </div>
   )
