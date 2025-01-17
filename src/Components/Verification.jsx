@@ -174,6 +174,12 @@ const handleGoBack = () => {
 
       <div className="Comp_Intro_Sec">
         <div className="COm_oopal">
+        <img 
+            src={`${config.API_BASE_URL}${organizationDatalogo}`} 
+            alt="Company Logo" 
+
+            className="mobile_comp_Logo"
+        />
           <h2 className="big-text"><span>{organizationData_name} </span><br></br>  verification portal</h2>
           <p>Your trusted platform for verifying certificates and documents with ease.</p>
         </div>

@@ -1221,6 +1221,10 @@
   display: none !important;
 }
 
+.Verification_Nav{
+  width: auto !important;
+  margin-left: 5% !important;
+}
 
 
 
@@ -1563,6 +1567,7 @@
 .password-strength {
   margin-top: 10px;
   margin-bottom: 10px;
+  font-size: 12px;
 }
 
 .strength-bar {
@@ -1672,7 +1677,7 @@
 .hagsh-sec{
   position: relative;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 90px;
 }
 
 
@@ -2692,6 +2697,39 @@ text-align: center;
  }
 
 
+ @media screen and (max-width:1200px){
+  .Comp_Intro_Sec,
+  .Fixed_BG_OO{
+    width: 50% !important;
+  }
+  .Fixed_BG_OO span{
+    width: 300px !important;
+    height: 300px !important;
+  }
+
+  .comp_Logo{
+    max-width: 200px !important;
+    max-height: 100px !important;
+  }
+ }
+
+ @media screen and (max-width:1000px){
+  .Fixed_BG_OO{
+    display: none !important;
+  }
+  .Comp_Intro_Sec{
+    width: 60% !important;
+    margin-left: 20% !important;
+    padding: 70px 0px !important;
+  }
+ }
+
+ @media screen and (max-width:700px){
+  .Comp_Intro_Sec{
+    width: 90% !important;
+    margin-left: 5% !important;
+  }
+ }
  .Fixed_BG_OO img.Fixed-ImgBg{
   position: absolute;
   width: 100%;
@@ -2723,6 +2761,7 @@ text-align: center;
   width: 400px;
   height:400px;
  }
+
 
  .marked_Img{
   position: relative;
@@ -2778,7 +2817,21 @@ text-align: center;
 .COm_oopal p{
   margin-top: 10px;
 }
+.mobile_comp_Logo{
+  display: none;
+ }
 
+ @media screen and (max-width:1000px){
+  .mobile_comp_Logo{
+    display: inline-flex !important;
+    max-width: 100px !important;
+    max-height: 80px !important;
+    border:1px solid #E2E2E2 !important;
+    padding: 10px !important;
+    margin-bottom: 10px !important;
+    border-radius: 5px !important;
+   }
+ }
 
 
 
@@ -2871,11 +2924,7 @@ text-align: center;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
-@media screen and (max-width:1000px){
-  .V_Form_Input button{
-      font-size: 16px !important;
-  }
-}
+
 
 
 .HGa_Grid{
@@ -2890,7 +2939,12 @@ text-align: center;
 }
 
 
-
+@media screen and (max-width:400px){
+  .HGa_Grid{
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
 
 
 
@@ -2916,10 +2970,19 @@ text-align: center;
   left: 0;
   z-index: -500;
   background-color: #eff2f6;
-  padding: 100px 0px;
+  padding: 30px 0px;
   overflow-y: auto;
 }
-
+@media screen and (max-width:1200px){
+  .Search_Reasult_Sec{
+    padding: 90px 0px !important;
+  }
+}
+@media screen and (max-width:500px){
+  .Search_Reasult_Sec{
+    padding: 50px 0px !important;
+  }
+}
 .Search_Reasult_Sec .site-container{
   display: flex !important;
   justify-content: center !important;
@@ -3005,16 +3068,27 @@ text-align: center;
   display: flex;
   width: 100%;
   height: auto;
-  padding:10px 20px;
+  padding:5px 20px;
   background-color:  #eff2f6;
-  margin-top: 15px;
+  margin-top: 10px;
   text-transform: capitalize !important;
-  font-size: 16px;
+  font-size: 13px;
 }
 .status {
   font-weight: 700;
+  font-size: 35px;
+}
+@media screen and (max-width:1000px){
+  .status {
+    font-size: 30px !important;
+  }
 }
 
+@media screen and (max-width:500px){
+  .status {
+    font-size: 20px !important;
+  }
+}
 
 
 
@@ -3029,7 +3103,26 @@ text-align: center;
   z-index: 1500;
   transition: all 0.3s ease-in-out;
 }
+@media screen and (max-width:1000px){
+  .very_footer{
+    color: #1c1c1c !important;
+    position: relative !important;
+    right: 0% !important;
+    bottom: 0px !important;
+    width: 90% !important;
+    margin-left: 5% !important;
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+  }
 
+  .very_footer span{
+    margin-top: 10px !important;
+  }
+
+  .Showresult .very_footer{
+    display: none !important;
+  }
+}
 .very_footer a{
   font-size: 11px;
   font-weight: 500;

@@ -13,18 +13,18 @@ const Certificate = ({ data, onGoBack }) => {
             <div className="verified-badge">
                 <button className="btn-bg" onClick={onGoBack}><ArrowBackIcon /> Back</button>
 
-              <p className="status"
+             <p></p>
+
+
+            </div>
+            <h1 className="status"
               style={{
                 color: data.status === "valid" ? "green" : "red",
                 fontWeight: "bold",
               }}
             >
               {data.status === "valid" ? "✔ Verified" : "Invalid"}
-            </p>
-
-
-            </div>
-            <h1 className="big-text">Certificate of Achievement</h1>
+            </h1>
           </div>
           <div className="certificate-body">
             <p>
@@ -42,19 +42,7 @@ const Certificate = ({ data, onGoBack }) => {
             <p>
               Issued By: <span>{data.certificate_details.organization_name}</span>
             </p>
-            <p>
-              Status:{" "}
-
-              <span className="status"
-              style={{
-                color: data.status === "valid" ? "green" : "red",
-                fontWeight: "bold",
-              }}
-            >
-              {data.status === "valid" ? "✔ Verified" : "Invalid"}
-            </span>
-
-            </p>
+           
           </div>
         </>
       )}

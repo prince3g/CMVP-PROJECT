@@ -13,25 +13,26 @@ import Pricing from './Components/Pricing';
 import HowItWorks from './Components/HowItWorks';
 import FAQ from './Components/FAQ';
 import Verification from './Components/Verification';
+import ForgotPassPage from './Components/ForgotPassPage';
+import ForgotPassPageReset from './Components/ForgotPassPageReset';
 
 function App() {
   const location = useLocation();
 
-  // Check if the current path matches any of the verification routes
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
+  const isAuthPage =
+    location.pathname === '/login' ||
+    location.pathname === '/signup' ||
+    location.pathname === '/forgot-password' ||
+    location.pathname.startsWith('/forgotten_pass_reset/');
   const isVerificationPage =
     location.pathname.startsWith('/verification') && location.pathname.split('/').length >= 2;
 
-  // Determine the class for Navbar
   const navbarClass = isAuthPage ? 'Reg_Nav' : isVerificationPage ? 'Verification_Nav' : '';
 
   return (
     <div className="App">
       <ScrollToTop />
-
-      {/* Pass the determined class to Navbar */}
       <Navbar className={navbarClass} />
-
       <div className="App-Pages">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -45,10 +46,10 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/verification" element={<Verification />} />
           <Route path="/verification/:orgID/:OrgName" element={<Verification />} />
+          <Route path="/forgot-password" element={<ForgotPassPage />} />
+          <Route path="/forgotten_pass_reset/:uidb64/:token/" element={<ForgotPassPageReset />} />
         </Routes>
       </div>
-
-      {/* Conditionally hide Footer */}
       {!isAuthPage && !isVerificationPage && <Footer />}
     </div>
   );
