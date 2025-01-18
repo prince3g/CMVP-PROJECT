@@ -15,6 +15,7 @@ import FAQ from './Components/FAQ';
 import Verification from './Components/Verification';
 import ForgotPassPage from './Components/ForgotPassPage';
 import ForgotPassPageReset from './Components/ForgotPassPageReset';
+import CompanyDashbaord from './Components/CompanyDashboard/CompanyDashbaord';
 
 function App() {
   const location = useLocation();
@@ -24,15 +25,24 @@ function App() {
     location.pathname === '/signup' ||
     location.pathname === '/forgot-password' ||
     location.pathname.startsWith('/forgotten_pass_reset/');
+  
   const isVerificationPage =
     location.pathname.startsWith('/verification') && location.pathname.split('/').length >= 2;
+  
+  const isDashboardPage = location.pathname.startsWith('/dashboard');
 
-  const navbarClass = isAuthPage ? 'Reg_Nav' : isVerificationPage ? 'Verification_Nav' : '';
+  const navbarClass = isAuthPage
+    ? 'Reg_Nav'
+    : isVerificationPage
+    ? 'Verification_Nav'
+    : isDashboardPage
+    ? ''
+    : '';
 
   return (
     <div className="App">
       <ScrollToTop />
-      <Navbar className={navbarClass} />
+      {!isDashboardPage && <Navbar className={navbarClass} />}
       <div className="App-Pages">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -48,9 +58,10 @@ function App() {
           <Route path="/verification/:orgID/:OrgName" element={<Verification />} />
           <Route path="/forgot-password" element={<ForgotPassPage />} />
           <Route path="/forgotten_pass_reset/:uidb64/:token/" element={<ForgotPassPageReset />} />
+          <Route path="/dashboard/*" element={<CompanyDashbaord />} />
         </Routes>
       </div>
-      {!isAuthPage && !isVerificationPage && <Footer />}
+      {!isAuthPage && !isVerificationPage && !isDashboardPage && <Footer />}
     </div>
   );
 }
