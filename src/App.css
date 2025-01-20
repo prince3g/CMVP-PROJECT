@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
 /* Navbar */
 
 
@@ -412,8 +414,7 @@
   transition: all 0.3s ease-in-out;
 }
 .social-media a:hover{
-  background-color: #0D2818;
-  color: #fff;
+  background-color: #e4e3e3;
 }
 @media screen and (max-width:1200px){
   .Sub-Foot span{

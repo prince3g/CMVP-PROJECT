@@ -1,7 +1,6 @@
 import React from 'react';
 import LogoIcon from '../assets/Img/logo-icon.png';
 
-import YoutubeIcon from '@mui/icons-material/Youtube';
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -23,7 +22,15 @@ function Footer() {
                     <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" width="30" height="30" class="SocialMediaLinks_m-social-media-links__icon__aLbPt"><path d="M4.054 4l8.493 12.136L4 26h1.924l7.483-8.637L19.455 26H26l-8.972-12.817L24.984 4H23.06l-6.891 7.953L10.599 4H4.055zm2.829 1.514H9.89l13.28 18.971h-3.007L6.883 5.515z" fill="currentColor"></path></svg>
                     </a>
                     <a href="https://www.youtubeIcon com" target="_blank" rel="noopener noreferrer">
-                       <YoutubeIcon />
+                                    <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                >
+                <path d="M21.8 8s-.2-1.45-.82-2.1a2.9 2.9 0 0 0-2.1-.82C16.73 5 12 5 12 5s-4.73 0-6.88.08a2.9 2.9 0 0 0-2.1.82C2.4 6.55 2.2 8 2.2 8S2 9.81 2 11.61v.78c0 1.8.2 3.61.2 3.61s.2 1.45.82 2.1c.39.39.91.66 1.45.78C6.5 19 12 19 12 19s4.73 0 6.88-.08a2.9 2.9 0 0 0 2.1-.82c.62-.62.82-2.1.82-2.1s.2-1.81.2-3.61v-.78C22 9.81 21.8 8 21.8 8z" fill="currentColor" />
+                <path d="M10 15l5.5-3.5L10 8v7z" fill="#FFFFFF" transform="scale(1.1) translate(0, -0.2)" />
+                </svg>
+
                     </a>
 
                     <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
