@@ -12,11 +12,13 @@ import Contact from './Components/Contact';
 import Pricing from './Components/Pricing';
 import HowItWorks from './Components/HowItWorks';
 import FAQ from './Components/FAQ';
+import AboutUs from './Components/AboutUs';
 import Verification from './Components/Verification';
 import ForgotPassPage from './Components/ForgotPassPage';
 import ForgotPassPageReset from './Components/ForgotPassPageReset';
 import CompanyDashbaord from './Components/CompanyDashboard/CompanyDashbaord';
 import AdminDashbaord from './Components/AdminDashboard/AdminDashboard';
+
 
 function App() {
   const location = useLocation();
@@ -56,6 +58,7 @@ function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/about-cmvp" element={<AboutUs />} />
           <Route path="/verification" element={<Verification />} />
           <Route path="/verification/:orgID/:OrgName" element={<Verification />} />
           <Route path="/forgot-password" element={<ForgotPassPage />} />
