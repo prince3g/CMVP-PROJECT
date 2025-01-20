@@ -218,3 +218,8 @@
     right: -5px;
     bottom: -5px;
 }
+
+
+.Upload_Table th{
+    font-weight: 700 !important;
+}

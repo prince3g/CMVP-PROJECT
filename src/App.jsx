@@ -16,6 +16,7 @@ import Verification from './Components/Verification';
 import ForgotPassPage from './Components/ForgotPassPage';
 import ForgotPassPageReset from './Components/ForgotPassPageReset';
 import CompanyDashbaord from './Components/CompanyDashboard/CompanyDashbaord';
+import AdminDashbaord from './Components/AdminDashboard/AdminDashboard';
 
 function App() {
   const location = useLocation();
@@ -30,19 +31,20 @@ function App() {
     location.pathname.startsWith('/verification') && location.pathname.split('/').length >= 2;
   
   const isDashboardPage = location.pathname.startsWith('/dashboard');
+  const isAdminDashboardPage = location.pathname.startsWith('/admin-dashboard');
 
   const navbarClass = isAuthPage
     ? 'Reg_Nav'
     : isVerificationPage
     ? 'Verification_Nav'
-    : isDashboardPage
+    : isDashboardPage || isAdminDashboardPage
     ? ''
     : '';
 
   return (
     <div className="App">
       <ScrollToTop />
-      {!isDashboardPage && <Navbar className={navbarClass} />}
+      {!isDashboardPage && !isAdminDashboardPage && <Navbar className={navbarClass} />}
       <div className="App-Pages">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -59,9 +61,10 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassPage />} />
           <Route path="/forgotten_pass_reset/:uidb64/:token/" element={<ForgotPassPageReset />} />
           <Route path="/dashboard/*" element={<CompanyDashbaord />} />
+          <Route path="/admin-dashboard/*" element={<AdminDashbaord />} />
         </Routes>
       </div>
-      {!isAuthPage && !isVerificationPage && !isDashboardPage && <Footer />}
+      {!isAuthPage && !isVerificationPage && !isDashboardPage && !isAdminDashboardPage && <Footer />}
     </div>
   );
 }
