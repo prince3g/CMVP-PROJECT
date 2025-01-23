@@ -28,15 +28,19 @@ export default function UploadedCert() {
 
     const [certificateList, setCertificateList] = useState([]);
 
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [certificateCategories, setCertificateCategories] = useState([]);
+
     const [certificateData, setCertificateData] = useState({
         organization_id: organizationID,
         certificate_id: "",
         certificate_title: "", // Ensure this field is included
-        type: "",
+        certificate_category: "",
         client_name: "",
         dateOfIssue: "",
         issueNumber: "",
         issuedBy: organizationName,
+        type: '',
         issue_date: "",
         examination_type: "",
         issuedNumber: ""
@@ -166,12 +170,18 @@ export default function UploadedCert() {
     };
     
 
-    const [selectedCategory, setSelectedCategory] = useState('');
+
+
 
     const handleChange = (event) => {
         setSelectedCategory(event.target.value);
-        // Perform any other actions based on the selected value
+        // Optionally update certificateData with the selected category
+        setCertificateData(prevData => ({
+            ...prevData,
+            type: event.target.value // Assuming "type" is the field for category
+        }));
     };
+
 
 
     useEffect(() => {
@@ -262,6 +272,37 @@ const handleSoftDelete = async (certificate_id) => {
         }
     };
 
+    // Fetch categories from the API
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/categories/`);
+                setCertificateCategories(response.data); // Store categories
+            } catch (error) {
+                console.error("Error fetching certificate categories:", error);
+                alert("Failed to fetch certificate categories. Please try again.");
+            }
+        };
+
+        fetchCategories();
+    }, []);
+
+    // Set default category when certificateData changes
+    useEffect(() => {
+        if (certificateData.certificate_category) {
+            setSelectedCategory(certificateData.certificate_category); // Pre-select the category
+        }
+    }, [certificateData]);
+
+    const handleChange1 = (event) => {
+        setSelectedCategory(event.target.value);
+        setCertificateData(prevData => ({
+            ...prevData,
+            certificate_category: event.target.value // Update certificate category
+        }));
+    };
+
+
 
     return (
         <div className="Uploaded_Cert_page">
@@ -282,11 +323,14 @@ const handleSoftDelete = async (certificate_id) => {
                                     <div className="Certificate_Form">
 
                                     <div className="Cert_Form_input Cert_Form_input_Select Cert_Form_input_Selct">
-                                            <select>
-                                                <option value="">Select certificate category</option>
-                                                <option value="training">Training certificate</option>
-                                                <option value="inspection">Inspection certificate</option>
-                                            </select>
+                                    <select value={selectedCategory} onChange={handleChange1}>
+                                        <option value="">Select certificate category</option>
+                                        {certificateCategories.map((category) => (
+                                            <option key={category.id} value={category.unique_certificate_category_id}>
+                                                {category.name}
+                                            </option>
+                                        ))}
+                                    </select>
                                             </div>
 
                                         <div className="Cert_Form_input">

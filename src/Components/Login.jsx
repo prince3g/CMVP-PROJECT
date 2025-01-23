@@ -29,53 +29,6 @@ const Login = () => {
     }));
   };
 
-  // const handleFormSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setErrorMessage(null);
-  //   setIsLoading(true);
-
-  //   // Create FormData for the login request
-  //   const formDataToSend = new FormData();
-  //   formDataToSend.append("email", formData.email);
-  //   formDataToSend.append("password", formData.password);
-
-  //   try {
-  //     const response = await axios.post(
-  //       `${config.API_BASE_URL}/api/accounts/auth/login/`,
-  //       formDataToSend,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data", // Ensure correct content type
-  //         },
-  //       }
-  //     );
-
-  //     // Assuming the API sends back a token or some user data on success
-  //     const token = response.data;
-
-  //     // Store the token and other user details in localStorage
-  //     localStorage.setItem("authToken", token.access);
-  //     localStorage.setItem("authEmail", token.email);
-  //     localStorage.setItem("authUserId", token.unique_subscriber_id);
-  //     localStorage.setItem("authName", token.name);
-  //     localStorage.setItem("authPhone", token.phone);
-  //     localStorage.setItem("authAddress", token.address);
-
-  //     localStorage.setItem("loginTime", token.login_time); // Store login time
-  //     // localStorage.setItem("authImageUrl", token.logo_url);
-  //     // console.log("Response Data: ", token)
-  //     // Redirect to the dashboard or home page
-  //     navigate("/dashboard/");
-  //   } catch (error) {
-  //     setErrorMessage(
-  //       error.response?.data?.detail || "Failed to log in. Please try again."
-  //     );
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage(null);
