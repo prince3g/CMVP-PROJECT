@@ -161,13 +161,13 @@ export default function Pricing() {
                                 <div key={plan.id} className="plan_box">
                                     <div className="Pricing_sub">
                                         <h3>CMVP Plan</h3>
-                                        <div className="pricing_Top_Btns">
+                                        {/* <div className="pricing_Top_Btns">
                                             {["1 Month", "3 Months", "6 Months", "1 Year"].map((duration) => (
                                                 <button key={duration} className="plan_btn">
                                                     {duration}
                                                 </button>
                                             ))}
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="plan_box_Top">
                                         <div className="plan_box_Top_1">
