@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import config from "../config";
 import axios from "axios";
+import FlashMessage from "../assets/FlashMessage";
 
 const ForgotPassPage = () => {
   const [email, setEmail] = useState("");
@@ -25,6 +26,7 @@ const ForgotPassPage = () => {
         { email }
       );
       setMessage("Password reset instructions have been sent to your email.");
+      alert("Password reset instructions have been sent to your email.");
       setEmail("");
     } catch (err) {
       setError(

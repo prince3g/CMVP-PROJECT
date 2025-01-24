@@ -61,7 +61,7 @@ const Login = () => {
   
       // Check if the logged-in email is "ekenehanson@gmail.com"
       if (token.email === "ekenehanson@gmail.comt" && token.user_role === "super_admin") {
-        navigate("/admin-dashboard/");
+        navigate("/admin-dashboard/"); 
       } else {  
         navigate("/dashboard/");
       }

@@ -12,8 +12,6 @@ const FlashMessage = ({ message, type, onClose }) => {
   }, [onClose]);
 
 
-
-
   return (
     <div className={`flash-message ${type}`}>
       {message}
@@ -21,7 +19,6 @@ const FlashMessage = ({ message, type, onClose }) => {
     </div>
   );
 };
-
 
 
 export default FlashMessage;
