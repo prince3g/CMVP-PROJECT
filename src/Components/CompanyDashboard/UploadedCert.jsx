@@ -195,7 +195,6 @@ export default function UploadedCert() {
                 });
                 setCertificateList(response.data.results || []); // Default to an empty array
 
-
                 setNumCertificateUploaded(response.data.count); // Default to an empty array
             } catch (error) {
                 console.error("Error fetching certificate data:", error);
@@ -288,28 +287,19 @@ const handleSoftDelete = async (certificate_id) => {
         fetchCategories();
     }, []);
 
-    // Set default category when certificateData changes
-    // useEffect(() => {
-    //     if (certificateData.certificate_category) {
-    //         setSelectedCategory(certificateData.category); // Pre-select the category
-    //     }
-    // }, [certificateData]);
 
+
+   
     const handleChange1 = (event) => {
-        setSelectedCategory(event.target.value);
+        const category = event.target.value;
+        console.log("Selected Category:", category);
+        setSelectedCategory(category);
         setCertificateData(prevData => ({
             ...prevData,
-            certificate_category: event.target.value // Update certificate category
-
-
+            certificate_category: category // Ensure this matches the API field name
         }));
-
-        console.log(" event.target.value")
-        console.log(selectedCategory)
-        console.log( "event.target.value")
     };
-
-
+    
 
     
   // Handle select change
