@@ -60,7 +60,7 @@ const Login = () => {
       localStorage.setItem("loginTime", token.login_time);
   
       // Check if the logged-in email is "ekenehanson@gmail.com"
-      if (token.email === "super_admin1@cmvp.net" && token.user_role === "super_admin") {
+      if (token.email === "ekenehanson@gmail.comt" && token.user_role === "super_admin") {
         navigate("/admin-dashboard/");
       } else {  
         navigate("/dashboard/");
