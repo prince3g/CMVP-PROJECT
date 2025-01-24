@@ -276,7 +276,8 @@ const handleSoftDelete = async (certificate_id) => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/categories/`);
+                const response = await axios.get(`${config.API_BASE_URL}//api/certificates/certificateCategory/${organizationID}`);
+
                 setCertificateCategories(response.data); // Store categories
             } catch (error) {
                 console.error("Error fetching certificate categories:", error);

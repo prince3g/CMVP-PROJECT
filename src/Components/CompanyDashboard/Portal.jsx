@@ -317,6 +317,7 @@ export default function PortalPage() {
         try {
           const response = await axios.post(`${config.API_BASE_URL}/api/certificates/categories/`, {
             name: categoryName,
+            organization: organizationID
           });
     
           // Handle successful response (e.g., show success message)
@@ -336,7 +337,7 @@ export default function PortalPage() {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get(`${config.API_BASE_URL}/api/certificates/categories/`);
+            const response = await axios.get(`${config.API_BASE_URL}/api/certificates/certificateCategory/${organizationID}`);
             setCategories1(response.data);
           } catch (error) {
             console.error('Error fetching categories:', error);
