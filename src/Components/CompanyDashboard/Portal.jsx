@@ -34,13 +34,17 @@ export default function PortalPage() {
     const [categoryName, setCategoryName] = useState('');
     const [loading, setLoading] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
-
-              
     
+    const [isLoading1, setIsLoading1] = useState(false);
+
+    const [categories1, setCategories1] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('');
+              
     const [organizationDatalogo, setOrganizationDataLogo] = useState(null); // For organization data
     const [certificateData, setCertificateData] = useState({
         
         organization_id: organizationID,
+        certificate_category: "",
         certificate_id: "",
         certificate_title: "",
         type: "",
@@ -186,6 +190,8 @@ export default function PortalPage() {
 
     const handleChange = (event) => {
         setCategoryName(event.target.value);
+
+        
     };
 
     const showAddCertCarti = () => {
@@ -198,6 +204,13 @@ export default function PortalPage() {
     };
 
     const handleInputChange = (event) => {
+        setSelectedCategory(event.target.value);
+
+        // console.log("event.target.value")
+        // console.log(event.target.value)
+        // console.log("event.target.value")
+
+
         const { name, value } = event.target;
         setCertificateData(prevState => ({
             ...prevState,
@@ -210,9 +223,23 @@ export default function PortalPage() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
+
+        console.log('selectedCategory:', selectedCategory); // Log the selectedCategory value
     
+        if (!selectedCategory) {
+            alert("Please select a certificate category.");
+            setLoading(false);
+            return; // Prevent form submission
+        }
         const formData = new FormData();
         formData.append("organization", certificateData.organization_id); 
+
+
+        // console.log("111selectedCategory111")
+        // console.log(selectedCategory)
+        // console.log("111selectedCategory111")
+
+        formData.append("certificate_category", selectedCategory); 
         formData.append("certificate_id", certificateData.number);
         formData.append("client_name", certificateData.client_name);
         formData.append("issue_date", certificateData.dateOfIssue); 
@@ -232,6 +259,13 @@ export default function PortalPage() {
         if (selectedFile) {
             formData.append("pdf_file", selectedFile);
         }
+
+        // console.log("formData")
+        // // Iterate over entries and log key-value pairs
+        // for (const [key, value] of formData.entries()) {
+        //     console.log(`${key}: ${value}`); 
+        // }
+        // console.log("formData")
     
         try {
             const response = await axios.post(`${config.API_BASE_URL}/api/certificates/create/`, formData, {
@@ -270,30 +304,81 @@ export default function PortalPage() {
 
 
 
+  
+    const handleChange1 = (event) => {
+      setCategoryName(event.target.value);
+    };
+  
 
-return (
+    const handleSubmit1 = async (event) => {
+        event.preventDefault();
+        setIsLoading1(true);
+    
+        try {
+          const response = await axios.post(`${config.API_BASE_URL}/api/certificates/categories/`, {
+            name: categoryName,
+          });
+    
+          // Handle successful response (e.g., show success message)
+         // console.log('Category created successfully:', response.data);
+
+          setCategoryName(''); 
+          setIsLoading1(false); 
+          alert("Certificate Category Created successfully")
+
+        } catch (error) {
+          // Handle error (e.g., display error message)
+          console.error('Error creating category:', error);
+          setIsLoading1(false); 
+        }
+      };
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await axios.get(`${config.API_BASE_URL}/api/certificates/categories/`);
+            setCategories1(response.data);
+          } catch (error) {
+            console.error('Error fetching categories:', error);
+          }
+        };
+    
+        fetchData();
+      }, []);
+
+
+
+
+    return (
         <div className="PortalPage">
             <section className={`Certificate_Sec ${isCertificateSectionVisible ? 'PopOut_Certificate_Sec' : ''}`}>
                 <div className={`Add_Cert_Carti ${isAddCertCartiVisible ? 'Active_Add_Cert_Carti' : ''}`}>
                     <div className="site-container">
+
                         <div className="Add_Cert_Carti_box">
                             <div className="Add_CCt_Input">
                                 <input
-                                    type="text"
-                                    placeholder="Enter category name"
-                                    value={categoryName}
-                                    onChange={handleChange}
+                                type="text"
+                                placeholder="Enter category name HERE"
+                                value={categoryName}
+                                onChange={handleChange1}
                                 />
                             </div>
                             <div className="Add_CCt_btns">
-                                <button className="Add_Cert_Certegory btn-bg" onClick={showAddCertCarti}>
-                                    Add category
+                                <button
+                                className="Add_Cert_Certegory btn-bg"
+                                onClick={handleSubmit1}
+                                disabled={isLoading1} 
+                                >
+                                {isLoading1 ? 'Adding...' : 'Add category'} 
                                 </button>
                                 <button className="Close_Cert_Certegory" onClick={hideAddCertCarti}>
-                                    Close
+                                Close
                                 </button>
                             </div>
-                        </div>
+                            </div>
+
+
                     </div>
                 </div>
                 <div className="Certificate_Sec_Main">
@@ -306,19 +391,25 @@ return (
                         <form className="Main_CC_Mn" onSubmit={handleSubmit}>
                             <div className="L_CC_Mn">
                                 <div className="L_CC_Mn_main">
+
+
                                     <h3>Upload certificate</h3>
                                     <div className="Certificate_Form">
 
-                                    <div className="Cert_Form_input Cert_Form_input_Select Cert_Form_input_Selct">
-                                            <select>
-                                                <option value="">Select certificate category</option>
-                                                <option value="training">Training certificate</option>
-                                                <option value="inspection">Inspection certificate</option>
-                                            </select>
-                                            <div className="Add_Cart_Btn" onClick={showAddCertCarti}>
-                                                Add category
-                                            </div>
-                                            </div>
+                                        <div className="Cert_Form_input Cert_Form_input_Select Cert_Form_input_Selct">
+                                        <select value={selectedCategory} onChange={handleInputChange}>
+                                            <option value="">Select certificate category</option>
+                                            {categories1.map((category) => (
+                                            <option key={category.id} value={category.unique_certificate_category_id}>
+                                                {category.name} 
+                                            </option>
+                                            ))}
+                                        </select>
+                                        <div className="Add_Cart_Btn" onClick={showAddCertCarti}>
+                                            Add category
+                                        </div>
+
+                                        </div>
 
                                         <div className="Cert_Form_input">
                                             <input

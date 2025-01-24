@@ -16,31 +16,28 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 import MenuIcon from '@mui/icons-material/Menu';
 
-
 import LogoIcon from './Img/DashLogo.png';
-
-
 
 import './Css/Dash.css';
 
+
 export default function NavBar() {
-
-    const [daysLeft, setDaysLeft] = useState(null); // State for days left
-
-    const [organizationDatalogo, setOrganizationDataLogo] = useState(null); // For organization data
+    
+    const [daysLeft, setDaysLeft] = useState(null);
+    const [organizationDatalogo, setOrganizationDataLogo] = useState(null); 
     const organizationID =  localStorage.getItem("authUserId");
     const organizationName =  localStorage.getItem("authName");
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [isSubscribed, setIsSubscribed] = useState(false);
-    const [showSearch, setShowSearch] = useState(false); // State to manage search visibility
-    const [activeDropIcon, setActiveDropIcon] = useState(false); // State to manage active drop icon
+    const [showSearch, setShowSearch] = useState(false);
+    const [activeDropIcon, setActiveDropIcon] = useState(false); 
     const location = useLocation();
     
-
     const toggleDropdown = () => {
+
         setDropdownOpen(!isDropdownOpen);
-        setActiveDropIcon(!activeDropIcon); // Toggle active class for Drop_Icon
+        setActiveDropIcon(!activeDropIcon);
     };
 
     const toggleSidebar = () => {
