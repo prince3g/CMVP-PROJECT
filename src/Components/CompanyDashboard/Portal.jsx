@@ -281,7 +281,7 @@ export default function PortalPage() {
             // console.error("Error creating certificate:", error);
             // alert("Failed to create certificate. Please try again.");
                     // Extract and display the specific error message
-            const errorMessage = error.response?.data?.error || "Please change and make the Certificate ID unique.";
+            const errorMessage = error.response?.data?.error || "Please change CertificateID to be unique or select the  category";
             console.error("Error creating certificate:", error);
             alert(errorMessage);
 

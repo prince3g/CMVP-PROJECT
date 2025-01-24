@@ -1,14 +1,16 @@
-// FlashMessage.js
+
+
 import React, { useEffect } from 'react';
 
 const FlashMessage = ({ message, type, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
-    }, 5000); // Message disappears after 5 seconds
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [onClose]);
+
 
   return (
     <div className={`flash-message ${type}`}>
@@ -17,5 +19,6 @@ const FlashMessage = ({ message, type, onClose }) => {
     </div>
   );
 };
+
 
 export default FlashMessage;

@@ -131,7 +131,7 @@ function Navbar({ className }) {
             <div className="Nav-Links">
 
               {isLoggedIn ? (
-                                 <Link to="/dashboard" onClick={handleLinkClick}>Dashboard</Link>
+                                 <Link to="/dashboard" onClick={handleLinkClick}>Account</Link>
                             ) : (
                                  <Link to="/login" onClick={handleLinkClick}>Log In</Link>
                             )}
