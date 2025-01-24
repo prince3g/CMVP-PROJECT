@@ -31,6 +31,8 @@ export default function UploadedCert() {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [certificateCategories, setCertificateCategories] = useState([]);
 
+    const [selectedCategory1, setSelectedCategory1] = useState("");
+
     const [certificateData, setCertificateData] = useState({
         organization_id: organizationID,
         certificate_id: "",
@@ -104,6 +106,7 @@ export default function UploadedCert() {
         event.preventDefault();
         setIsDragging(true);
     };
+
     const handleDrop = (event) => {
         event.preventDefault();
         setIsDragging(false);
@@ -132,11 +135,13 @@ export default function UploadedCert() {
 
         const organizationID = localStorage.getItem("authUserId");
 
-    
         const formData = new FormData();
         formData.append("organization", organizationID); 
         formData.append("certificate_id", certificateData.certificate_id);  // `number` on frontend -> `certificate_id` on backend
         formData.append("client_name", certificateData.client_name);   // `issuedTo` -> `client_name`
+
+        formData.append("certificate_category", selectedCategory); 
+
         formData.append("issue_date", certificateData.issue_date); 
         formData.append("certificate_title", certificateData.certificate_title); // Ensure this line is present
         formData.append("examination_type", certificateData.examination_type); // Ensure this line is present
@@ -168,10 +173,6 @@ export default function UploadedCert() {
             setLoading(false);
         }
     };
-    
-
-
-
 
     const handleChange = (event) => {
         setSelectedCategory(event.target.value);
@@ -288,22 +289,50 @@ const handleSoftDelete = async (certificate_id) => {
     }, []);
 
     // Set default category when certificateData changes
-    useEffect(() => {
-        if (certificateData.certificate_category) {
-            setSelectedCategory(certificateData.certificate_category); // Pre-select the category
-        }
-    }, [certificateData]);
+    // useEffect(() => {
+    //     if (certificateData.certificate_category) {
+    //         setSelectedCategory(certificateData.category); // Pre-select the category
+    //     }
+    // }, [certificateData]);
 
     const handleChange1 = (event) => {
         setSelectedCategory(event.target.value);
         setCertificateData(prevData => ({
             ...prevData,
             certificate_category: event.target.value // Update certificate category
+
+
         }));
+
+        console.log(" event.target.value")
+        console.log(selectedCategory)
+        console.log( "event.target.value")
     };
 
 
 
+    
+  // Handle select change
+  const handleChange2 = (event) => {
+    setSelectedCategory1(event.target.value);
+
+    // console.log("event.target.value")
+    // console.log(event.target.value)
+    // console.log("event.target.value")
+
+
+  };
+
+  // Filter certificate list based on the selected category
+  const filteredCertificates =
+    selectedCategory1 === ""
+      ? certificateList // Show all certificates if no category is selected
+      : certificateList.filter(
+          (cert) => cert.certificate_category === selectedCategory1
+        );
+
+
+            
     return (
         <div className="Uploaded_Cert_page">
             <section className={`Certificate_Sec ${isCertificateSectionVisible ? 'PopOut_Certificate_Sec' : ''}`}>
@@ -464,73 +493,90 @@ const handleSoftDelete = async (certificate_id) => {
             </div>
 
 
-    <div className={`Upload_env_main ${isUploadEnvHidden ? 'Hide_Envi_Box' : ''}`}>
-    <div className="Cert_Carti_Sel_Sec">
-        <h3>Training certificate</h3>
-        <div className="Cart_select_Sec">
-            <select value={selectedCategory} onChange={handleChange}>
-                <option value="">All certificate</option>
-                <option value="training">Training certificate</option>
-                <option value="inspection">Inspection certificate</option>
-            </select>
+        <div className={`Upload_env_main ${isUploadEnvHidden ? 'Hide_Envi_Box' : ''}`}>
+        <div className="Cert_Carti_Sel_Sec">
+            <h3>Training certificate</h3>
+            <div className="Cart_select_Sec">
+            <select value={selectedCategory1} onChange={handleChange2}>
+            <option value="">All Certificates</option>
+            {certificateCategories.map((category) => (
+              <option
+                key={category.unique_certificate_category_id}
+                value={category.unique_certificate_category_id}
+              >
+                {category.name} 
+              </option>
+            ))}
+          </select>
         </div>
-    </div>
+      </div>
 
-
-    <div className="Table_Sec">
+      <div className="Table_Sec">
         <table className="Upload_Table">
-            <thead>
-                <tr>
-                    <th>S/N</th>
-                    <th>Certificate number</th>
-                    <th>Client name</th>
-                    <th>Date of issue</th>
-                    <th>Issue number</th>
-                    <th>Issued by</th>
-                    <th>Status</th>
-                    <th>Uploaded / E-copy</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {certificateList.map((cert, index) => (
-                    <tr key={index}>
-                        <td><span className="serial_Number_span">{index + 1}</span></td>
-                        <td>{cert.certificate_id}</td>
-                        <td>{cert.client_name}</td>
-                        <td>{new Date(cert.issue_date).toLocaleDateString()}</td>
-                        <td>{cert.issuedNumber || cert.certificate_id}</td>
-                        <td>{cert.issuedBy  ||  cert.organization_name}</td>
-                        <td>
-                            <span className="Status_Respn"><img src={VerifiedIcon} alt="Verified Icon" /> Verified</span>
-                        </td>
-                        <td>
-                            <div className="Uploaded_Cert_Div">
-                                {cert.pdf_file ? (
-                                    <button 
-                                        onClick={() => handleDownloadReceipt(cert.pdf_file, `${cert.client_name}.pdf`)}
-                                        disabled={loadingDownload} // Disable if downloading
-                                    >
-                                        {loadingDownload ? 'Downloading...' : 'Download' } 
-                                        <img src={DownloadIcon} alt="Download Icon" />
-                                    </button>
-                                ) : (
-                                    <span>Not uploaded</span>
-                                )}
-                            </div>
-                        </td>
-                        <td>
-                            <div className="td_Btns">
-                            <button onClick={() => handlePreviewButtonClick(cert.id)}>Edit</button>
-                                {/* <button onClick={handlePreviewButtonClick(cert.certificate_id, cert.issuedBy,
-                                     cert.issueNumber, cert.client_name,
-                                     new Date(cert.issue_date).toLocaleDateString() )}>Edit</button> */}
-                                <button onClick={() => handleSoftDelete(cert.certificate_id)}>Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
+          <thead>
+            <tr>
+              <th>S/N</th>
+              <th>Certificate number</th>
+              <th>Client name</th>
+              <th>Date of issue</th>
+              <th>Issue number</th>
+              <th>Issued by</th>
+              <th>Status</th>
+              <th>Uploaded / E-copy</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredCertificates.map((cert, index) => (
+              <tr key={index}>
+                <td>
+                  <span className="serial_Number_span">{index + 1}</span>
+                </td>
+                <td>{cert.certificate_id}</td>
+                <td>{cert.client_name}</td>
+                <td>{new Date(cert.issue_date).toLocaleDateString()}</td>
+                <td>{cert.issuedNumber || cert.certificate_id}</td>
+                <td>{cert.issuedBy || cert.organization_name}</td>
+                <td>
+                  <span className="Status_Respn">
+                    <img src={VerifiedIcon} alt="Verified Icon" /> Verified
+                  </span>
+                </td>
+                <td>
+                  <div className="Uploaded_Cert_Div">
+                    {cert.pdf_file ? (
+                      <button
+                        onClick={() =>
+                          handleDownloadReceipt(
+                            cert.pdf_file,
+                            `${cert.client_name}.pdf`
+                          )
+                        }
+                        disabled={loadingDownload}
+                      >
+                        {loadingDownload ? "Downloading..." : "Download"}
+                        <img src={DownloadIcon} alt="Download Icon" />
+                      </button>
+                    ) : (
+                      <span>Not uploaded</span>
+                    )}
+                  </div>
+                </td>
+                <td>
+                  <div className="td_Btns">
+                    <button onClick={() => handlePreviewButtonClick(cert.id)}>
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleSoftDelete(cert.certificate_id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
     </div>
 </div>
