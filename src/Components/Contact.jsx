@@ -147,7 +147,7 @@ export default function HelpPage() {
                                         required
                                     />
                                 </div>
-                                <div className="message-form-input">
+                                {/* <div className="message-form-input">
                                     <select
                                         name="serviceInterest"
                                         value={formData.serviceInterest}
@@ -161,7 +161,7 @@ export default function HelpPage() {
                                         <option value="Supply Chain Management">Supply Chain Management</option>
                                         <option value="Learning and Development">Learning and Development</option>
                                     </select>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="message-form-input">
                                 <textarea

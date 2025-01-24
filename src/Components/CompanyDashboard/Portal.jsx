@@ -525,7 +525,7 @@ export default function PortalPage() {
             <div className="Copy_Url_Sec">
 
             <div className="Port_into">
-                        <h2><WorkspacePremiumIcon /><span><i></i><i></i>{organizationName}</span>  CMVP Portal</h2>
+                        <h2><WorkspacePremiumIcon /> {organizationName} CMVP Portal</h2>
                         <p>
                             Welcome to your CMVP portal.
                         </p>
