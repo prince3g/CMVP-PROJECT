@@ -6,7 +6,16 @@ import PhotoEditIcon from './Img/edit_icon.svg';
 import AngleDownIcon from './Img/angle-down.svg';
 import config from '../../config.jsx';
 
+import FlashMessage from "../FlashMessage/FlashMessage.jsx"
+
 export default function Profile({ orgId }) {
+
+    const [flash, setFlash] = useState(null);
+    
+    const showMessage = (message, type) => {
+          setFlash({ message, type });
+        };
+    
 
     const organizationID = localStorage.getItem("authUserId");
     const organizationName = localStorage.getItem("authName");
@@ -109,7 +118,8 @@ export default function Profile({ orgId }) {
             if (response.ok) {
                 const data = await response.json();
                 console.log("Organization updated:", data);
-                alert("Organization updated:", data);
+               // alert("Organization updated:", data);
+                showMessage('Organization data updated successfully', 'success')
             } else {
                 const data = await response.json();
                 console.error("Error updating organization:", data.message);
@@ -188,6 +198,15 @@ export default function Profile({ orgId }) {
                         </div>
 
                         <div className="top-dash-2">
+
+                        {flash && (
+                            <FlashMessage
+                            message={flash.message}
+                            type={flash.type}
+                            onClose={() => setFlash(null)} // Remove flash message after timeout
+                            />
+                        )}
+
                             <div className="top-dash-2-main top-dash-2-main-1 active-top-dash-2-main">
                                 <div className="form-header">
                                     <h3>Portal profile Settings </h3>

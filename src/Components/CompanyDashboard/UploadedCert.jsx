@@ -5,13 +5,18 @@ import DownloadIcon from './Img/download_icon.svg';
 import VerifiedIcon from './Img/verified-badge2.svg';
 import ArrowLeft from './Img/arrow-left.svg';
 import PhotoIcon from './Img/photo-icon.svg';
+import FlashMessage from "../FlashMessage/FlashMessage.jsx";
 import config from '../../config.jsx'
 
 export default function UploadedCert() {
 
     const organizationID = localStorage.getItem("authUserId");
 
+    const [flash, setFlash] = useState(null);
 
+    const showMessage = (message, type) => {
+      setFlash({ message, type });
+    };
 
     const organizationName = localStorage.getItem("authName");
 
@@ -162,7 +167,8 @@ export default function UploadedCert() {
                     "Authorization": `Bearer ${localStorage.getItem("authUserId")}`
                 }
             });
-            alert("Certificate Updated successfully!");
+
+            showMessage('Certificate Updated successfully!', 'success')
 
             window.location.reload();
 
@@ -197,7 +203,8 @@ export default function UploadedCert() {
 
                 setNumCertificateUploaded(response.data.count); // Default to an empty array
             } catch (error) {
-                console.error("Error fetching certificate data:", error);
+                //console.error("Error fetching certificate data:", error);
+                showMessage('Error fetching certificate data', 'failure')
                 setCertificateList([]); // Fallback to an empty array
             }
         };
@@ -227,10 +234,13 @@ const handleSoftDelete = async (certificate_id) => {
 
         // Remove the deleted certificate from the state list
         setCertificateList(certificateList.filter(cert => cert.certificate_id !== certificate_id));
-        alert("Certificate has been deleted (soft delete).");
+
+        showMessage('Certificate has been deleted successfully', 'success')
+        // alert("Certificate has been deleted (soft delete).");
     } catch (error) {
-        console.error("Error deleting certificate:", error);
-        alert("Failed to delete certificate. Please try again.");
+        //console.error("Error deleting certificate:", error);
+        //alert("Failed to delete certificate. Please try again.");
+        showMessage('Failed to delete certificate. Please try again.', 'failure')
     }
 };
 
@@ -263,10 +273,12 @@ const handleSoftDelete = async (certificate_id) => {
             // Clean up the URL and link element
             window.URL.revokeObjectURL(downloadUrl);
             document.body.removeChild(link);
+            showMessage('Your Certificate  is downloading ', 'success')
 
         } catch (error) {
             console.error('Error downloading receipt:', error);
-            alert("An error occurred during the download. Please try again.");
+            //alert("An error occurred during the download. Please try again.");
+            showMessage('An error occurred during the download. Please try again. ', 'failure')
         } finally {
             setLoadingDownload(false); // Stop loader
         }
@@ -280,8 +292,9 @@ const handleSoftDelete = async (certificate_id) => {
 
                 setCertificateCategories(response.data); // Store categories
             } catch (error) {
-                console.error("Error fetching certificate categories:", error);
-                alert("Failed to fetch certificate categories. Please try again.");
+               //  console.error("Error fetching certificate categories:", error);
+               // alert("Failed to fetch certificate categories. Please try again.");
+                showMessage('Failed to fetch certificate categories. Please try again.', 'failure')
             }
         };
 
@@ -326,6 +339,15 @@ const handleSoftDelete = async (certificate_id) => {
             
     return (
         <div className="Uploaded_Cert_page">
+
+        {flash && (
+                <FlashMessage
+                message={flash.message}
+                type={flash.type}
+                onClose={() => setFlash(null)} // Remove flash message after timeout
+                />
+            )}
+
             <section className={`Certificate_Sec ${isCertificateSectionVisible ? 'PopOut_Certificate_Sec' : ''}`}>
                 <div className="Certificate_Sec_Main">
                     <div className="site-container">
@@ -342,7 +364,16 @@ const handleSoftDelete = async (certificate_id) => {
                                     <h3>Edit certificate</h3>
                                     <div className="Certificate_Form">
 
-                                    <div className="Cert_Form_input Cert_Form_input_Select Cert_Form_input_Selct">
+                                        
+                        {flash && (
+                                <FlashMessage
+                                message={flash.message}
+                                type={flash.type}
+                                onClose={() => setFlash(null)} // Remove flash message after timeout
+                                />
+                            )}
+
+                                                    <div className="Cert_Form_input Cert_Form_input_Select Cert_Form_input_Selct">
                                     <select value={selectedCategory} onChange={handleChange1}>
                                         <option value="">Select certificate category</option>
                                         {certificateCategories.map((category) => (
