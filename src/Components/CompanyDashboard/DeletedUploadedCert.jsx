@@ -73,6 +73,8 @@ export default function DeletedUploadedCert() {
             const response = await axios.post(`${config.API_BASE_URL}/api/certificates/${certificateId}/restore/`);
             showMessage("Certificate data restored successfully", "success");
             setCertificates(prevCertificates => prevCertificates.filter(cert => cert.certificate_id !== certificateId));
+
+            window.location.reload();
         } catch (error) {
             console.error("Error restoring certificate:", error);
         } finally {
