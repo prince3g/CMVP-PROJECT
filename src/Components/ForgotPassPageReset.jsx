@@ -115,6 +115,7 @@ const ForgotPassPageReset = () => {
       }
     };
   
+    
     return (
       <div>
         <section className="Get-Seecos login-desis">

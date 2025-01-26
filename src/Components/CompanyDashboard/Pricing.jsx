@@ -2,11 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Import Link for routing
 import './Css/Dash.css';
 import config from "../../config.jsx";
-
+import FlashMessage from "../FlashMessage/FlashMessage.jsx"
 import MinusIcon from './Img/minus-icon.svg';
 import CheckIcon from './Img/check-icon.svg';
 
 export default function Pricing() {
+
+    const [flash, setFlash] = useState(null);
+    
+    const showMessage = (message, type) => {
+            setFlash({ message, type });
+        };
     
     const [activePlanFree, setActivePlanFree] = useState("1 Month");
     const [activePlanBasic, setActivePlanBasic] = useState("1 Month");
@@ -35,6 +41,7 @@ export default function Pricing() {
     
                     if (!response.ok) {
                         if (response.status === 404) {
+                            showMessage("You are not subscribed to any plan. Please subscribe to access the features.", "failure")
                             throw new Error("You are not subscribed to any plan. Please subscribe to access the features.");
                         } else {
                             throw new Error("Failed to fetch subscription details");
@@ -80,6 +87,14 @@ export default function Pricing() {
     return (
         <div className="Pricing_Sec">
             <div className="Pricing_top">
+
+            {flash && (
+                <FlashMessage
+                message={flash.message}
+                type={flash.type}
+                onClose={() => setFlash(null)} // Remove flash message after timeout
+                />
+            )}
                 <h2>Subscription Plans</h2>
                 <p>Your Subscription plan for certificate management and verification portal (CMVP).</p>
             </div>

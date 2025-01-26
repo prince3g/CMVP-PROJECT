@@ -15,10 +15,19 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 
+import FlashMessage from "../FlashMessage/FlashMessage.jsx";
+
 export default function PortalPage() {
 
     const organizationID =  localStorage.getItem("authUserId");
     const organizationName =  localStorage.getItem("authName");
+
+    const [flash, setFlash] = useState(null);
+
+    const showMessage = (message, type) => {
+      setFlash({ message, type });
+    };
+
 
     const [subscriptionDetails, setSubscriptionDetails] = useState(null); // Store subscription details
     const [numDailyCertificateUpload, setNumDailyCertificateUpload] = useState(0); // State to store num_daily_certificate_upload
@@ -227,7 +236,10 @@ export default function PortalPage() {
         console.log('selectedCategory:', selectedCategory); // Log the selectedCategory value
     
         if (!selectedCategory) {
-            alert("Please select a certificate category.");
+           // alert("Please select a certificate category.");
+
+            showMessage("Please select a certificate category.", "failure")
+
             setLoading(false);
             return; // Prevent form submission
         }
@@ -274,7 +286,9 @@ export default function PortalPage() {
                     "Authorization": `Bearer ${localStorage.getItem("authToken")}`
                 }
             });
-            alert("Certificate created successfully!");
+            // alert("Certificate created successfully!");
+
+            showMessage("Certificate created successfully!", "success")
             
             window.location.reload();
         } catch (error) {
@@ -283,7 +297,8 @@ export default function PortalPage() {
                     // Extract and display the specific error message
             const errorMessage = error.response?.data?.error || "Please change CertificateID to be unique or select the  category";
             console.error("Error creating certificate:", error);
-            alert(errorMessage);
+            // alert(errorMessage);
+            showMessage(errorMessage, "failure")
 
         } finally {
             setLoading(false);
@@ -317,6 +332,7 @@ export default function PortalPage() {
         try {
           const response = await axios.post(`${config.API_BASE_URL}/api/certificates/categories/`, {
             name: categoryName,
+            organization: organizationID
           });
     
           // Handle successful response (e.g., show success message)
@@ -324,7 +340,8 @@ export default function PortalPage() {
 
           setCategoryName(''); 
           setIsLoading1(false); 
-          alert("Certificate Category Created successfully")
+          // alert("Certificate Category Created successfully")
+          showMessage("Certificate Category Created successfully", "sucecess")
 
         } catch (error) {
           // Handle error (e.g., display error message)
@@ -336,7 +353,7 @@ export default function PortalPage() {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get(`${config.API_BASE_URL}/api/certificates/categories/`);
+            const response = await axios.get(`${config.API_BASE_URL}/api/certificates/certificateCategory/${organizationID}`);
             setCategories1(response.data);
           } catch (error) {
             console.error('Error fetching categories:', error);
@@ -356,10 +373,18 @@ export default function PortalPage() {
                     <div className="site-container">
 
                         <div className="Add_Cert_Carti_box">
+                            {flash && (
+                                <FlashMessage
+                                message={flash.message}
+                                type={flash.type}
+                                onClose={() => setFlash(null)} // Remove flash message after timeout
+                                />
+                            )}
+
                             <div className="Add_CCt_Input">
                                 <input
                                 type="text"
-                                placeholder="Enter category name HERE"
+                                placeholder="Enter category name"
                                 value={categoryName}
                                 onChange={handleChange1}
                                 />
@@ -395,6 +420,14 @@ export default function PortalPage() {
 
                                     <h3>Upload certificate</h3>
                                     <div className="Certificate_Form">
+
+                                        {flash && (
+                                            <FlashMessage
+                                            message={flash.message}
+                                            type={flash.type}
+                                            onClose={() => setFlash(null)} // Remove flash message after timeout
+                                            />
+                                        )}
 
                                         <div className="Cert_Form_input Cert_Form_input_Select Cert_Form_input_Selct">
                                         <select value={selectedCategory} onChange={handleInputChange}>

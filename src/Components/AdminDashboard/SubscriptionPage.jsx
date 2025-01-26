@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css"; // Import skeleton styles
 import './Css/Dash.css';
 import config from "../../config";
 
@@ -8,6 +10,7 @@ import CheckIcon from './Img/check-icon.svg';
 
 export default function SubscriptionPage() {
     const [plans, setPlans] = useState([]);
+    const [loading, setLoading] = useState(true); // Add a loading state
 
     useEffect(() => {
         // Fetch subscription plans
@@ -16,16 +19,15 @@ export default function SubscriptionPage() {
                 const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/subscription-plans/`);
                 const data = await response.json();
                 setPlans(data.results); // The actual plans are in `results` array
-                //console.log("Fetched Plans Data: ", data);
             } catch (error) {
                 console.error("Error fetching subscription plans:", error);
+            } finally {
+                setLoading(false); // Stop loading once data is fetched
             }
         };
         fetchPlans();
     }, []);
 
-
-    
     return (
         <div className="DDD-Seco">
             <div className="Pricing_Sec">
@@ -44,7 +46,16 @@ export default function SubscriptionPage() {
                 </div>
 
                 <div className="Plans_Sec">
-                    {plans.length > 0 ? (
+                    {loading ? (
+                        // Render skeleton loaders when data is still loading
+                        Array.from({ length: 3 }).map((_, index) => (
+                            <div key={index} className="plan_box">
+                                <Skeleton height={30} width={200} style={{ marginBottom: 10 }} />
+                                <Skeleton height={20} width={100} style={{ marginBottom: 10 }} />
+                                <Skeleton height={20} count={5} />
+                            </div>
+                        ))
+                    ) : plans.length > 0 ? (
                         plans.map((plan) => (
                             <div key={plan.id} className="plan_box">
                                 <div className="Pricing_sub">
@@ -74,9 +85,6 @@ export default function SubscriptionPage() {
                                             >
                                             Edit Plan
                                         </Link>
-
-
-
                                     </div>
                                 </div>
                                 <div className="plan_box_Body">
@@ -88,12 +96,17 @@ export default function SubscriptionPage() {
                                                 <th>Not Active</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            {/* Check each feature's property in `features` */}
-                                            <tr>
-                                                <td>Access to portal</td>
-                                                <td>
+
+
+                                         <tbody>
+
+                                             {/* Check each feature's property in `features` */}
+
+                                             <tr>
+                                                 <td>Access to portal</td>
+                                                 <td>
                                                     {plan.features.access_deleted_certificates_files ? (
+
                                                         <span className="Check_Span">
                                                             <img src={CheckIcon} alt="Check Icon" />
                                                         </span>
@@ -217,3 +230,4 @@ export default function SubscriptionPage() {
         </div>
     );
 }
+
