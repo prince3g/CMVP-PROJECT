@@ -3166,14 +3166,13 @@ text-align: center;
 }
 
 .faq-list {
-  padding-left: 20px;  /* Add space to the left of the list */
+  padding-left: 20px;  
 }
 
 .faq-list li {
-  margin-bottom: 5px;  /* Space out the items */
+  margin-bottom: 5px; 
 }
 
 .faq-list .bullet {
-  color: black;  /* Bullet color */
-  margin-right: 10px;  /* Space between bullet and text */
+  margin-right: 10px; 
 }
