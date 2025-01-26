@@ -5,6 +5,9 @@ import DownloadIcon from './Img/download_icon.svg';
 import VerifiedIcon from './Img/verified-badge2.svg';
 import ArrowLeft from './Img/arrow-left.svg';
 import PhotoIcon from './Img/photo-icon.svg';
+import Skeleton from 'react-loading-skeleton'; // Optional: Import Skeleton
+import 'react-loading-skeleton/dist/skeleton.css'; // Optional: for better styles
+
 import FlashMessage from "../FlashMessage/FlashMessage.jsx";
 import config from '../../config.jsx'
 
@@ -36,6 +39,7 @@ export default function UploadedCert() {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [certificateCategories, setCertificateCategories] = useState([]);
 
+
     const [selectedCategory1, setSelectedCategory1] = useState("");
 
     const [certificateData, setCertificateData] = useState({
@@ -63,6 +67,7 @@ export default function UploadedCert() {
         setIsCertificateSectionVisible(false);
     };
 
+
     const handlePreviewButtonClick = async (certificate_id) => {
         try {
             const response = await axios.get(`${config.API_BASE_URL}/api/certificates/create/${certificate_id}/`, {
@@ -82,6 +87,7 @@ export default function UploadedCert() {
             }
     
             setIsCertificateSectionVisible(true); // Show the form for editing
+
         } catch (error) {
             console.error("Error fetching certificate details:", error);
             alert("Failed to fetch certificate details. Please try again.");
@@ -199,6 +205,7 @@ export default function UploadedCert() {
                         Authorization: `Bearer ${localStorage.getItem("authToken")}`,
                     },
                 });
+                
                 setCertificateList(response.data.results || []); // Default to an empty array
 
                 setNumCertificateUploaded(response.data.count); // Default to an empty array
@@ -288,7 +295,7 @@ const handleSoftDelete = async (certificate_id) => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await axios.get(`${config.API_BASE_URL}//api/certificates/certificateCategory/${organizationID}`);
+                const response = await axios.get(`${config.API_BASE_URL}/api/certificates/certificateCategory/${organizationID}`);
 
                 setCertificateCategories(response.data); // Store categories
             } catch (error) {
@@ -312,6 +319,7 @@ const handleSoftDelete = async (certificate_id) => {
             ...prevData,
             certificate_category: category // Ensure this matches the API field name
         }));
+
     };
     
 
@@ -319,11 +327,6 @@ const handleSoftDelete = async (certificate_id) => {
   // Handle select change
   const handleChange2 = (event) => {
     setSelectedCategory1(event.target.value);
-
-    // console.log("event.target.value")
-    // console.log(event.target.value)
-    // console.log("event.target.value")
-
 
   };
 
@@ -336,6 +339,8 @@ const handleSoftDelete = async (certificate_id) => {
         );
 
 
+
+    
             
     return (
         <div className="Uploaded_Cert_page">
@@ -344,7 +349,7 @@ const handleSoftDelete = async (certificate_id) => {
                 <FlashMessage
                 message={flash.message}
                 type={flash.type}
-                onClose={() => setFlash(null)} // Remove flash message after timeout
+                onClose={() => setFlash(null)}
                 />
             )}
 
@@ -373,7 +378,7 @@ const handleSoftDelete = async (certificate_id) => {
                                 />
                             )}
 
-                                                    <div className="Cert_Form_input Cert_Form_input_Select Cert_Form_input_Selct">
+                                <div className="Cert_Form_input Cert_Form_input_Select Cert_Form_input_Selct">
                                     <select value={selectedCategory} onChange={handleChange1}>
                                         <option value="">Select certificate category</option>
                                         {certificateCategories.map((category) => (
@@ -495,10 +500,6 @@ const handleSoftDelete = async (certificate_id) => {
                     </div>
                 </div>
             </section>
-
-
-
-
             <div className="ToP_Upload_env">
                 <h3 
                     className={`Upload_Box_Toggler ${isUploadBoxTogglerActive ? 'Active_Upload_Box_Toggler' : ''}`} 
@@ -515,93 +516,161 @@ const handleSoftDelete = async (certificate_id) => {
             </div>
 
 
-        <div className={`Upload_env_main ${isUploadEnvHidden ? 'Hide_Envi_Box' : ''}`}>
-        <div className="Cert_Carti_Sel_Sec">
-            <h3>Training certificate</h3>
-            <div className="Cart_select_Sec">
-            <select value={selectedCategory1} onChange={handleChange2}>
-            <option value="">All Certificates</option>
-            {certificateCategories.map((category) => (
-              <option
-                key={category.unique_certificate_category_id}
-                value={category.unique_certificate_category_id}
-              >
-                {category.name} 
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+            <div className={`Upload_env_main ${isUploadEnvHidden ? 'Hide_Envi_Box' : ''}`}>
+            <div className="Cert_Carti_Sel_Sec">
+                <h3>Training certificate</h3>
 
-      <div className="Table_Sec">
-        <table className="Upload_Table">
-          <thead>
-            <tr>
-              <th>S/N</th>
-              <th>Certificate number</th>
-              <th>Client name</th>
-              <th>Date of issue</th>
-              <th>Issue number</th>
-              <th>Issued by</th>
-              <th>Status</th>
-              <th>Uploaded / E-copy</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredCertificates.map((cert, index) => (
-              <tr key={index}>
-                <td>
-                  <span className="serial_Number_span">{index + 1}</span>
-                </td>
-                <td>{cert.certificate_id}</td>
-                <td>{cert.client_name}</td>
-                <td>{new Date(cert.issue_date).toLocaleDateString()}</td>
-                <td>{cert.issuedNumber || cert.certificate_id}</td>
-                <td>{cert.issuedBy || cert.organization_name}</td>
-                <td>
-                  <span className="Status_Respn">
-                    <img src={VerifiedIcon} alt="Verified Icon" /> Verified
-                  </span>
-                </td>
-                <td>
-                  <div className="Uploaded_Cert_Div">
-                    {cert.pdf_file ? (
-                      <button
-                        onClick={() =>
-                          handleDownloadReceipt(
-                            cert.pdf_file,
-                            `${cert.client_name}.pdf`
-                          )
-                        }
-                        disabled={loadingDownload}
-                      >
-                        {loadingDownload ? "Downloading..." : "Download"}
-                        <img src={DownloadIcon} alt="Download Icon" />
-                      </button>
-                    ) : (
-                      <span>Not uploaded</span>
-                    )}
-                  </div>
-                </td>
-                <td>
-                  <div className="td_Btns">
-                    <button onClick={() => handlePreviewButtonClick(cert.id)}>
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleSoftDelete(cert.certificate_id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-    </div>
-</div>
+                <div className="Cart_select_Sec">
+                <select value={selectedCategory1} onChange={handleChange2}>
+                <option value="">All Certificates</option>
+                {certificateCategories.map((category) => (
+                <option
+                    key={category.unique_certificate_category_id}
+                    value={category.unique_certificate_category_id}
+                >
+                    {category.name} 
+                </option>
+                ))}
+            </select>
+            </div>
+
+        </div>
+
+        <div className="Table_Sec">
+            <table className="Upload_Table">
+            <thead>
+                <tr>
+                <th>S/N</th>
+                <th>Certificate number</th>
+                <th>Client name</th>
+                <th>Date of issue</th>
+                <th>Issue number</th>
+                <th>Issued by</th>
+                <th>Status</th>
+                <th>Uploaded / E-copy</th>
+                <th>Action</th>
+                </tr>
+            </thead>
+            {/* <tbody>
+                {filteredCertificates.length > 0 ? (
+                    filteredCertificates.map((cert, index) => (
+                        <tr key={index}>
+                            <td>
+                                <span className="serial_Number_span">{index + 1}</span>
+                            </td>
+                            <td>{cert.certificate_id}</td>
+                            <td>{cert.client_name}</td>
+                            <td>{new Date(cert.issue_date).toLocaleDateString()}</td>
+                            <td>{cert.issuedNumber || cert.certificate_id}</td>
+                            <td>{cert.issuedBy || cert.organization_name}</td>
+                            <td>
+                                <span className="Status_Respn">
+                                    <img src={VerifiedIcon} alt="Verified Icon" /> Verified
+                                </span>
+                            </td>
+                            <td>
+                                <div className="Uploaded_Cert_Div">
+                                    {cert.pdf_file ? (
+                                        <button
+                                            onClick={() =>
+                                                handleDownloadReceipt(
+                                                    cert.pdf_file,
+                                                    `${cert.client_name}.pdf`
+                                                )
+                                            }
+                                            disabled={loadingDownload}
+                                        >
+                                            {loadingDownload ? "Downloading..." : "Download"}
+                                            <img src={DownloadIcon} alt="Download Icon" />
+                                        </button>
+                                    ) : (
+                                        <span>Not uploaded</span>
+                                    )}
+                                </div>
+                            </td>
+                            <td>
+                                <div className="td_Btns">
+                                    <button onClick={() => handlePreviewButtonClick(cert.id)}>
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleSoftDelete(cert.certificate_id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))
+                ) : (
+                    <tr>
+                        <td colSpan="9" style={{ textAlign: "center", padding: "10px" }}>
+                            NO certificate created for this category yet
+                        </td>
+                    </tr>
+                )}
+            </tbody> */}
+            <tbody>
+                        {loading ? (
+                        // Display Skeleton loader for rows
+                        Array.from({ length: 5 }).map((_, index) => (
+                            <tr key={index}>
+                            <td><Skeleton height={30} width={50} /></td>
+                            <td><Skeleton height={30} width={100} /></td>
+                            <td><Skeleton height={30} width={150} /></td>
+                            <td><Skeleton height={30} width={120} /></td>
+                            <td><Skeleton height={30} width={100} /></td>
+                            <td><Skeleton height={30} width={120} /></td>
+                            <td><Skeleton height={30} width={80} /></td>
+                            <td><Skeleton height={30} width={150} /></td>
+                            <td><Skeleton height={30} width={100} /></td>
+                            </tr>
+                        ))
+                        ) : filteredCertificates.length > 0 ? (
+                        filteredCertificates.map((cert, index) => (
+                            <tr key={index}>
+                            <td><span className="serial_Number_span">{index + 1}</span></td>
+                            <td>{cert.certificate_id}</td>
+                            <td>{cert.client_name}</td>
+                            <td>{new Date(cert.issue_date).toLocaleDateString()}</td>
+                            <td>{cert.issuedNumber || cert.certificate_id}</td>
+                            <td>{cert.issuedBy || cert.organization_name}</td>
+                            <td>
+                                <span className="Status_Respn">
+                                <img src={VerifiedIcon} alt="Verified Icon" /> Verified
+                                </span>
+                            </td>
+                            <td>
+                                <div className="Uploaded_Cert_Div">
+                                {cert.pdf_file ? (
+                                    <button onClick={() => handleDownloadReceipt(cert.pdf_file, `${cert.client_name}.pdf`)}>
+                                    Download
+                                    </button>
+                                ) : (
+                                    <span>Not uploaded</span>
+                                )}
+                                </div>
+                            </td>
+                            <td>
+                                <div className="td_Btns">
+                                <button onClick={() => handlePreviewButtonClick(cert.id)}>Edit</button>
+                                <button onClick={() => handleSoftDelete(cert.certificate_id)}>Delete</button>
+                                </div>
+                            </td>
+                            </tr>
+                        ))
+                        ) : (
+                        <tr>
+                            <td colSpan="9" style={{ textAlign: 'center', padding: '10px' }}>
+                            No certificate created for this category yet
+                            </td>
+                        </tr>
+                        )}
+            </tbody>
+                    
+            </table>
+        </div>
+            </div>
 
         </div>
     );

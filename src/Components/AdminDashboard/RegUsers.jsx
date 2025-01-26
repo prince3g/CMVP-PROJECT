@@ -1,21 +1,25 @@
-
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
-import './Css/Dash.css';
-import config from '../../config';
+import "./Css/Dash.css";
+import config from "../../config";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function RegUsers() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [deletingId, setDeletingId] = useState(null); // Track ongoing deletions
 
   useEffect(() => {
     // Fetch data from the API
     axios
-      .get(`${config.API_BASE_URL}/api/accounts/auth/subscription/organizations/subscriptions/`)
+      .get(
+        `${config.API_BASE_URL}/api/accounts/auth/subscription/organizations/subscriptions/`
+      )
       .then((response) => {
-        setData(response.data); // Access the `results` array from the response
+        setData(response.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -24,31 +28,49 @@ export default function RegUsers() {
       });
   }, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
-
-   // Function to handle delete
-   const handleDelete = (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this organization?");
+  // Function to handle delete
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this organization?"
+    );
     if (confirmDelete) {
+      setDeletingId(id); // Indicate the deletion is ongoing
       axios
         .delete(`${config.API_BASE_URL}/api/accounts/auth/organization/${id}/`)
         .then(() => {
-          // Update the state to reflect the deletion
-          setData((prevData) => prevData.filter((organization) => organization.id !== id));
+          setData((prevData) =>
+            prevData.filter((organization) => organization.id !== id)
+          );
+          setDeletingId(null);
           alert("Organization deleted successfully!");
         })
         .catch((err) => {
           console.error(err);
+          setDeletingId(null);
           alert("An error occurred while deleting the organization.");
         });
     }
   };
+
+  if (loading) {
+    return (
+      <div className="DDD-Seco">
+        <div className="JJha-DhA">
+          <Skeleton count={5} height={30} />
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="DDD-Seco">
+        <div className="error-message">
+          <p>Error: {error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="DDD-Seco">
@@ -74,49 +96,61 @@ export default function RegUsers() {
             <tbody>
               {data.map((organization, index) => (
                 <tr key={organization.id}>
-                  {/* Serial Number (S/N) */}
                   <td>{index + 1}</td>
-
-                  {/* Organization Data */}
                   <td>{organization.name}</td>
                   <td>{organization.email}</td>
                   <td>{organization.phone}</td>
-                 
                   <td>{organization.address}</td>
-
-                  {/* Format Date */}
-                  <td>{new Date(organization.date_joined).toLocaleDateString('en-GB')}</td>
-
-                  {/* Actions */}
+                  <td>
+                    {new Date(
+                      organization.date_joined
+                    ).toLocaleDateString("en-GB")}
+                  </td>
                   <td>{organization.subscription_plan_name}</td>
                   <td>
                     <div className="action-btns">
-                   <Link
-                      to={{
-                        pathname: "/admin-dashboard/user-profile",
-                        search: `?num_certificates_uploaded=${encodeURIComponent(organization.num_certificates_uploaded)}
-                        &name=${encodeURIComponent(organization.name)}
-                        &phone=${encodeURIComponent(organization.phone)}
-                        // &logo=${encodeURIComponent(organization.logo)}
-                        &address=${encodeURIComponent(organization.address )}
-                        &id=${organization.id}
-                        
-                        &subscription_start_time=${encodeURIComponent(organization.subscription_start_time)}
-                        &subscription_end_time=${encodeURIComponent(organization.subscription_end_time)}
-                        &subscription_plan_name=${encodeURIComponent(organization.subscription_plan_name)}
-                        &subscription_duration=${encodeURIComponent(organization.subscription_duration)}
-                        &email=${encodeURIComponent(organization.email)}
-                        &date_joined=${encodeURIComponent(organization.date_joined)}`,
-                      }}
-                      className="prof-bank-btn"
-                    >
-                      View Profile
-                    </Link>
-                      
-                      <button onClick={() => handleDelete(organization.id)}>Remove</button>
+                      <Link
+                        to={{
+                          pathname: "/admin-dashboard/user-profile",
+                          search: `?num_certificates_uploaded=${encodeURIComponent(
+                            organization.num_certificates_uploaded
+                          )}
+                          &name=${encodeURIComponent(organization.name)}
+                          &phone=${encodeURIComponent(organization.phone)}
+                          &address=${encodeURIComponent(
+                            organization.address
+                          )}
+                          &id=${organization.id}
+                          &subscription_start_time=${encodeURIComponent(
+                            organization.subscription_start_time
+                          )}
+                          &subscription_end_time=${encodeURIComponent(
+                            organization.subscription_end_time
+                          )}
+                          &subscription_plan_name=${encodeURIComponent(
+                            organization.subscription_plan_name
+                          )}
+                          &subscription_duration=${encodeURIComponent(
+                            organization.subscription_duration
+                          )}
+                          &email=${encodeURIComponent(organization.email)}
+                          &date_joined=${encodeURIComponent(
+                            organization.date_joined
+                          )}`,
+                        }}
+                        className="prof-bank-btn"
+                      >
+                        View Profile
+                      </Link>
+
+                      <button
+                        onClick={() => handleDelete(organization.id)}
+                        disabled={deletingId === organization.id}
+                      >
+                        {deletingId === organization.id ? "Deleting..." : "Remove"}
+                      </button>
                     </div>
                   </td>
-                  
                 </tr>
               ))}
             </tbody>
