@@ -87,7 +87,7 @@ export default function HelpPage() {
                                 </span>
                                 <div className="DDl_Div">
                                     <h3>Email us</h3>
-                                    <h4><a href="mailto:info@cmvp.net">info@cmvp.net</a></h4>
+                                    <h4><a href="mailto:support@cmvp.net">support@cmvp.net</a></h4>
                                 </div>
                             </li>
                             <li>
@@ -104,7 +104,7 @@ export default function HelpPage() {
                                     <img src={LocationIcon} alt="Location icon" />
                                 </span>
                                 <div className="DDl_Div">
-                                    <h3>Location</h3>
+                                    <h3>Address</h3>
                                     <h4>Plot 5 Owule Ojuan Street, off Peter Odili Road, Trans Amadi, Port Harcourt, Rivers</h4>
                                 </div>
                             </li>
