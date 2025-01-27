@@ -570,7 +570,7 @@ export default function PortalPage() {
                         <input
                             id="portalUrl"
                             type="text"
-                            value={`${config.WEB_PAGE_BASE_URL}/${organizationID}/${organizationName}/`}
+                            value={`${config.WEB_PAGE_BASE_URL}/verification/${organizationID}/${organizationName}/`}
                             readOnly
                         />
                     </div>
