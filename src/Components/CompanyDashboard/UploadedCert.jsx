@@ -222,7 +222,7 @@ export default function UploadedCert() {
    // Soft delete certificate by id with confirmation
 const handleSoftDelete = async (certificate_id) => {
     // Ask for confirmation before proceeding with deletion
-    const isConfirmed = window.confirm("Are you sure you want to delete this certificate? This action cannot be undone.");
+    const isConfirmed = window.confirm("Are you sure you want to delete this certificate?");
 
     if (!isConfirmed) {
         return; // Exit the function if the user cancels the deletion
