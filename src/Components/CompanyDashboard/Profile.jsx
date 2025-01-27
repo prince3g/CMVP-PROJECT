@@ -246,8 +246,9 @@ export default function Profile({ orgId }) {
                                             onChange={(e) => setContactLastName(e.target.value)}
                                         />
                                     </div>
+                                    
                                     <div className="form-input">
-                                        <p>Contact Person's Telephone</p>
+                                        <p>Contact Telephone</p>
                                         <input
                                             type="text"
                                             placeholder="Enter Contact Person's Telephone"
@@ -255,6 +256,7 @@ export default function Profile({ orgId }) {
                                             onChange={(e) => setContactTelephone(e.target.value)}
                                         />
                                     </div>
+
                                     <div className="form-input">
                                         <p>Year Incorporated</p>
                                         <input
@@ -273,7 +275,7 @@ export default function Profile({ orgId }) {
                                             onChange={(e) => setRegistrationNumber(e.target.value)}
                                         />
                                     </div>
-                                    <div className="form-input">
+                                    {/* <div className="form-input">
                                         <p>Nationality</p>
                                         <input
                                             type="text"
@@ -281,8 +283,8 @@ export default function Profile({ orgId }) {
                                             value={nationality}
                                             onChange={(e) => setNationality(e.target.value)}
                                         />
-                                    </div>
-                                    <div className="form-input">
+                                    </div> */}
+                                    {/* <div className="form-input">
                                         <p>Number of Staff</p>
                                         <input
                                             type="Number"
@@ -290,7 +292,7 @@ export default function Profile({ orgId }) {
                                             value={staffNumber}
                                             onChange={(e) => setStaffNumber(e.target.value)}
                                         />
-                                    </div>
+                                    </div> */}
                                     <div className="form-input">
                                         <p>City Address</p>
                                         <input
