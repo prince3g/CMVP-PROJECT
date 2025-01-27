@@ -3142,3 +3142,37 @@ text-align: center;
   display: block;
   opacity: 0.7;
 }
+
+
+.HH_Contents h2{
+  font-size: 20px;
+  font-weight: 700;
+  margin: 20px 0px;
+  text-transform: uppercase;
+}
+
+.HH_Contents h3{
+  font-size: 17px;
+  font-weight: 700;
+  margin: 20px 0px;
+}
+
+.MMha-page ol{
+  margin-left: 0px !important;
+}
+
+.MMha-page ol li{
+  margin-top: 10px;
+}
+
+.faq-list {
+  padding-left: 20px;  
+}
+
+.faq-list li {
+  margin-bottom: 5px; 
+}
+
+.faq-list .bullet {
+  margin-right: 10px; 
+}
