@@ -126,6 +126,15 @@ export default function EditSubScript() {
                             required
                         />
                     </div>
+
+                    <div className="Supt-Input">
+                        <label>Select currency</label>
+                        <select>
+                            <option>Naira (₦)</option>
+                            <option>Dollar ($)</option>
+                        </select>
+                    </div>
+                    
                     <div className="Supt-Input">
                         <label>What's the amount?</label>
                         <input
