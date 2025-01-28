@@ -222,7 +222,7 @@ useEffect(() => {
                 <div className="Main_Top_NaV">
                     <div className="Large-container">
                         <div className="L_NN_V_Sec">
-                            <Link to="/dashboard/" className="dash_logo"><img src={LogoIcon}></img></Link>
+                            <Link to="/" className="dash_logo"><img src={LogoIcon}></img></Link>
                         </div>
 
                         <div className="R_NN_V_Sec">

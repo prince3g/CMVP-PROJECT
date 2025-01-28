@@ -72,7 +72,7 @@ export default function NavBar() {
             <div className="NavBar_Body" onClick={closeSidebar}></div>
             <nav className="AALeft_Dash_Nav">
                 <div className="Top_Dash_nav">
-                    <Link to="/admin-dashboard/" onClick={() => handleLinkClick('/admin-dashboard/')}>
+                    <Link to="/" onClick={() => handleLinkClick('/admin-dashboard/')}>
                         <img src={LitDashLogo} alt="Dashboard Logo"></img>
                     </Link>
                     <button className="AASide_Nav_Toggler" onClick={closeSidebar}><img src={CloseIcon} alt="Close Icon"></img></button>
