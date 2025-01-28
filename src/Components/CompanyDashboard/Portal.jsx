@@ -145,6 +145,13 @@ export default function PortalPage() {
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
+        // File size validation: 2MB = 2 * 1024 * 1024 bytes
+        const maxSizeInBytes = 2 * 1024 * 1024;
+        if (file && file.size > maxSizeInBytes) {
+            showMessage("File size should not exceed 2MB.", "failure");
+            return;
+        }
+    
         if (file) {
             setSelectedFile(file);
             const reader = new FileReader();
@@ -154,6 +161,18 @@ export default function PortalPage() {
             reader.readAsDataURL(file);
         }
     };
+
+    // const handleImageUpload = (event) => {
+    //     const file = event.target.files[0];
+    //     if (file) {
+    //         setSelectedFile(file);
+    //         const reader = new FileReader();
+    //         reader.onloadend = () => {
+    //             setImagePreview(reader.result);
+    //         };
+    //         reader.readAsDataURL(file);
+    //     }
+    // };
 
     const handleDrop = (event) => {
         event.preventDefault();
@@ -212,20 +231,34 @@ export default function PortalPage() {
         setCategoryName('');
     };
 
+
     const handleInputChange = (event) => {
-        setSelectedCategory(event.target.value);
-
-        // console.log("event.target.value")
-        // console.log(event.target.value)
-        // console.log("event.target.value")
-
-
         const { name, value } = event.target;
-        setCertificateData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+    
+        if (name === "certificate_category") {
+            setSelectedCategory(value); // Update selected category independently
+        } else {
+            setCertificateData((prevState) => ({
+                ...prevState,
+                [name]: value,
+            }));
+        }
     };
+    
+    // const handleInputChange = (event) => {
+    //     setSelectedCategory(event.target.value);
+
+    //     // console.log("event.target.value")
+    //     // console.log(event.target.value)
+    //     // console.log("event.target.value")
+
+
+    //     const { name, value } = event.target;
+    //     setCertificateData(prevState => ({
+    //         ...prevState,
+    //         [name]: value
+    //     }));
+    // };
 
 
     
@@ -430,14 +463,32 @@ export default function PortalPage() {
                                         )}
 
                                         <div className="Cert_Form_input Cert_Form_input_Select Cert_Form_input_Selct">
-                                        <select value={selectedCategory} onChange={handleInputChange}>
+
+
+                                        {/* <select value={selectedCategory} onChange={handleInputChange}>
                                             <option value="">Select certificate category</option>
                                             {categories1.map((category) => (
                                             <option key={category.id} value={category.unique_certificate_category_id}>
                                                 {category.name} 
                                             </option>
                                             ))}
+                                        </select> */}
+
+                                        <select
+                                            name="certificate_category"
+                                            value={selectedCategory}
+                                            onChange={handleInputChange}
+                                        >
+                                            <option value="">Select certificate category</option>
+                                            {categories1.map((category) => (
+                                                <option key={category.id} value={category.unique_certificate_category_id}>
+                                                    {category.name}
+                                                </option>
+                                            ))}
                                         </select>
+
+
+
                                         <div className="Add_Cart_Btn" onClick={showAddCertCarti}>
                                             Add category
                                         </div>

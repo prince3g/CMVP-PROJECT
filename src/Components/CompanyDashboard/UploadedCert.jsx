@@ -42,6 +42,7 @@ export default function UploadedCert() {
 
     const [selectedCategory1, setSelectedCategory1] = useState("");
 
+
     const [certificateData, setCertificateData] = useState({
         organization_id: organizationID,
         certificate_id: "",
@@ -77,8 +78,17 @@ export default function UploadedCert() {
             });
     
             setCertificateData(response.data); // Populate the form with the fetched certificate data
-            
+            const fetchedData = response.data;
             // Prepopulate the image preview if cert.image exists
+
+            // Prepopulate the select dropdown with the fetched certificate category
+            setSelectedCategory(fetchedData.certificate_category);
+
+            // console.log("response.data"); // Store categories
+            // console.log(response.data); 
+            // console.log("response.data"); // Store categories
+
+            
             if (response.data.pdf_file) {
                 setImagePreview(response.data.pdf_file);
                 setCertificateID(response.data.id);
@@ -97,6 +107,13 @@ export default function UploadedCert() {
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
+        // File size validation: 2MB = 2 * 1024 * 1024 bytes
+        const maxSizeInBytes = 2 * 1024 * 1024;
+        if (file && file.size > maxSizeInBytes) {
+            showMessage("File size should not exceed 2MB.", "failure");
+            return;
+        }
+    
         if (file) {
             setSelectedFile(file);
             const reader = new FileReader();
@@ -106,6 +123,20 @@ export default function UploadedCert() {
             reader.readAsDataURL(file);
         }
     };
+    
+    // const handleImageUpload = (event) => {
+    //     const file = event.target.files[0];
+    //     if (file) {
+    //         setSelectedFile(file);
+    //         const reader = new FileReader();
+    //         reader.onloadend = () => {
+    //             setImagePreview(reader.result);
+    //         };
+    //         reader.readAsDataURL(file);
+    //     }
+    // };
+
+
 
     const triggerFileInput = () => {
         document.getElementById('fileInput').click();
@@ -298,6 +329,7 @@ const handleSoftDelete = async (certificate_id) => {
                 const response = await axios.get(`${config.API_BASE_URL}/api/certificates/certificateCategory/${organizationID}`);
 
                 setCertificateCategories(response.data); // Store categories
+
             } catch (error) {
                //  console.error("Error fetching certificate categories:", error);
                // alert("Failed to fetch certificate categories. Please try again.");

@@ -13,7 +13,7 @@ export default function AddSubScript() {
             num_certificate_categories: 0,
             num_daily_certificate_upload: 0,
             access_deleted_certificates_files: false,
-            maximum_login_users: 0,
+            // maximum_login_users: 0,
             twentyFourSevenSupport: false // Updated to camelCase
         }
     });
@@ -48,7 +48,7 @@ export default function AddSubScript() {
                 num_certificate_categories: planData.features.num_certificate_categories,
                 num_daily_certificate_upload: planData.features.num_daily_certificate_upload,
                 access_deleted_certificates_files: planData.features.access_deleted_certificates_files, // Boolean already
-                maximum_login_users: planData.features.maximum_login_users,
+                //maximum_login_users: planData.features.maximum_login_users,
                 "24/7_support": planData.features.twentyFourSevenSupport // Updated to match API format
             }
         };
@@ -164,7 +164,7 @@ export default function AddSubScript() {
                         </select>
                     </div>
 
-                    <div className="Supt-Input">
+                    {/* <div className="Supt-Input">
                         <label>Maximum login users</label>
                         <select
                             name="maximum_login_users"
@@ -178,7 +178,7 @@ export default function AddSubScript() {
                                 </option>
                             ))}
                         </select>
-                    </div>
+                    </div> */}
 
                     <div className="Supt-Input">
                         <label>24/7 support</label>

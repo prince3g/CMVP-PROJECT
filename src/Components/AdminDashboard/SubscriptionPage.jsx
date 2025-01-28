@@ -19,6 +19,11 @@ export default function SubscriptionPage() {
                 const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/subscription-plans/`);
                 const data = await response.json();
                 setPlans(data.results); // The actual plans are in `results` array
+                console.log("data.results"); // The actual plans are in `results` array
+
+                console.log(data.results); // The actual plans are in `results` array
+
+                console.log("data.results"); // The actual plans are in `results` array
             } catch (error) {
                 console.error("Error fetching subscription plans:", error);
             } finally {
@@ -73,7 +78,7 @@ export default function SubscriptionPage() {
                                         <h3>{plan.name}</h3>
                                     </div>
                                     <div className="plan_box_Top_1">
-                                        <h3 className="plan_price">${plan.price}</h3>
+                                        <h3 className="plan_price">NGN{plan.price}</h3>
                                         <Link 
                                             to={`/admin-dashboard/edit-plan?id=${plan.id}&price=${plan.price}&name=${encodeURIComponent(plan.name)}
                                             &storage=${encodeURIComponent(plan.features.storage || '')}
@@ -106,24 +111,48 @@ export default function SubscriptionPage() {
                                                  <td>Access to portal</td>
                                                  <td>
                                                     {plan.features.access_deleted_certificates_files ? (
-
                                                         <span className="Check_Span">
-                                                            <img src={CheckIcon} alt="Check Icon" />
+                                                            <img src={CheckIcon} alt="Minus Icon" />
                                                         </span>
                                                     ) : (
                                                         <span>
-                                                            <img src={MinusIcon} alt="Minus Icon" />
+                                                            <img src={MinusIcon} alt="Check Icon" />
                                                         </span>
                                                     )}
                                                 </td>
                                                 <td>
                                                     {!plan.features.access_deleted_certificates_files ? (
                                                         <span className="Check_Span">
-                                                            <img src={MinusIcon} alt="Minus Icon" />
+                                                            <img src={CheckIcon} alt="Minus Icon" />
                                                         </span>
                                                     ) : (
                                                         <span>
-                                                            <img src={CheckIcon} alt="Check Icon" />
+                                                            <img src={MinusIcon} alt="Check Icon" />
+                                                        </span>
+                                                    )}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Add up to {plan.features.num_daily_certificate_upload} certificate daily</td>
+                                                <td>
+                                                    {plan.features.num_daily_certificate_upload > 5 ? (
+                                                        <span className="Check_Span">
+                                                            <img src={CheckIcon} alt="Minus Icon" />
+                                                        </span>
+                                                    ) : (
+                                                        <span>
+                                                            <img src={MinusIcon} alt="Check Icon" />
+                                                        </span>
+                                                    )}
+                                                </td>
+                                                <td>
+                                                    {!plan.features.num_daily_certificate_upload > 5 ? (
+                                                        <span className="Check_Span">
+                                                            <img src={CheckIcon} alt="Minus Icon" />
+                                                        </span>
+                                                    ) : (
+                                                        <span>
+                                                            <img src={MinusIcon} alt="Check Icon" />
                                                         </span>
                                                     )}
                                                 </td>
@@ -131,27 +160,26 @@ export default function SubscriptionPage() {
                                             <tr>
                                                 <td>Add up to {plan.features.num_certificate_categories} certificate categories</td>
                                                 <td>
-                                                    <span className="Check_Span">
-                                                        <img src={CheckIcon} alt="Check Icon" />
-                                                    </span>
+                                                    {plan.features.num_certificate_categories >= 5 ? (
+                                                        <span className="Check_Span">
+                                                            <img src={CheckIcon} alt="Minus Icon" />
+                                                        </span>
+                                                    ) : (
+                                                        <span>
+                                                            <img src={MinusIcon} alt="Check Icon" />
+                                                        </span>
+                                                    )}
                                                 </td>
                                                 <td>
-                                                    <span>
-                                                        <img src={MinusIcon} alt="Minus Icon" />
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Upload up to {plan.features.num_daily_certificate_upload} certificates daily</td>
-                                                <td>
-                                                    <span className="Check_Span">
-                                                        <img src={CheckIcon} alt="Check Icon" />
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span>
-                                                        <img src={MinusIcon} alt="Minus Icon" />
-                                                    </span>
+                                                    {!plan.features.num_certificate_categories >= 5 ? (
+                                                        <span className="Check_Span">
+                                                            <img src={CheckIcon} alt="Minus Icon" />
+                                                        </span>
+                                                    ) : (
+                                                        <span>
+                                                            <img src={MinusIcon} alt="Check Icon" />
+                                                        </span>
+                                                    )}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -159,27 +187,27 @@ export default function SubscriptionPage() {
                                                 <td>
                                                     {plan.features.access_deleted_certificates_files ? (
                                                         <span className="Check_Span">
-                                                            <img src={CheckIcon} alt="Check Icon" />
+                                                            <img src={CheckIcon} alt="Minus Icon" />
                                                         </span>
                                                     ) : (
                                                         <span>
-                                                            <img src={MinusIcon} alt="Minus Icon" />
+                                                            <img src={MinusIcon} alt="Check Icon" />
                                                         </span>
                                                     )}
                                                 </td>
                                                 <td>
                                                     {!plan.features.access_deleted_certificates_files ? (
                                                         <span className="Check_Span">
-                                                            <img src={MinusIcon} alt="Minus Icon" />
+                                                            <img src={CheckIcon} alt="Minus Icon" />
                                                         </span>
                                                     ) : (
                                                         <span>
-                                                            <img src={CheckIcon} alt="Check Icon" />
+                                                            <img src={MinusIcon} alt="Check Icon" />
                                                         </span>
                                                     )}
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            {/* <tr>
                                                 <td>{plan.features.maximum_login_users} maximum login users</td>
                                                 <td>
                                                     <span className="Check_Span">
@@ -191,10 +219,10 @@ export default function SubscriptionPage() {
                                                         <img src={MinusIcon} alt="Minus Icon" />
                                                     </span>
                                                 </td>
-                                            </tr>
+                                            </tr> */}
                                             <tr>
                                                 <td>24/7 support</td>
-                                                <td>
+                                                {/* <td>
                                                     {plan.features["24/7_support"] ? (
                                                         <span className="Check_Span">
                                                             <img src={CheckIcon} alt="Check Icon" />
@@ -213,6 +241,28 @@ export default function SubscriptionPage() {
                                                     ) : (
                                                         <span>
                                                             <img src={CheckIcon} alt="Check Icon" />
+                                                        </span>
+                                                    )}
+                                                </td> */}
+                                                <td>
+                                                    {plan.features["24/7_support"] ? (
+                                                        <span className="Check_Span">
+                                                            <img src={CheckIcon} alt="Minus Icon" />
+                                                        </span>
+                                                    ) : (
+                                                        <span>
+                                                            <img src={MinusIcon} alt="Check Icon" />
+                                                        </span>
+                                                    )}
+                                                </td>
+                                                <td>
+                                                 {!plan.features["24/7_support"] ? (
+                                                        <span className="Check_Span">
+                                                            <img src={CheckIcon} alt="Minus Icon" />
+                                                        </span>
+                                                    ) : (
+                                                        <span>
+                                                            <img src={MinusIcon} alt="Check Icon" />
                                                         </span>
                                                     )}
                                                 </td>
