@@ -445,67 +445,74 @@ export default function PortalPage() {
                                         </div>
 
                                         <div className="Cert_Form_input">
+                                            <lable>Certificate ID</lable>
                                             <input
                                                 type="text"
                                                 name="number"  // Maps to `certificate_id`
                                                 value={certificateData.number}
                                                 onChange={handleInputChange}
-                                                placeholder="Certificate ID"
+                                                placeholder="Enter Certificate ID"
                                             />
 
                                         </div>
                                         <div className="Cert_Form_input">
+                                            <label>Certificate title</label>
                                             <input
                                                 type="text"
                                                 name="certificate_title"
                                                 value={certificateData.certificate_title}
                                                 onChange={handleInputChange}
-                                                placeholder="Certificate title"
+                                                placeholder="Enter Certificate title"
                                             />
                                         </div>
                                         <div className="Cert_Form_input">
+                                            <label>Type of examination / Event (optional)</label>
                                             <input
                                                 type="text"
                                                 name="examination_type"
                                                 value={certificateData.examination_type}
                                                 onChange={handleInputChange}
-                                                placeholder="Type of examination / Event (optional)"
+                                                placeholder="Enter Type of examination / Event (optional)"
                                             />
                                         </div>
                                         <div className="Cert_Form_input">
+                                            <label>Issued To</label>
                                             <input
                                                 type="text"
                                                 name="client_name"  // Maps to `client_name`
                                                 value={certificateData.client_name}
                                                 onChange={handleInputChange}
-                                                placeholder="Issued To"
+                                                placeholder="Enter Issued To"
                                             />
                                         </div>
                                         <div className="Cert_Form_input">
+                                            <lable>Date of Issue</lable>
                                             <input
                                                 type="date"
                                                 name="dateOfIssue"  // Maps to `issue_date`
                                                 value={certificateData.dateOfIssue}
                                                 onChange={handleInputChange}
-                                                placeholder="Date of Issue"
+                                                placeholder="Enter Date of Issue"
                                             />
                                         </div>
                                         <div className="Cert_Form_input">
+                                            <lable>Issue number</lable>
                                             <input
                                                 type="text"
                                                 name="issuedNumber"
                                                 value={certificateData.issuedNumber}
                                                 onChange={handleInputChange}
-                                                placeholder="Issue number"
+                                                placeholder="Enter Issue number"
                                             />
                                         </div>
                                         <div className="Cert_Form_input">
+                                            <label>Issued by</label>
                                             <input
                                                 type="text"
                                                 name="issuedBy"
                                                 value={certificateData.issuedBy}
                                                 onChange={handleInputChange}
-                                                placeholder="Issued by"
+                                                placeholder="Enter Issued by"
                                             />
                                         </div>
                                     </div>

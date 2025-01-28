@@ -223,3 +223,10 @@
 .Upload_Table th{
     font-weight: 700 !important;
 }
+
+.Cert_Form_input label{
+    margin-bottom: 10px !important;
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+}

@@ -1449,11 +1449,12 @@
   text-align: center;
   color: #606060;
 }
+.Reg_Input label,
 .Upload-input label{
   margin-bottom: 10px !important;
   display: block;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 700;
 }
 .Upload-input input{
   padding-top: 12px !important;

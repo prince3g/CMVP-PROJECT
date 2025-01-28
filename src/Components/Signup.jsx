@@ -154,10 +154,11 @@ const Signup = () => {
               </div>
               <form className="Reg_Form" onSubmit={handleFormSubmit}>
                 <div className="Reg_Input">
+                <label>Company Email</label>
                   <input
                     type="email"
                     name="email"
-                    placeholder=" Company Email"
+                    placeholder="Enter Company Email"
                     value={formData.email}
                     onChange={handleInputChange}
                     required
@@ -166,10 +167,11 @@ const Signup = () => {
 
                 <div className="OO-D-flex">
                   <div className="Reg_Input">
+                    <label>Company Name</label>
                     <input
                       type="text"
                       name="companyName"
-                      placeholder="Company Name"
+                      placeholder="Enter Company Name"
                       value={formData.companyName}
                       onChange={handleInputChange}
                       required
@@ -177,10 +179,11 @@ const Signup = () => {
                   </div>
 
                   <div className="Reg_Input">
+                    <label>Phone number</label>
                     <input
                       type="text"
                       name="phone"
-                      placeholder="Phone number"
+                      placeholder="Enter Phone number"
                       value={formData.phone}
                       onChange={handleInputChange}
                       required
@@ -189,10 +192,11 @@ const Signup = () => {
                 </div>
 
                 <div className="Reg_Input">
+                  <label>Company Registration Number</label>
                   <input
                     type="text"
                     name="registration_number"
-                    placeholder="Company Registration Number"
+                    placeholder="Enter Company Registration Number"
                     value={formData.registration_number}
                     onChange={handleInputChange}
                     required
@@ -200,10 +204,11 @@ const Signup = () => {
                 </div>
 
                 <div className="Reg_Input">
+                  <label>Address</label>
                   <input
                     type="text"
                     name="address"
-                    placeholder="Address"
+                    placeholder="Enter Address"
                     value={formData.address}
                     onChange={handleInputChange}
                     required
