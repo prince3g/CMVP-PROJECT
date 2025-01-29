@@ -201,7 +201,7 @@ useEffect(() => {
                         <li>
                             <Link to="/dashboard/pricing" className={location.pathname === '/dashboard/pricing' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/dashboard/pricing')}>
                             <span> <PriceCheckIcon /></span>
-                                <p>Pricing</p>
+                                <p>Your Subscription</p>
                             </Link>
                         </li>
 

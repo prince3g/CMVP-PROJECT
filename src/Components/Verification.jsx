@@ -172,8 +172,8 @@ const handleGoBack = () => {
       <div className="Comp_Intro_Sec">
         <div className="COm_oopal">
       
-          <h2 className="big-text"><span>{organizationData_name} </span><br></br>  verification portal</h2>
-          <p>Your trusted platform for verifying certificates and documents with ease.</p>
+          <h2 className="big-text hggga-text"><span>{organizationData_name} </span><br></br>  verification portal</h2>
+          <p>Your trusted platform for verifying our issued certificates.</p>
         </div>
 
         <div className="seargs_sec">
