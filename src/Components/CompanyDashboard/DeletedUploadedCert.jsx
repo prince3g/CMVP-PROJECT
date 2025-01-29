@@ -198,7 +198,6 @@ export default function DeletedUploadedCert() {
               
                                         <td>
                                             <div className="td_Btns">
-                                            <div className="Uploaded_Cert_Div">
                                                 {/* <button className="deleted_LAbel">Deleted <img src={TrashIcon} alt="Trash Icon" /></button> */}
                                                 <button 
                                                     className="deleted_LAbel"
@@ -209,7 +208,6 @@ export default function DeletedUploadedCert() {
                                                     {loadingCertificateId === cert.certificate_id && <span className="loader">...</span>}
                                                     <img src={TrashIcon} alt="Trash Icon" />
                                                 </button>
-                                            </div>
                                             
                                                 <button 
                                                     className="restore_btn" 

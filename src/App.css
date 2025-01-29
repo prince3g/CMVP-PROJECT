@@ -3177,3 +3177,85 @@ text-align: center;
 .faq-list .bullet {
   margin-right: 10px; 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.Gland-Quest-data input,
+.Gland-Quest-data textarea,
+.Gland-Quest-data select{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    padding: 0px 15px;
+    border-radius: 5px;
+    border:1px solid #cccbcb;
+    transition: all 0.3s ease-in-out;
+    margin-top: 10px;
+  }
+  .Gland-Quest-data input:focus,
+  .Gland-Quest-data textarea:focus,
+  .Gland-Quest-data select:focus {
+    border-color: #0D2818;
+    outline: none;
+    border-width: 2px;
+  }
+  .Gland-Quest-data textarea{
+    height: 150px;
+    resize: none;
+    padding: 15px;
+  }
+
+
+
+
+  .gghaja-flex{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    grid-gap: 10px;
+  }
+
+  .ghha-foot{
+    font-size: 13px;
+    margin-top: 20px;
+  }
+
+.ghha-foot p button{
+  font-weight: 600;
+  background-color: transparent;
+  outline: none !important;
+  border:none !important;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: all 0.3s ease-in-out;
+  color: #0D2818;
+}
+
+.jjaao{
+  margin-top: 10px;
+}

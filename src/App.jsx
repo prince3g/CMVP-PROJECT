@@ -13,6 +13,7 @@ import Pricing from './Components/Pricing';
 import HowItWorks from './Components/HowItWorks';
 import FAQ from './Components/FAQ';
 import AboutUs from './Components/AboutUs';
+import VerificationCode from './Components/VerificationCode';
 import Verification from './Components/Verification';
 import ForgotPassPage from './Components/ForgotPassPage';
 import ForgotPassPageReset from './Components/ForgotPassPageReset';
@@ -26,6 +27,7 @@ function App() {
   const isAuthPage =
     location.pathname === '/login' ||
     location.pathname === '/signup' ||
+    location.pathname === '/verification-code' ||
     location.pathname === '/forgot-password' ||
     location.pathname.startsWith('/forgotten_pass_reset/');
   
@@ -59,6 +61,7 @@ function App() {
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/about-cmvp" element={<AboutUs />} />
+          <Route path="/verification-code" element={<VerificationCode />} />
           <Route path="/verification" element={<Verification />} />
           <Route path="/verification/:orgID/:OrgName" element={<Verification />} />
           <Route path="/forgot-password" element={<ForgotPassPage />} />
