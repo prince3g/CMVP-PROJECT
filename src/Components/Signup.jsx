@@ -270,7 +270,8 @@ const Signup = () => {
                   </span>
                 </div>
 
-                <div className="Reg_Input">
+                <div className="Reg_Input hgahs-ooa">
+                  <input type="checkbox" />
                   <p>
                     By clicking "Sign Up," you agree to our{" "}
                     <Link to="/terms-of-use">Terms of Use</Link> and our{" "}
