@@ -151,6 +151,14 @@ const handleGoBack = () => {
   return (
     <div className={`Verification-Landing-page ${showResult ? 'Showresult' : ''}`}>
      <div className='Verification_page'>
+
+     <img 
+            src={`${config.API_BASE_URL}${organizationDatalogo}`} 
+            alt="CEO" 
+
+            className="oo_comp_Logo"
+        />
+
       <div className="Fixed_BG_OO">
 
          {backgroundImage ? (
@@ -159,27 +167,11 @@ const handleGoBack = () => {
                 <img src={PageFixeImg} className="Fixed-ImgBg" alt="Fallback Background" />
             )}
 
-         <span>
-
-             <img 
-            src={`${config.API_BASE_URL}${organizationDatalogo}`} 
-            alt="CEO" 
-
-            className="comp_Logo"
-        />
-              <img src={MarkedImg} className="marked_Img"></img>
-
-         </span>
       </div>
 
       <div className="Comp_Intro_Sec">
         <div className="COm_oopal">
-        <img 
-            src={`${config.API_BASE_URL}${organizationDatalogo}`} 
-            alt="Company Logo" 
-
-            className="mobile_comp_Logo"
-        />
+      
           <h2 className="big-text"><span>{organizationData_name} </span><br></br>  verification portal</h2>
           <p>Your trusted platform for verifying certificates and documents with ease.</p>
         </div>
@@ -249,8 +241,8 @@ const handleGoBack = () => {
 
 
           <footer className="very_footer">
-          <a href="https://www.prolianceltd.com/">Powered by Proliance LTD <br></br> (ISO 9001:2015 certified company)</a>
-          <span>© {currentYear} CMVP. All rights reserved.</span>
+          <p>Powered by CMVP</p>
+          <span>© {currentYear}</span>
           </footer>
 
      </div>
