@@ -171,7 +171,6 @@ export default function DeletedUploadedCert() {
                                 <th>Issue number</th>
                                 <th>Issued by</th>
                                 <th>Status</th>
-                                <th>Uploaded Downloaded / E-copy</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -196,7 +195,9 @@ export default function DeletedUploadedCert() {
                                         <td>
                                             <span className="Status_Respn"><img src={VerifiedIcon} alt="Verified Icon" /> Verified</span>
                                         </td>
+              
                                         <td>
+                                            <div className="td_Btns">
                                             <div className="Uploaded_Cert_Div">
                                                 {/* <button className="deleted_LAbel">Deleted <img src={TrashIcon} alt="Trash Icon" /></button> */}
                                                 <button 
@@ -209,9 +210,7 @@ export default function DeletedUploadedCert() {
                                                     <img src={TrashIcon} alt="Trash Icon" />
                                                 </button>
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div className="td_Btns">
+                                            
                                                 <button 
                                                     className="restore_btn" 
                                                     onClick={() => restoreCertificate(cert.certificate_id)}

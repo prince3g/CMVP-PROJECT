@@ -13,6 +13,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import PersonIcon from '@mui/icons-material/Person';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import LogoutIcon from '@mui/icons-material/Logout';
+import PriceCheckIcon from '@mui/icons-material/PriceCheck';
 
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -196,12 +197,23 @@ useEffect(() => {
                             </Link>
                         </li>
 
+                        
                         <li>
                             <Link to="/dashboard/pricing" className={location.pathname === '/dashboard/pricing' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/dashboard/pricing')}>
+                            <span> <PriceCheckIcon /></span>
+                                <p>Pricing</p>
+                            </Link>
+                        </li>
+
+
+                        <li>
+                            <Link to="/dashboard/subscription" className={location.pathname === '/dashboard/subscription' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/dashboard/subscription')}>
                             <span> <AttachMoneyIcon /></span>
                                 <p>Subscription Plans</p>
                             </Link>
                         </li>
+
+
 
 
                         <li>

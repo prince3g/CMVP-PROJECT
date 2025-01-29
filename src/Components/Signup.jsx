@@ -192,6 +192,16 @@ const Signup = () => {
                 </div>
 
                 <div className="Reg_Input">
+                    <label>Company Official Mail</label>
+                    <input
+                      type="text"
+                      name="companyName"
+                      placeholder="Enter Company Official Mail"
+                      required
+                    />
+                  </div>
+
+                <div className="Reg_Input">
                   <label>Company Registration Number</label>
                   <input
                     type="text"
@@ -202,6 +212,7 @@ const Signup = () => {
                     required
                   />
                 </div>
+                
 
                 <div className="Reg_Input">
                   <label>Address</label>

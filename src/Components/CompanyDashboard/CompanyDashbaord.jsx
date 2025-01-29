@@ -11,6 +11,7 @@ import Notification from "./Notification";
 import LogonInfo from "./LogonInfo";
 import Profile from "./Profile";
 import Pricing from "./Pricing";
+import Subscription from "./Subscription";
 
 import SettingIcon from "./Img/settings-icon.svg";
 
@@ -62,7 +63,8 @@ export default function CompanyDashbaord() {
             <Route path="/deleted-certificates" element={<DeletedUploadedCert />} />
             <Route path="/logon-info" element={<LogonInfo />} />
             <Route path="/profile" element={<Profile />} />
-            
+            <Route path="/subscription" element={<Subscription />} />
+
           </Routes>
         </div>
 
