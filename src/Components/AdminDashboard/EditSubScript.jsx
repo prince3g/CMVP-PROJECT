@@ -13,7 +13,7 @@ export default function EditSubScript() {
         num_certificate_categories: '',
         num_daily_certificate_upload: '',
         access_deleted_certificates_files: '',
-        maximum_login_users: '',
+        // maximum_login_users: '',
         twentyFourSevenSupport: ''
     });
     const [isUpdating, setIsUpdating] = useState(false);
@@ -28,7 +28,7 @@ export default function EditSubScript() {
             num_certificate_categories: queryParams.get('num_certificate_categories')?.trim(),
             num_daily_certificate_upload: queryParams.get('num_daily_certificate_upload')?.trim(),
             access_deleted_certificates_files: queryParams.get('access_deleted_certificates_files')?.trim(),
-            maximum_login_users: queryParams.get('maximum_login_users')?.trim(),
+            //maximum_login_users: queryParams.get('maximum_login_users')?.trim(),
             twentyFourSevenSupport: queryParams.get('twentyFourSevenSupport')?.trim()
         };
 
@@ -43,7 +43,7 @@ export default function EditSubScript() {
             num_certificate_categories: planData.num_certificate_categories || '',
             num_daily_certificate_upload: planData.num_daily_certificate_upload || '',
             access_deleted_certificates_files: planData.access_deleted_certificates_files || '',
-            maximum_login_users: planData.maximum_login_users || '',
+           // maximum_login_users: planData.maximum_login_users || '',
             twentyFourSevenSupport: planData.twentyFourSevenSupport || ''
         });
     }, [location.search]);
@@ -69,7 +69,7 @@ export default function EditSubScript() {
                 num_certificate_categories: formData.num_certificate_categories,
                 num_daily_certificate_upload: formData.num_daily_certificate_upload,
                 access_deleted_certificates_files: formData.access_deleted_certificates_files,
-                maximum_login_users: formData.maximum_login_users,
+                //maximum_login_users: formData.maximum_login_users,
                 twentyFourSevenSupport: formData.twentyFourSevenSupport
             }
         };
@@ -221,7 +221,7 @@ export default function EditSubScript() {
                         </select>
                     </div>
 
-                    <div className="Supt-Input">
+                    {/* <div className="Supt-Input">
                         <label>Maximum login users</label>
                         <select
                             name="maximum_login_users"
@@ -237,7 +237,7 @@ export default function EditSubScript() {
                             <option value="30">30</option>
                             <option value="UNLIMITED">UNLIMITED</option>
                         </select>
-                    </div>
+                    </div> */}
 
                     <div className="Supt-Input">
                         <label>24/7 support</label>

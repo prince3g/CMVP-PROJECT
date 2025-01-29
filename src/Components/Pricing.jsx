@@ -174,7 +174,7 @@ export default function Pricing() {
                                             <h3>{plan.name}</h3>
                                         </div>
                                         <div className="plan_box_Top_1">
-                                    <h3 className="plan_price">${plan.price}</h3>
+                                    <h3 className="plan_price">NGN{plan.price}</h3>
                                     <Link
                                         to="#"
                                         onClick={(e) => {
@@ -190,7 +190,7 @@ export default function Pricing() {
 
                                     </div>
                                     <div className="plan_box_Body">
-                                        <table className="plan_table">
+                                        {/* <table className="plan_table">
                                             <thead>
                                                 <tr>
                                                     <th>Feature</th>
@@ -309,6 +309,183 @@ export default function Pricing() {
                                                         ) : (
                                                             <span>
                                                                 <img src={CheckIcon} alt="Check Icon" />
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table> */}
+
+                                        <table className="plan_table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Feature</th>
+                                                    <th>Active</th>
+                                                    <th>Not Active</th>
+                                                </tr>
+                                            </thead>
+
+
+                                                <tbody>
+
+                                                    {/* Check each feature's property in `features` */}
+
+                                                    <tr>
+                                                        <td>Access to portal</td>
+                                                        <td>
+                                                        {plan.features.access_deleted_certificates_files ? (
+                                                            <span className="Check_Span">
+                                                                <img src={CheckIcon} alt="Minus Icon" />
+                                                            </span>
+                                                        ) : (
+                                                            <span>
+                                                                <img src={MinusIcon} alt="Check Icon" />
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        {!plan.features.access_deleted_certificates_files ? (
+                                                            <span className="Check_Span">
+                                                                <img src={CheckIcon} alt="Minus Icon" />
+                                                            </span>
+                                                        ) : (
+                                                            <span>
+                                                                <img src={MinusIcon} alt="Check Icon" />
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Add up to {plan.features.num_daily_certificate_upload} certificate daily</td>
+                                                    <td>
+                                                    {plan.features.num_daily_certificate_upload > 5 || plan.features.num_daily_certificate_upload === "UNLIMITED"  ? (
+                                                            <span className="Check_Span">
+                                                                <img src={CheckIcon} alt="Minus Icon" />
+                                                            </span>
+                                                        ) : (
+                                                            <span>
+                                                                <img src={MinusIcon} alt="Check Icon" />
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        {!plan.features.num_daily_certificate_upload > 5 || !plan.features.num_daily_certificate_upload === "UNLIMITED"  ? (
+                                                            <span className="Check_Span">
+                                                                <img src={CheckIcon} alt="Minus Icon" />
+                                                            </span>
+                                                        ) : (
+                                                            <span>
+                                                                <img src={MinusIcon} alt="Check Icon" />
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Add up to {plan.features.num_certificate_categories} certificate categories</td>
+                                                    <td>
+                                                    {plan.features.num_certificate_categories >= 5 || plan.features.num_certificate_categories === "UNLIMITED"  ? (
+                                                            <span className="Check_Span">
+                                                                <img src={CheckIcon} alt="Minus Icon" />
+                                                            </span>
+                                                        ) : (
+                                                            <span>
+                                                                <img src={MinusIcon} alt="Check Icon" />
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        {!plan.features.num_certificate_categories > 5 || !plan.features.num_certificate_categories === "UNLIMITED"? (
+                                                            <span className="Check_Span">
+                                                                <img src={CheckIcon} alt="Minus Icon" />
+                                                            </span>
+                                                        ) : (
+                                                            <span>
+                                                                <img src={MinusIcon} alt="Check Icon" />
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Access to deleted certificates and files</td>
+                                                    <td>
+                                                        {plan.features.access_deleted_certificates_files ? (
+                                                            <span className="Check_Span">
+                                                                <img src={CheckIcon} alt="Minus Icon" />
+                                                            </span>
+                                                        ) : (
+                                                            <span>
+                                                                <img src={MinusIcon} alt="Check Icon" />
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        {!plan.features.access_deleted_certificates_files ? (
+                                                            <span className="Check_Span">
+                                                                <img src={CheckIcon} alt="Minus Icon" />
+                                                            </span>
+                                                        ) : (
+                                                            <span>
+                                                                <img src={MinusIcon} alt="Check Icon" />
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                </tr>
+                                                {/* <tr>
+                                                    <td>{plan.features.maximum_login_users} maximum login users</td>
+                                                    <td>
+                                                        <span className="Check_Span">
+                                                            <img src={CheckIcon} alt="Check Icon" />
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span>
+                                                            <img src={MinusIcon} alt="Minus Icon" />
+                                                        </span>
+                                                    </td>
+                                                </tr> */}
+                                                <tr>
+                                                    <td>24/7 support</td>
+                                                    {/* <td>
+                                                        {plan.features["24/7_support"] ? (
+                                                            <span className="Check_Span">
+                                                                <img src={CheckIcon} alt="Check Icon" />
+                                                            </span>
+                                                        ) : (
+                                                            <span>
+                                                                <img src={MinusIcon} alt="Minus Icon" />
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        {!plan.features["24/7_support"] ? (
+                                                            <span className="Check_Span">
+                                                                <img src={MinusIcon} alt="Minus Icon" />
+                                                            </span>
+                                                        ) : (
+                                                            <span>
+                                                                <img src={CheckIcon} alt="Check Icon" />
+                                                            </span>
+                                                        )}
+                                                    </td> */}
+                                                    <td>
+                                                        {plan.features["24/7_support"] ? (
+                                                            <span className="Check_Span">
+                                                                <img src={CheckIcon} alt="Minus Icon" />
+                                                            </span>
+                                                        ) : (
+                                                            <span>
+                                                                <img src={MinusIcon} alt="Check Icon" />
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                    <td>
+                                                        {!plan.features["24/7_support"] ? (
+                                                            <span className="Check_Span">
+                                                                <img src={CheckIcon} alt="Minus Icon" />
+                                                            </span>
+                                                        ) : (
+                                                            <span>
+                                                                <img src={MinusIcon} alt="Check Icon" />
                                                             </span>
                                                         )}
                                                     </td>
