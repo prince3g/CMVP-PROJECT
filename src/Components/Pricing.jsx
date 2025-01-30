@@ -146,21 +146,20 @@ export default function Pricing() {
 
 
     return (
-        <div className="Landing-page MMha-page">
+        <div className="Landing-page MMha-page subscript-page">
 
                 <div className="Top_Plannsia">
                     <div className="site-container">
                     <div  className="Pricing_Sec">
                     <div className="Pricing_top">
-                        <h3 className="big-text">Subscription Plans</h3>
-                        <p>Subscription plans for certificate management and verification portal (CMVP).</p>
+                        <h3 className="big-text">CMVP Subscription Plan</h3>
+                        <p>Subscription plans for CMVP is tailored to meet the specific needs of different organizations. </p>
                     </div>
                     <div className="Plans_Sec">
                         {plans.length > 0 ? (
                             plans.map((plan) => (
                                 <div key={plan.id} className="plan_box">
                                     <div className="Pricing_sub">
-                                        <h3>CMVP Plan</h3>
                                         {/* <div className="pricing_Top_Btns">
                                             {["1 Month", "3 Months", "6 Months", "1 Year"].map((duration) => (
                                                 <button key={duration} className="plan_btn">
@@ -504,42 +503,8 @@ export default function Pricing() {
                     </div>
                 </div>
 
-            <div className="site-container">
+           
 
-                <div className="Plan_SUmmry">
-                    <h3><span>All plans include:</span></h3>
-                    <ul>
-                        <li>
-                            <WorkOutlineIcon />
-                            <p>Easy Access to company portal</p>
-                        </li>
-                        <li>
-                            <UploadFileIcon />
-                            <p>Upload  certificates and results</p>
-                        </li>
-                        <li>
-                            <PersonAddAltIcon />
-                            <p>Free registeration for all users</p>
-                        </li>
-                        <li>
-                            <SupportAgentIcon />
-                            <p>24/7 support system</p>
-                        </li>
-                    </ul>
-                </div>
-
-            
-            </div>
-
-               <div className='ggatsh-sec'>
-                    <div className='site-container'>
-                    <div className='ggatsh-main'>
-                        <h2 className='big-text'>Say goodbye to forgery of your brand certificates</h2>
-                        <Link to="/signup">Get started with CMVP</Link>
-                    </div>
-                    </div>
-                </div>
-                
 
         </div>
     );

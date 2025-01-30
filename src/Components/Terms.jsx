@@ -4,12 +4,18 @@ export default function Terms() {
     return(
         <div className="MMha-page">
             <div className="hagsh-sec">
+
+            <div className="TThero-Blam">
+                <div className="site-container">
+                    <h2 className="big-text">CMVP Terms of Use</h2>
+                    <p>Rev.01; 22 January, 2025</p>
+                    </div>
+                </div>
+
                 <div className="site-container">
                     <div className="hagsh-main">
                         <div className="hagsh-Box">
-                        <div className="TThero-Blam">
-                    <h2 className="big-text">Terms of Use</h2>
-                </div>
+                      
 
 <p>
     <strong>www.cmvp.net</strong> is an online record management solution provided by <strong>Proliance Ltd</strong>, a registered company with the Corporate Affairs Commission of Nigeria with certificate of incorporation number <strong>RC 1451877</strong>. The platform is designed to assist businesses such as Inspection Bodies, Calibration and Testing Labs, Certification Bodies, Training organisations, schools and institutes, as well as any related entities in managing, storing, and verifying issued certificates or results in a secure and organised manner. By accessing or using the Platform, you agree to comply with the following Terms and Conditions:
