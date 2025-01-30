@@ -76,7 +76,13 @@ function App() {
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/about-cmvp" element={<AboutUs />} />
+          
           <Route path="/verification-code" element={<VerificationCode />} />
+          <Route path="/verification-code/:code" element={<VerificationCode />} />
+          <Route path="/verification-code/:code/:email" element={<VerificationCode />} />
+
+          {/* <Route path="/verification-code" element={<VerificationCode />} /> */}
+
           <Route path="/verification" element={<Verification />} />
           <Route path="/verification/:orgID/:OrgName" element={<Verification />} />
           <Route path="/forgot-password" element={<ForgotPassPage />} />

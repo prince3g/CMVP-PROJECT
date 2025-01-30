@@ -7,8 +7,16 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import ShowPassIcon from "../assets/Img/showPass-icon.svg";
 import HidePassIcon from "../assets/Img/hidePass-icon.svg";
+import FlashMessage from "./FlashMessage/FlashMessage"
 
 const Login = () => {
+
+    const [flash, setFlash] = useState(null);
+  
+    const showMessage = (message, type) => {
+        setFlash({ message, type });
+      };
+  
   const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState("password");
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -34,23 +42,13 @@ const Login = () => {
     setErrorMessage(null);
     setIsLoading(true);
   
-    const formDataToSend = new FormData();
-    formDataToSend.append("email", formData.email);
-    formDataToSend.append("password", formData.password);
-  
     try {
       const response = await axios.post(
         `${config.API_BASE_URL}/api/accounts/auth/login/`,
-        formDataToSend,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        formData
       );
   
       const token = response.data;
-  
       localStorage.setItem("authToken", token.access);
       localStorage.setItem("authEmail", token.email);
       localStorage.setItem("authUserId", token.unique_subscriber_id);
@@ -59,22 +57,33 @@ const Login = () => {
       localStorage.setItem("authAddress", token.address);
       localStorage.setItem("loginTime", token.login_time);
   
-      // Check if the logged-in email is "ekenehanson@gmail.com"
       if (token.email === "ekenehanson@gmail.com" && token.user_role === "super_admin") {
-        navigate("/admin-dashboard/"); 
-      } else {  
+        navigate("/admin-dashboard/");
+      } else {
         navigate("/dashboard/");
       }
     } catch (error) {
-      setErrorMessage(
-        error.response?.data?.detail || "Failed to log in. Please try again."
-      );
+      if (error.response) {
+        setErrorMessage(error.response.data.error || "Failed to log in. Please try again.");
+        showMessage(error.response.data.error, "failure")
+
+     
+        if (error.response.data.error === "User is not verified. Please check your email for verification.") {
+          setTimeout(() => {
+            navigate(`/verification-code/:code/${formData.email}`);
+
+          }, 3000);
+        }
+        
+      } else {
+        setErrorMessage("An unexpected error occurred. Please try again.");
+        showMessage("An unexpected error occurred. Please try again.", "failure");
+      }
     } finally {
       setIsLoading(false);
     }
   };
-
-
+  
 
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
@@ -87,6 +96,15 @@ const Login = () => {
           <div className="Reg_Sec">
             <div className="Reg_Box">
               <div className="Reg_Box_Header">
+
+              {flash && (
+                  <FlashMessage
+                  message={flash.message}
+                  type={flash.type}
+                  onClose={() => setFlash(null)} // Remove flash message after timeout
+                  />
+                )}
+
                 <h3>Welcome Back</h3>
               </div>
               <form className="Reg_Form" onSubmit={handleFormSubmit}>

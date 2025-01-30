@@ -3,17 +3,29 @@ import { useNavigate } from "react-router-dom";
 import config from "../config";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import FlashMessage from "./FlashMessage/FlashMessage"
 
 import ShowPassIcon from "../assets/Img/showPass-icon.svg";
 import HidePassIcon from "../assets/Img/hidePass-icon.svg";
 
 const Signup = () => {
+
+  const [flash, setFlash] = useState(null);
+
+  const showMessage = (message, type) => {
+      setFlash({ message, type });
+    };
+
+
   const navigate = useNavigate();
+  const [isChecked, setIsChecked] = useState(false); // Track checkbox state
+
   const [passwordType, setPasswordType] = useState("password");
   const [confirmPasswordType, setConfirmPasswordType] = useState("password"); // State for confirm password visibility
   const [formData, setFormData] = useState({
     email: "",
     companyName: "",
+    company_official_mail: "",
     phone: "",
     address: "",
     registration_number: "",
@@ -61,6 +73,12 @@ const Signup = () => {
     setErrorMessage(null);
     setSuccessMessage(null);
 
+    if (!isChecked) {
+      setErrorMessage("You must agree to the Terms of Use and Privacy Policy.");
+      showMessage("You must agree to the Terms of Use and Privacy Policy.", "failure")
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       setErrorMessage("Passwords do not match");
       return;
@@ -74,6 +92,7 @@ const Signup = () => {
     formDataToSend.append("phone", formData.phone);
     formDataToSend.append("address", formData.address);
     formDataToSend.append("registration_number", formData.registration_number);
+    formDataToSend.append("company_official_mail", formData.company_official_mail);
     formDataToSend.append("password", formData.password);
 
     if (formData.logo) {
@@ -90,8 +109,10 @@ const Signup = () => {
           },
         }
       );
-
-      setSuccessMessage("Account created successfully. Please check your email to confirm your account.");
+    
+      setSuccessMessage(
+        "Account created successfully. Please check your email to confirm your account."
+      );
       setFormData({
         email: "",
         companyName: "",
@@ -100,20 +121,37 @@ const Signup = () => {
         password: "",
         registration_number: "",
         confirmPassword: "",
+        company_official_mail: "",
+
         logo: null,
       });
-
-      setTimeout(() => {
-        navigate("/login");
-      }, 500);
+    
+      showMessage("Account created successfully. Please check your email to confirm your account.", "success");
+      navigate("/verification-code");
+    
     } catch (error) {
-      setErrorMessage(
-        error.response?.data?.detail || "Failed to create an account. Please try again."
-      );
+      console.error("Signup error:", error.response?.data);
+    
+      if (error.response?.data?.errors) {
+        const errorDetails = error.response.data.errors;
+        let errorMessages = "";
+    
+        Object.keys(errorDetails).forEach((field) => {
+          errorMessages += `${field}: ${errorDetails[field].join(", ")}\n`;
+        });
+    
+        setErrorMessage(errorMessages);
+        showMessage(errorMessages, "failure");
+
+      } else {
+        setErrorMessage("Failed to create an account. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
+    
   };
+  
 
   const assessPasswordStrength = (password) => {
     if (!password) return "";
@@ -142,6 +180,11 @@ const Signup = () => {
     }
   };
 
+
+  const handleCheckboxChange = (e) => {
+    setIsChecked(e.target.checked);
+  };
+
   return (
     <div>
       <section className="Get-Seecos signup-desis">
@@ -152,6 +195,15 @@ const Signup = () => {
                 <h3>Get started with CMVP</h3>
                 <p>FOR BUSINESS</p>
               </div>
+              
+              {flash && (
+                  <FlashMessage
+                  message={flash.message}
+                  type={flash.type}
+                  onClose={() => setFlash(null)} // Remove flash message after timeout
+                  />
+                )}
+
               <form className="Reg_Form" onSubmit={handleFormSubmit}>
                 <div className="Reg_Input">
                 <label>Company Email</label>
@@ -195,9 +247,10 @@ const Signup = () => {
                     <label>Company Official Mail</label>
                     <input
                       type="text"
-                      name="companyName"
+                      name="company_official_mail"
                       placeholder="Enter Company Official Mail"
-                      required
+                      value={formData.company_official_mail}
+                      onChange={handleInputChange}
                     />
                   </div>
 
@@ -271,7 +324,7 @@ const Signup = () => {
                 </div>
 
                 <div className="Reg_Input hgahs-ooa">
-                  <input type="checkbox" />
+                <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
                   <p>
                     By clicking "Sign Up," you agree to our{" "}
                     <Link to="/terms-of-use">Terms of Use</Link> and our{" "}
