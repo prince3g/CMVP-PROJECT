@@ -107,8 +107,10 @@ const Signup = () => {
           },
         }
       );
-
-      setSuccessMessage("Account created successfully. Please check your email to confirm your account.");
+    
+      setSuccessMessage(
+        "Account created successfully. Please check your email to confirm your account."
+      );
       setFormData({
         email: "",
         companyName: "",
@@ -119,18 +121,33 @@ const Signup = () => {
         confirmPassword: "",
         logo: null,
       });
-      
-        showMessage("Account created successfully. Please check your email to confirm your account.", "success")
-        navigate("/verification-code");
-        
+    
+      showMessage("Account created successfully. Please check your email to confirm your account.", "success");
+      navigate("/verification-code");
+    
     } catch (error) {
-      setErrorMessage(
-        error.response?.data?.detail || "Failed to create an account. Please try again."
-      );
+      console.error("Signup error:", error.response?.data);
+    
+      if (error.response?.data?.errors) {
+        const errorDetails = error.response.data.errors;
+        let errorMessages = "";
+    
+        Object.keys(errorDetails).forEach((field) => {
+          errorMessages += `${field}: ${errorDetails[field].join(", ")}\n`;
+        });
+    
+        setErrorMessage(errorMessages);
+        showMessage(errorMessages, "failure");
+        
+      } else {
+        setErrorMessage("Failed to create an account. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
+    
   };
+  
 
   const assessPasswordStrength = (password) => {
     if (!password) return "";

@@ -37,53 +37,6 @@ const Login = () => {
     }));
   };
 
-  // const handleFormSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setErrorMessage(null);
-  //   setIsLoading(true);
-  
-  //   const formDataToSend = new FormData();
-  //   formDataToSend.append("email", formData.email);
-  //   formDataToSend.append("password", formData.password);
-  
-  //   try {
-  //     const response = await axios.post(
-  //       `${config.API_BASE_URL}/api/accounts/auth/login/`,
-  //       formDataToSend,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //       }
-  //     );
-  
-  //     const token = response.data;
-  
-  //     localStorage.setItem("authToken", token.access);
-  //     localStorage.setItem("authEmail", token.email);
-  //     localStorage.setItem("authUserId", token.unique_subscriber_id);
-  //     localStorage.setItem("authName", token.name);
-  //     localStorage.setItem("authPhone", token.phone);
-  //     localStorage.setItem("authAddress", token.address);
-  //     localStorage.setItem("loginTime", token.login_time);
-  
-  //     // Check if the logged-in email is "ekenehanson@gmail.com"
-  //     if (token.email === "ekenehanson@gmail.com" && token.user_role === "super_admin") {
-  //       navigate("/admin-dashboard/"); 
-  //     } else {  
-  //       navigate("/dashboard/");
-  //     }
-  //   } catch (error) {
-  //     setErrorMessage(
-  //       error.response?.data?.detail || "Failed to log in. Please try again."  
-  //     );
-
-  //     // navigate("verification-code/");
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage(null);
@@ -114,13 +67,11 @@ const Login = () => {
         setErrorMessage(error.response.data.error || "Failed to log in. Please try again.");
         showMessage(error.response.data.error, "failure")
 
-        // console.log("error.response.data.error")
-        // console.log(error.response.data.error)
-        // console.log("error.response.data.error")
      
         if (error.response.data.error === "User is not verified. Please check your email for verification.") {
           setTimeout(() => {
-            navigate("/verification-code");
+            navigate(`/verification-code/:code/${formData.email}`);
+
           }, 3000);
         }
         
