@@ -25,6 +25,7 @@ const Signup = () => {
   const [formData, setFormData] = useState({
     email: "",
     companyName: "",
+    company_official_mail: "",
     phone: "",
     address: "",
     registration_number: "",
@@ -91,6 +92,7 @@ const Signup = () => {
     formDataToSend.append("phone", formData.phone);
     formDataToSend.append("address", formData.address);
     formDataToSend.append("registration_number", formData.registration_number);
+    formDataToSend.append("company_official_mail", formData.company_official_mail);
     formDataToSend.append("password", formData.password);
 
     if (formData.logo) {
@@ -119,6 +121,8 @@ const Signup = () => {
         password: "",
         registration_number: "",
         confirmPassword: "",
+        company_official_mail: "",
+
         logo: null,
       });
     
@@ -138,7 +142,7 @@ const Signup = () => {
     
         setErrorMessage(errorMessages);
         showMessage(errorMessages, "failure");
-        
+
       } else {
         setErrorMessage("Failed to create an account. Please try again.");
       }
@@ -243,9 +247,10 @@ const Signup = () => {
                     <label>Company Official Mail</label>
                     <input
                       type="text"
-                      name="companyName"
+                      name="company_official_mail"
                       placeholder="Enter Company Official Mail"
-                      required
+                      value={formData.company_official_mail}
+                      onChange={handleInputChange}
                     />
                   </div>
 
