@@ -110,7 +110,7 @@ const Login = () => {
               <form className="Reg_Form" onSubmit={handleFormSubmit}>
                 <div className="Reg_Input">
                 <div className={`input-container ${emailFocused ? "focused" : ""}`}>
-                <label>Email address*</label>
+                <label>Email Address</label>
 
                   <input
                     type="email"
@@ -126,7 +126,7 @@ const Login = () => {
                 </div>
                 <div className="Reg_Input pass-Input">
                 <div className={`input-container ${passwordFocused ? "focused" : ""}`}>
-                <label>Password</label>
+                <label>Enter Password</label>
                   <input
                     type={passwordType}
                     name="password"

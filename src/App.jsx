@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import './App.css';
 import ScrollToTop from './assets/ScrollToTop';
 import Navbar from './Components/Navbar';
@@ -21,7 +22,21 @@ import CompanyDashbaord from './Components/CompanyDashboard/CompanyDashbaord';
 import AdminDashbaord from './Components/AdminDashboard/AdminDashboard';
 
 
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+
 function App() {
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration in milliseconds
+      once: true, // Animation only happens once
+      easing: "ease-in-out", // Animation easing
+    });
+  }, []);
+
+  
   const location = useLocation();
 
   const isAuthPage =
