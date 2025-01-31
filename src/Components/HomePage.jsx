@@ -69,10 +69,10 @@ function HomePage() {
             <div>
             <h1 className='big-text'>Manage and create unique <span>certificate verification</span> link for:</h1>
             <div className="Nwass_Cont_btn">
-                <button>Inspection Certificates</button>
-                <button>Calibration Certificates</button>
-                <button>Training Certificates</button>
-                <button>Results</button>
+                <button data-aos="fade-up" data-aos-delay="100">Inspection Certificates</button>
+                <button data-aos="fade-up" data-aos-delay="200">Calibration Certificates</button>
+                <button data-aos="fade-up" data-aos-delay="300">Training Certificates</button>
+                <button data-aos="fade-up" data-aos-delay="400">Results</button>
             </div>
             </div>
         </div>
@@ -93,7 +93,7 @@ function HomePage() {
                 </div>
                 <div className='hag_Top_2'>
                     <h2 className='big-text'>Meet your records <span>management compliance</span> needs with <span>CMVP</span></h2>
-                    <Link to="/about">About CMVP</Link>
+                    <Link to="/about-cmvp">About CMVP</Link>
                 </div>
                 </div>
             </div>

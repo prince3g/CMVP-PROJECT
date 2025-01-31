@@ -35,8 +35,8 @@ function Footer() {
                     <Link to="/faq">FAQ</Link>
                 </div>
                 <div className='foot_cnt_Nav'>
-                    <Link to="/terms-of-use">Terms of Use</Link>
-                    <Link to="/privacy-policy">Privacy Policy</Link>
+                    <a href="/terms-of-use" target='_blank'>Terms of Use</a>
+                    <a href="/privacy-policy" target='_blank'>Privacy Policy</a>
                 </div>
 
                 <div className='connect-sec'>

@@ -21,49 +21,51 @@ import ForgotPassPageReset from './Components/ForgotPassPageReset';
 import CompanyDashbaord from './Components/CompanyDashboard/CompanyDashbaord';
 import AdminDashbaord from './Components/AdminDashboard/AdminDashboard';
 
-
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-
 function App() {
-
   useEffect(() => {
     AOS.init({
       duration: 1000, // Animation duration in milliseconds
-      once: true, // Animation only happens once
+      once: false, // Animation only happens once
       easing: "ease-in-out", // Animation easing
     });
   }, []);
 
-  
   const location = useLocation();
 
   const isAuthPage =
-    location.pathname === '/login' ||
-    location.pathname === '/signup' ||
-    location.pathname === '/verification-code' ||
-    location.pathname === '/forgot-password' ||
-    location.pathname.startsWith('/forgotten_pass_reset/');
-  
+    location.pathname === "/login" ||
+    location.pathname === "/signup" ||
+    location.pathname === "/verification-code" ||
+    location.pathname === "/forgot-password" ||
+    location.pathname.startsWith("/forgotten_pass_reset/");
+
   const isVerificationPage =
-    location.pathname.startsWith('/verification') && location.pathname.split('/').length >= 2;
-  
-  const isDashboardPage = location.pathname.startsWith('/dashboard');
-  const isAdminDashboardPage = location.pathname.startsWith('/admin-dashboard');
+    location.pathname.startsWith("/verification") &&
+    location.pathname.split("/").length >= 2;
+
+  const isDashboardPage = location.pathname.startsWith("/dashboard");
+  const isAdminDashboardPage = location.pathname.startsWith("/admin-dashboard");
+
+  const isTermsOrPrivacyPage =
+    location.pathname === "/terms-of-use" || location.pathname === "/privacy-policy";
 
   const navbarClass = isAuthPage
-    ? 'Reg_Nav'
+    ? "Reg_Nav"
     : isVerificationPage
-    ? 'Verification_Nav'
-    : isDashboardPage || isAdminDashboardPage
-    ? ''
-    : '';
+    ? "Verification_Nav"
+    : isDashboardPage || isAdminDashboardPage || isTermsOrPrivacyPage
+    ? ""
+    : "";
 
   return (
     <div className="App">
       <ScrollToTop />
-      {!isDashboardPage && !isAdminDashboardPage && <Navbar className={navbarClass} />}
+      {!isDashboardPage && !isAdminDashboardPage && !isTermsOrPrivacyPage && (
+        <Navbar className={navbarClass} />
+      )}
       <div className="App-Pages">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -76,12 +78,10 @@ function App() {
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/about-cmvp" element={<AboutUs />} />
-          
+
           <Route path="/verification-code" element={<VerificationCode />} />
           <Route path="/verification-code/:code" element={<VerificationCode />} />
           <Route path="/verification-code/:code/:email" element={<VerificationCode />} />
-
-          {/* <Route path="/verification-code" element={<VerificationCode />} /> */}
 
           <Route path="/verification" element={<Verification />} />
           <Route path="/verification/:orgID/:OrgName" element={<Verification />} />
@@ -91,11 +91,13 @@ function App() {
           <Route path="/admin-dashboard/*" element={<AdminDashbaord />} />
         </Routes>
       </div>
-      {!isAuthPage && !isVerificationPage && !isDashboardPage && !isAdminDashboardPage && <Footer />}
+      {!isAuthPage &&
+        !isVerificationPage &&
+        !isDashboardPage &&
+        !isAdminDashboardPage &&
+        !isTermsOrPrivacyPage && <Footer />}
     </div>
   );
 }
 
 export default App;
-
-

@@ -63,13 +63,12 @@ export default function HelpPage() {
 
     return (
         <div className="CnMMha-page">
-            <div className="MMha-page-header">
-                <div className="site-container GG_Padded">
-                    <div className="hero-Blam">
-                        <h2 className="big-text">Contact us</h2>
+               <div className="TThero-Blam">
+                <div className="site-container">
+                    <h2 className="big-text">Contact us</h2>
                     </div>
                 </div>
-            </div>
+
 
             <div className="contact-Dlts">
                 <div className="site-container GG_Padded">
@@ -173,7 +172,7 @@ export default function HelpPage() {
                                 />
                             </div>
                             <div className="message-form-input">
-                                <button type="submit" disabled={isSubmitting} className="btn-bg">
+                                <button type="submit" disabled={isSubmitting} className="btn-bg bbao">
                                     {isSubmitting ? "Sending..." : "Send Message"}
                                 </button>
                             </div>

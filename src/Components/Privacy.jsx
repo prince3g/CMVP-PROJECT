@@ -7,7 +7,7 @@ export default function Privacy() {
 
             <div className="hagsh-sec">
 
-            <div className="TThero-Blam">
+            <div className="TThero-Blam Kang">
                 <div className="site-container">
                     <h2 className="big-text">CMVP Privacy Policy</h2>
                     <p>Rev.01; 22 January, 2025</p>

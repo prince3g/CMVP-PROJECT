@@ -108,11 +108,14 @@ const FAQ = () => {
   };
 
   return (
+    <div>
+         <div className="TThero-Blam">
+                <div className="site-container">
+                    <h2 className="big-text">Frequently Asked Questions</h2>
+                    </div>
+                </div>
     <div className="faq-section">
       <div className="site-container">
-        <div className="faq_header">
-          <h2 className="big-text">Frequently Asked Questions</h2>
-        </div>
         <div className="faq_Main">
            <ul>
             {faqData.map((item, index) => (
@@ -132,6 +135,8 @@ const FAQ = () => {
         </div>
       </div>
     </div>
+    </div>
+
   );
 };
 
