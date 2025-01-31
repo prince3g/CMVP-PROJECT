@@ -127,7 +127,7 @@ const Signup = () => {
       });
     
       showMessage("Account created successfully. Please check your email to confirm your account.", "success");
-      navigate("/verification-code");
+      navigate(`/verification-code/:code/${formData.email}`);
     
     } catch (error) {
       console.error("Signup error:", error.response?.data);
