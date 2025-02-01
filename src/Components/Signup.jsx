@@ -327,8 +327,9 @@ const Signup = () => {
                 <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
                   <p>
                     By clicking "Sign Up," you agree to our{" "}
-                    <Link to="/terms-of-use">Terms of Use</Link> and our{" "}
-                    <Link to="/privacy-policy">Privacy Policy</Link>.
+                    <a href="/terms-of-use" target='_blank'>Terms of Use</a> and our{" "}
+                    <a href="/privacy-policy" target='_blank'>Privacy Policy</a>.
+
                   </p>
                 </div>
 
