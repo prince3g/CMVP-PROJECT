@@ -6,7 +6,7 @@ API_BASE_URL: 'https://cmvp-api-v1.onrender.com',
  // WEB_PAGE_BASE_URL: 'https://cmvp.net',
 WEB_PAGE_BASE_URL: 'https://cmvp-project.vercel.app',
   
- WEB_PAGE_BASE_URL: 'http://localhost:5173',
+ //WEB_PAGE_BASE_URL: 'http://localhost:5173',
 
   };
 
