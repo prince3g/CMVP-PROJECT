@@ -144,17 +144,17 @@ function Navbar({ className }) {
               {/* Dropdown Menu */}
               {(isDropdownVisible || isMobile) && (
                 <div className="Drop_Down">
-                  <Link to="/about-cmvp" onClick={handleLinkClick}>
+                  <Link to="/about-cmvp" onClick={handleMobileNavClose}>
                     <InfoIcon />
                     About CMVP
                   </Link>
                   <br />
-                  <Link to="/faq" onClick={handleLinkClick}>
+                  <Link to="/faq" onClick={handleMobileNavClose}>
                     <QuestionAnswerIcon />
                     FAQ
                   </Link>
                   <br />
-                  <Link to="/how-it-works" onClick={handleLinkClick}>
+                  <Link to="/how-it-works" onClick={handleMobileNavClose}>
                     <SettingsIcon />
                     How it works
                   </Link>
@@ -162,19 +162,19 @@ function Navbar({ className }) {
               )}
 
               {/* Other Navigation Links */}
-              <Link to="/contact-us" onClick={handleLinkClick}>Contact Us</Link>
-              <Link to="/pricing" className="bordered-link" onClick={handleLinkClick}>Subscription Plans</Link>
+              <Link to="/contact-us" onClick={handleMobileNavClose}>Contact Us</Link>
+              <Link to="/pricing" className="bordered-link" onClick={handleMobileNavClose}>Subscription Plans</Link>
 
               {/* Authentication Links */}
               {isLoggedIn ? (
                 <>
-                  <Link to="/dashboard" className="bordered-link" onClick={handleLinkClick}>Account</Link>
+                  <Link to="/dashboard" className="bordered-link" onClick={handleMobileNavClose}>Account</Link>
                   <Link to="/login" className="bordered-link" onClick={handleLogout}>Log Out</Link>
                 </>
               ) : (
                 <>
-                  <Link to="/login" className="bordered-link" onClick={handleLinkClick}>Log In</Link>
-                  <Link to="/signup" className="bordered-link sign-up-btn" onClick={handleLinkClick}>Sign Up</Link>
+                  <Link to="/login" className="bordered-link" onClick={handleMobileNavClose}>Log In</Link>
+                  <Link to="/signup" className="bordered-link sign-up-btn" onClick={handleMobileNavClose}>Sign Up</Link>
                 </>
               )}
             </div>
