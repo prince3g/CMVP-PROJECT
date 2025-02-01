@@ -170,7 +170,7 @@ const VerificationCode = () => {
 
               <div className="Reg_Box_Header">
                 <h3>Verification Code</h3>
-                <p>Enter the 6-digit code sent to your email.</p>
+                <p>We Sent a 6-digit code to <span className="sppa-span">{email}</span></p>
               </div>
 
               <div className="Gland-Quest jjaao">

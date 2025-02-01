@@ -1950,6 +1950,12 @@
 }
 
 
+.sppa-span{
+  color: #FE6601 !important;
+  font-weight: 700 !important;
+  text-decoration: underline !important;
+}
+
 
 
 
@@ -2014,24 +2020,32 @@
     margin-top: 40px;
 }
 
+.Contact_SeccO_1 h2{
+  color: #52B788 !important;
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.Contact_SeccO_1 p{
+  font-size: 16px;
+}
+
+@media screen and (max-width:700px){
+  .Contact_SeccO_1 h2{
+    font-size: 20px !important;
+  }
+  .Contact_SeccO_1 p{
+    font-size: 15px !important;
+  }
+}
 
 .Contact_SeccO_1 ul{
     position: relative;
     width: 100%;
     height: auto;
-    margin-top: 50px !important;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
-    grid-template-rows: auto;
+    margin-top: 30px !important;
   }
-  @media screen and (max-width:500px){
-    .Contact_SeccO_1 ul{
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 20px !important;
-    }
-  }
+
   .Contact_SeccO_1 ul li{
     position: relative;
     width: 100%;
@@ -2039,6 +2053,7 @@
     display: grid;
     grid-template-columns: auto 1fr;
     grid-gap: 30px;
+    margin-top: 15px;
   }
 
   @media screen and (max-width:350px){
@@ -2048,18 +2063,6 @@
         grid: 20px !important;
         grid-gap: 20px !important;
     }
-  }
-
-  .Contact_SeccO_1 ul li span{
-    position: relative;
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    border:1px solid #DEDEE8;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
   }
 
   .Contact_SeccO_1 ul li span img{
@@ -2085,14 +2088,10 @@
 
   .Contact_SeccO_1 ul li .DDl_Div h4{
     font-size: 15px;
-    font-weight: 500;
-    margin-top: 5px !important;
+    font-weight: 700;
   }
   .Contact_SeccO_1 ul li .DDl_Div h4 a{
     white-space: nowrap;
-    color: #0a6332;
-  }
-  .Contact_SeccO_1 ul li .DDl_Div h4 a:hover{
     text-decoration: underline;
   }
 
@@ -2102,7 +2101,12 @@
   position: relative;
   width: 100%;
   height: auto;
-  margin-top: 40px;
+  border: 1px solid #BDBDBD;
+  padding: 30px;
+  border-radius: 12px;
+  -webkit-box-shadow: 0 0 30px rgb(0 0 0 / 15%);
+  -moz-box-shadow: 0 0 30px rgb(0 0 0 / 15%);
+  box-shadow: 0 0 30px rgb(0 0 0 / 15%);
 }
 
 
@@ -2122,6 +2126,7 @@
     margin-top: 20px;
     display: block;
 }
+
 .message-form-input textarea,
 .message-form-input select,
 .message-form-input input{
@@ -2137,6 +2142,15 @@
 .message-form-input textarea::placeholder,
 .message-form-input::placeholder{
     color: #4E4E4E;
+}
+
+.message-form-input textarea,
+.message-form-input input{
+  background-color: #F9F9F9 !important;
+}
+.message-form-input textarea:focus,
+.message-form-input input:focus{
+  background-color: transparent !important;
 }
 
 .message-form-input textarea:focus,
@@ -2195,16 +2209,27 @@
 
 
 
+
+
+
 .GG_Padded{
-  padding: 0px 100px !important;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 100px;
+  gap: 100px;
+  margin:80px 0px;
 }
 
 @media screen and (max-width:1000px){
   .GG_Padded{
-    padding: 0px 0px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 50px !important;
+    grid-gap: 50px !important;
+    margin: 50px 0px !important;
   }
 }
-
 
 
 
@@ -2521,9 +2546,8 @@ text-align: center;
   position: relative;
   width: 100%;
   height: auto;
-  margin-top: 130px;
-  border-bottom: 1px solid #E2E2E2;
-  padding-bottom: 70px;
+  margin-bottom: 100px;
+  margin-top: 70px;
 }
 @media screen and (max-width:600px){
   .Plan_SUmmry{
@@ -2555,8 +2579,8 @@ text-align: center;
   margin-top: 70px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 80px;
-  gap: 80px;
+  grid-gap: 30px;
+  gap: 30px;
   grid-template-rows: auto;
 }
 @media screen and (max-width:1000px){
@@ -2577,11 +2601,15 @@ text-align: center;
   position: relative;
   width: 100%;
   height: auto;
-  text-align: center;
+  padding: 30px;
+  background-color: #F3F5F7;
+}
+.Plan_SUmmry ul li:first-child{
+  background-color: #F1FCF2;
 }
 .Plan_SUmmry ul li p{
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
 }
 @media screen and (max-width:500px){
   .Plan_SUmmry ul li p{
@@ -2612,7 +2640,11 @@ text-align: center;
   position: relative;
   width: 100%;
   height: auto;
-  margin-top: 130px;
+}
+
+.How_Page .TThero-Blam{
+  padding: 150px 0px;
+  padding-top: 200px;
 }
 
 .How_Seccoo{
@@ -2623,13 +2655,18 @@ text-align: center;
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-top: 40px;
 }
+
 
 .How_Seccoo_TOp{
   position: relative;
   width: 500px;
 }
 @media screen and (max-width:700px){
+  .How_Seccoo{
+    margin-top: 20px !important;
+  }
   .How_Seccoo_TOp{
     width: 100% !important;
   }
@@ -4032,4 +4069,15 @@ text-align: center;
 
 .bbao{
   border:1px solid #FE6601 !important;
+}
+
+.cont-ban{
+  text-align: left !important;
+  padding: 200px 0px !important;
+}
+
+@media screen and (max-width:1000px){
+  .cont-ban{
+    padding: 120px 0px !important;
+  }
 }

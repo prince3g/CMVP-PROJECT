@@ -38,7 +38,7 @@ function App() {
   const isAuthPage =
     location.pathname === "/login" ||
     location.pathname === "/signup" ||
-    location.pathname === "/verification-code" ||
+    location.pathname.startsWith("/verification-code") ||
     location.pathname === "/forgot-password" ||
     location.pathname.startsWith("/forgotten_pass_reset/");
 
