@@ -7,7 +7,7 @@ export default function AddSubScript() {
     const [planData, setPlanData] = useState({
         name: "",
         duration_in_months: 12,
-        price: 0,
+        price_per_month: 0,
         features: {
             storage: "",
             num_certificate_categories: 0,
@@ -42,7 +42,7 @@ export default function AddSubScript() {
         const requestPayload = {
             name: planData.name,
             duration_in_months: planData.duration_in_months,
-            price: String(planData.price), // Ensure price is sent as a string
+            price_per_month: String(planData.price_per_month), // Ensure price is sent as a string
             features: {
                 storage: planData.features.storage,
                 num_certificate_categories: planData.features.num_certificate_categories,
@@ -108,13 +108,13 @@ export default function AddSubScript() {
                     </div>
 
                     <div className="Supt-Input">
-                        <label>What's the amount?</label>
+                        <label>What's the amount per month?</label>
                         <input
                             type="number"
-                            name="price"
-                            value={planData.price}
+                            name="price_per_month"
+                            value={planData.price_per_month}
                             onChange={handleChange}
-                            placeholder="Enter amount"
+                            placeholder="Enter amount per month"
                             required
                         />
                     </div>

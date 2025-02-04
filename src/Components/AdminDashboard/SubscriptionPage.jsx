@@ -10,8 +10,9 @@ import CheckIcon from './Img/check-icon.svg';
 
 export default function SubscriptionPage() {
     const [plans, setPlans] = useState([]);
-    const [loading, setLoading] = useState(true); // Add a loading state
 
+    const [loading, setLoading] = useState(true); // Add a loading state
+    const [selectedDurations, setSelectedDurations] = useState({}); // Track selected durations for each plan
     useEffect(() => {
         // Fetch subscription plans
         const fetchPlans = async () => {
@@ -29,6 +30,23 @@ export default function SubscriptionPage() {
         fetchPlans();
     }, []);
 
+    // Handle duration selection
+    const handleDurationSelect = (planId, durationInMonths) => {
+        setSelectedDurations((prev) => ({
+            ...prev,
+            [planId]: durationInMonths,
+        }));
+    };
+        // Calculate total price based on selected duration
+    // const calculateTotalPrice = (pricePerMonth, durationInMonths) => {
+    //         return pricePerMonth * durationInMonths;
+    //     };
+
+    const calculateTotalPrice = (pricePerMonth, durationInMonths) => {
+        return pricePerMonth * (durationInMonths || 1); // Default to 1 month if duration is undefined
+    };
+
+    
     return (
         <div className="DDD-Seco">
             <div className="Pricing_Sec">
@@ -45,7 +63,6 @@ export default function SubscriptionPage() {
                         </Link>
                     </div>
                 </div>
-
                 <div className="Plans_Sec">
                     {loading ? (
                         // Render skeleton loaders when data is still loading
@@ -62,9 +79,20 @@ export default function SubscriptionPage() {
                                 <div className="Pricing_sub">
                                     <h3>{plan.name}</h3>
                                     <div className="pricing_Top_Btns">
-                                        {["1 Month", "3 Months", "6 Months", "1 Year"].map((duration) => (
-                                            <button key={duration} className="plan_btn">
-                                                {duration}
+                                        {[
+                                            { label: "1 Month", duration: 1 },
+                                            { label: "3 Months", duration: 3 },
+                                            { label: "6 Months", duration: 6 },
+                                            { label: "1 Year", duration: 12 },
+                                        ].map(({ label, duration }) => (
+                                            <button
+                                                key={label}
+                                                className={`plan_btn ${
+                                                    selectedDurations[plan.id] === duration ? "active" : ""
+                                                }`}
+                                                onClick={() => handleDurationSelect(plan.id, duration)}
+                                            >
+                                                {label}
                                             </button>
                                         ))}
                                     </div>
@@ -74,9 +102,11 @@ export default function SubscriptionPage() {
                                         <h3>{plan.name}</h3>
                                     </div>
                                     <div className="plan_box_Top_1">
-                                        <h3 className="plan_price">NGN{plan.price}</h3>
+                                        <h3 className="plan_price">
+                                            NGN{calculateTotalPrice(plan.price_per_month, selectedDurations[plan.id])}
+                                        </h3>
                                         <Link 
-                                            to={`/admin-dashboard/edit-plan?id=${plan.id}&price=${plan.price}&name=${encodeURIComponent(plan.name)}
+                                            to={`/admin-dashboard/edit-plan?id=${plan.id}&price_per_month=${plan.price_per_month}&name=${encodeURIComponent(plan.name)}
                                             &storage=${encodeURIComponent(plan.features.storage || '')}
                                             &num_certificate_categories=${encodeURIComponent(plan.features.num_certificate_categories || '')}
                                             &num_daily_certificate_upload=${encodeURIComponent(plan.features.num_daily_certificate_upload || '')}

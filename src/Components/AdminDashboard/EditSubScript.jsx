@@ -8,7 +8,7 @@ export default function EditSubScript() {
     const [formData, setFormData] = useState({
         id: '',
         name: '',
-        price: '',
+        price_per_month: '',
         storage: '',
         num_certificate_categories: '',
         num_daily_certificate_upload: '',
@@ -23,7 +23,7 @@ export default function EditSubScript() {
         const planData = {
             id: queryParams.get('id')?.trim(),
             name: queryParams.get('name')?.trim(),
-            price: queryParams.get('price')?.trim(),
+            price_per_month: queryParams.get('price_per_month')?.trim(),
             storage: queryParams.get('storage')?.trim(),
             num_certificate_categories: queryParams.get('num_certificate_categories')?.trim(),
             num_daily_certificate_upload: queryParams.get('num_daily_certificate_upload')?.trim(),
@@ -38,7 +38,7 @@ export default function EditSubScript() {
         setFormData({
             id: planData.id || '',
             name: planData.name || '',
-            price: planData.price || '',
+            price_per_month: planData.price_per_month || '',
             storage: planData.storage || '',
             num_certificate_categories: planData.num_certificate_categories || '',
             num_daily_certificate_upload: planData.num_daily_certificate_upload || '',
@@ -63,7 +63,7 @@ export default function EditSubScript() {
     
         const payload = {
             name: formData.name,
-            price: formData.price,
+            price_per_month: formData.price_per_month,
             features: {
                 storage: formData.storage,
                 num_certificate_categories: formData.num_certificate_categories,
@@ -136,13 +136,13 @@ export default function EditSubScript() {
                     </div>
                     
                     <div className="Supt-Input">
-                        <label>What's the amount?</label>
+                        <label>What's the amount per month?</label>
                         <input
                             type="number"
-                            name="price"
-                            value={formData.price}
+                            name="price_per_month"
+                            value={formData.price_per_month}
                             onChange={handleChange}
-                            placeholder="Enter amount"
+                            placeholder="Enter amount per month"
                             required
                         />
                     </div>
@@ -220,24 +220,6 @@ export default function EditSubScript() {
                             <option value="false">No</option>
                         </select>
                     </div>
-
-                    {/* <div className="Supt-Input">
-                        <label>Maximum login users</label>
-                        <select
-                            name="maximum_login_users"
-                            value={formData.maximum_login_users}
-                            onChange={handleChange}
-                        >
-                            <option value="">--Select--</option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                            <option value="25">25</option>
-                            <option value="30">30</option>
-                            <option value="UNLIMITED">UNLIMITED</option>
-                        </select>
-                    </div> */}
 
                     <div className="Supt-Input">
                         <label>24/7 support</label>
