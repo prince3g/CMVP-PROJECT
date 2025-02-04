@@ -73,58 +73,26 @@ export default function NavBar() {
   }, [navigate]);
 
 
-  // Fetch organization data
-//   useEffect(() => {
-//     const fetchOrganizationData = async () => {
-//         try {
-//             const response = await fetch(`${config.API_BASE_URL}/api/accounts/auth/organizations/${organizationID}/`);
-//             const data = await response.json();
-//             if (response.ok) {
-//                 setOrganizationDataLogo(data.logo);
-//                 console.log("data");
-//                 console.log(data);
-//                 console.log("data");
-//                 // Assuming your API returns the expiry date
-//                 const expiryDate = new Date(data.trial_end_date); // Log this value
-
-//                 // console.log('expiryDate:', expiryDate);
-                
-//                 if (isNaN(expiryDate)) {
-//                   console.error('Invalid expiryDate:', data.expiry_date);
-//                 } else {
-//                   const today = new Date();
-//                   const timeDiff = expiryDate - today;
-//                   const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-//                   setDaysLeft(daysRemaining);
-//                 }
-                
-//             } else {
-//                 console.error("Error fetching organization data:", data.message);
-//             }
-//         } catch (error) {
-//             console.error("Error fetching organization data:", error);
-//         }
-//     };
-
-//     fetchOrganizationData();
-// }, [organizationID]);
 
 
 useEffect(() => {
     const fetchDates = async () => {
+
         try {
+            
+            // Fetch organization data (for trial end date)
+            const organizationResponse = await fetch(`${config.API_BASE_URL}/api/accounts/auth/organizations/${organizationID}/`);
+            const organizationData = await organizationResponse.json();
             // Fetch subscription data
             const subscriptionResponse = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscription/${organizationID}/`);
             const subscriptionData = await subscriptionResponse.json();
 
-            // Fetch organization data (for trial end date)
-            const organizationResponse = await fetch(`${config.API_BASE_URL}/api/accounts/auth/organizations/${organizationID}/`);
-            const organizationData = await organizationResponse.json();
 
             setIsSubscribed(organizationData.is_subscribed)
             setOrganizationDataLogo(organizationData.logo)
     
             let endDate;
+   
 
             if (organizationData.is_subscribed) {
                 // User is subscribed, use subscription end date
@@ -139,6 +107,7 @@ useEffect(() => {
             const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
             setDaysLeft(daysRemaining);
 
+
         } catch (error) {
             console.error("Error fetching dates:", error);
         }
@@ -149,15 +118,11 @@ useEffect(() => {
 
 
 
-
     return (
         <div className={`Dash_NavBar ${isSidebarOpen ? 'Toggle_NavBar' : ''}`}>
             <div className="NavBar_Body" onClick={closeSidebar}></div>
             <nav className="Left_Dash_Nav">
-                {/* <div className="Top_Dash_nav">
-    
-                    <button className="Side_Nav_Toggler" onClick={closeSidebar}><img src={`${config.API_BASE_URL}${organizationDatalogo}`}  alt="Close Icon"></img></button>
-                </div> */}
+
                 <div className="Nav_Main">
                     <ul>
 
