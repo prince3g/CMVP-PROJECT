@@ -4087,3 +4087,27 @@ text-align: center;
     padding: 120px 0px !important;
   }
 }
+
+
+
+.current-sub-card{
+  opacity: 0.3 !important;
+  cursor: no-drop !important;
+}
+
+.current-sub-card:hover{
+  transform: none !important;
+  margin: 0px !important;
+  border: none !important;
+}
+
+.current-sub-card:hover button{
+  background: #081C15 !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.current-sub-card a:hover{
+  background: linear-gradient(to right, #1B4332, #44A97E) !important;
+}

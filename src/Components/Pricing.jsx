@@ -210,7 +210,7 @@ export default function Pricing() {
                     </div>
 
                     <div className="oahhs_Sec">
-                    <div className="oahhs_Card">
+                    <div className="oahhs_Card current-sub-card">
                             <h3>FREE plan</h3>
                             <p>All-in-one certificate management package available for a limited time.</p>
                             <button>free <span>/one month</span></button>
