@@ -71,30 +71,78 @@ export default function Pricing() {
 
 
 
+    // const handleSubscribeClick = async (planId) => {
+    //     setIsSubscribing(planId); // Start loader for the specific plan
+    //     const authToken = localStorage.getItem("authToken");
+    //     const authUserId = localStorage.getItem("authUserId");
+
+    //     if (!authToken) {
+    //         setFlashMessage("Please login or register to continue");
+    //         setTimeout(() => {
+    //             setFlashMessage("");
+    //             navigate("/login");
+    //         }, 3000);
+    //         setIsSubscribing(null); // Stop loader
+    //         return;
+    //     }
+
+    //     const payload = {
+    //         user: authUserId,
+    //         subscription_plan: planId,
+    //         subscribed_duration: 1,
+    //         transaction_id: "your_transaction_id"
+    //     };
+
+    //     try {
+
+    //         const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscriptions/`, {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 "Authorization": `Bearer ${authToken}`
+    //             },
+    //             body: JSON.stringify(payload)
+    //         });
+
+    //         if (!response.ok) {
+    //             const errorData = await response.json();
+    //             throw new Error(errorData.detail || "Failed to subscribe");
+    //         }
+
+    //         const result = await response.json();
+    //         localStorage.setItem("subscription_plan", result.subscription_plan);
+    //         navigate("/dashboard");
+    //     } catch (error) {
+    //         console.error("Error subscribing:", error);
+    //         setFlashMessage(error.message || "An unexpected error occurred");
+    //         setTimeout(() => setFlashMessage(""), 3000);
+    //     } finally {
+    //         setIsSubscribing(null); // Stop loader
+    //     }
+    // };
+
     const handleSubscribeClick = async (planId) => {
-        setIsSubscribing(planId); // Start loader for the specific plan
+        setIsSubscribing(planId);
         const authToken = localStorage.getItem("authToken");
         const authUserId = localStorage.getItem("authUserId");
-
+    
         if (!authToken) {
             setFlashMessage("Please login or register to continue");
             setTimeout(() => {
                 setFlashMessage("");
                 navigate("/login");
             }, 3000);
-            setIsSubscribing(null); // Stop loader
+            setIsSubscribing(null);
             return;
         }
-
+    
         const payload = {
             user: authUserId,
             subscription_plan: planId,
-            subscribed_duration: 1,
-            transaction_id: "your_transaction_id"
+            subscribed_duration: 1  // Default to 1 month
         };
-
+    
         try {
-
             const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscriptions/`, {
                 method: "POST",
                 headers: {
@@ -103,51 +151,52 @@ export default function Pricing() {
                 },
                 body: JSON.stringify(payload)
             });
-
+    
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.detail || "Failed to subscribe");
             }
-
+    
             const result = await response.json();
-            localStorage.setItem("subscription_plan", result.subscription_plan);
-            navigate("/dashboard");
+            window.location.href = result.payment_link;  // Redirect to Remita payment page
         } catch (error) {
             console.error("Error subscribing:", error);
             setFlashMessage(error.message || "An unexpected error occurred");
             setTimeout(() => setFlashMessage(""), 3000);
         } finally {
-            setIsSubscribing(null); // Stop loader
+            setIsSubscribing(null);
         }
     };
+    
 
-
-
-    const [paymentData, setpaymentData] = useState({
-        key: "", // enter your key here
-        customerId: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        amount: null,
-        narration: "",
-      });
-      let data = {
-        ...paymentData,
-        onSuccess: function (response) {
-          // function callback when payment is successful
-          console.log("callback Successful Response", response);
-        },
-        onError: function (response) {
-          // function callback when payment fails
-          console.log("callback Error Response", response);
-        },
-        onClose: function () {
-          // function callback when payment modal is closed
-          console.log("closed");
-        },
-      };
-
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const transactionStatus = queryParams.get("status");
+        const transactionId = queryParams.get("transactionId");
+    
+        if (transactionStatus && transactionId) {
+            fetch(`${config.API_BASE_URL}/api/subscription/auth/payment-confirmation/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("authToken")}`
+                },
+                body: JSON.stringify({
+                    status: transactionStatus,
+                    transactionId: transactionId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                setFlashMessage(data.message);
+                setTimeout(() => navigate("/dashboard"), 3000);
+            })
+            .catch(error => {
+                console.error("Error confirming payment:", error);
+                setFlashMessage("Payment confirmation failed.");
+            });
+        }
+    }, []);
 
     return (
         <div className="Landing-page MMha-page subscript-page">
@@ -156,63 +205,13 @@ export default function Pricing() {
                     <div className="site-container">
                     <div  className="Pricing_Sec">
                     <div className="Pricing_top UUya_Ooa">
-                        <h3 className="big-text">CMVP Subscription Plan QWERTY</h3>
+                        <h3 className="big-text">CMVP Subscription Plan</h3>
                         <p>Subscription plans for CMVP is tailored to meet the specific needs of different organizations. </p>
                     </div>
 
-                    {/* <div className="oahhs_Sec">
-                        <div className="oahhs_Card">
-                            <h3>fREE plan</h3>
-                            <p>All-in-one certificate management package available for a limited time.</p>
-                            <button>free <span>/one month</span></button>
-                            <ul>
-                                <li><CheckIcon /> Access to portal</li>
-                                <li><CheckIcon /> Add UNLIMITED certificate categories</li>
-                                <li><CheckIcon /> Upload UNLIMITED certificates daily</li>
-                                <li><CheckIcon /> Access to deleted certificates and files</li>
-                                <li><CheckIcon /> maximum login users</li>
-                                <li><CheckIcon /> 24/7 support</li>
-                            </ul>
-                            <a href="#">Free Trial</a>
-                        </div>
-
-
-                        <div className="oahhs_Card">
-                            <h3>STANDARD</h3>
-                            <p>Larger organizations with more complex certificate management requirements.</p>
-                            <button>NGN 9495 <span>/per month</span></button>
-                            <ul>
-                                <li><CheckIcon /> Access to portal</li>
-                                <li><CheckIcon /> Add up to 5 certificate categories</li>
-                                <li><CheckIcon /> Upload up to 10 certificates daily</li>
-                                <li><CheckIcon /> Access to deleted certificates and files</li>
-                                <li><CheckIcon /> maximum login users</li>
-                                <li><CheckIcon /> maximum login users</li>
-                            </ul>
-                            <a href="#">Subscribe</a>
-                        </div>
-
-                        <div className="oahhs_Card">
-                            <h3>PREMIUM</h3>
-                            <p>Large enterprises with high-volume certificate management needs.</p>
-                            <button>NGN 12500 <span>/per month</span></button>
-                            <ul>
-                                <li><CheckIcon /> Access to portal</li>
-                                <li><CheckIcon /> Add UNLIMITED certificate categories</li>
-                                <li><CheckIcon /> Upload UNLIMITED certificates daily</li>
-                                <li><CheckIcon /> Access to deleted certificates and files</li>
-                                <li><CheckIcon /> maximum login users</li>
-                                <li><CheckIcon /> 24/7 support</li>
-                            </ul>
-                            <a href="#">Subscribe</a>
-                        </div>
-
-
-                    </div> */}
-
                     <div className="oahhs_Sec">
                     <div className="oahhs_Card">
-                            <h3>fREE plan</h3>
+                            <h3>FREE plan</h3>
                             <p>All-in-one certificate management package available for a limited time.</p>
                             <button>free <span>/one month</span></button>
                             <ul>
