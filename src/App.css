@@ -1625,10 +1625,11 @@
 
 .Reg_Box_Foot p{
   margin-top: 20px;
+  font-size: 15px !important;
+
 }
 .Reg_Box_Foot p a{
   color: #FE6601;
-  font-size: 15px !important;
 }
 .Reg_Box_Foot p a:hover{
   text-decoration: underline !important;
@@ -1683,7 +1684,7 @@
 .input-container input:focus ~ label {
   top: 10px;
   font-size: 11px !important;
-  color: #A9A3B3 !important;
+  color: #fff !important;
   font-weight: normal !important;
 }
 
@@ -3755,6 +3756,7 @@ text-align: center;
   margin: 40px 0px;
   margin-left: 10%;
   font-size: 16px !important;
+  margin-bottom: 100px;
 }
 @media screen and (max-width:1000px){
   .whyoo-cmvp-container{

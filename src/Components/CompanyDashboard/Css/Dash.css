@@ -939,7 +939,7 @@
 }
 .CertUpload_Btn svg{
     font-size: 20px;
-    color: #7BF2AB;
+    color: #fff !important;
 }
 .Upload_env_main_Foot{
     position: absolute;

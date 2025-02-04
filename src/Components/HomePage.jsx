@@ -72,7 +72,7 @@ function HomePage() {
                 <button data-aos="fade-up" data-aos-delay="100">Inspection Certificates</button>
                 <button data-aos="fade-up" data-aos-delay="200">Calibration Certificates</button>
                 <button data-aos="fade-up" data-aos-delay="300">Training Certificates</button>
-                <button data-aos="fade-up" data-aos-delay="400">Results</button>
+                <button data-aos="fade-up" data-aos-delay="400">Results, etc.</button>
             </div>
             </div>
         </div>
@@ -102,7 +102,7 @@ function HomePage() {
         <div className='site-container'>
              <div className='Bidd-Main'>
                 <div className='Bidd-Dlt'>
-                    <h2 className='big-text'>Manage your certificate records with easee</h2>
+                    <h2 className='big-text'>Manage your certificate records with ease</h2>
                     <p>Our system ensures proper management, traceability and verification of your certificate records.</p>
                     <ul>
                         <li>
