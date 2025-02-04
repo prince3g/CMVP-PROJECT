@@ -67,61 +67,10 @@ export default function Pricing() {
             }
         };
         fetchSubscriptionDetails();
-    }, []); // Empty dependency array, runs on component mount
+    }, []); 
 
 
-
-    // const handleSubscribeClick = async (planId) => {
-    //     setIsSubscribing(planId); // Start loader for the specific plan
-    //     const authToken = localStorage.getItem("authToken");
-    //     const authUserId = localStorage.getItem("authUserId");
-
-    //     if (!authToken) {
-    //         setFlashMessage("Please login or register to continue");
-    //         setTimeout(() => {
-    //             setFlashMessage("");
-    //             navigate("/login");
-    //         }, 3000);
-    //         setIsSubscribing(null); // Stop loader
-    //         return;
-    //     }
-
-    //     const payload = {
-    //         user: authUserId,
-    //         subscription_plan: planId,
-    //         subscribed_duration: 1,
-    //         transaction_id: "your_transaction_id"
-    //     };
-
-    //     try {
-
-    //         const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscriptions/`, {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "Authorization": `Bearer ${authToken}`
-    //             },
-    //             body: JSON.stringify(payload)
-    //         });
-
-    //         if (!response.ok) {
-    //             const errorData = await response.json();
-    //             throw new Error(errorData.detail || "Failed to subscribe");
-    //         }
-
-    //         const result = await response.json();
-    //         localStorage.setItem("subscription_plan", result.subscription_plan);
-    //         navigate("/dashboard");
-    //     } catch (error) {
-    //         console.error("Error subscribing:", error);
-    //         setFlashMessage(error.message || "An unexpected error occurred");
-    //         setTimeout(() => setFlashMessage(""), 3000);
-    //     } finally {
-    //         setIsSubscribing(null); // Stop loader
-    //     }
-    // };
-
-    const handleSubscribeClick = async (planId) => {
+  const handleSubscribeClick = async (planId) => {
         setIsSubscribing(planId);
         const authToken = localStorage.getItem("authToken");
         const authUserId = localStorage.getItem("authUserId");
@@ -158,7 +107,10 @@ export default function Pricing() {
             }
     
             const result = await response.json();
-            window.location.href = result.payment_link;  // Redirect to Remita payment page
+
+            navigate("/dashboard");
+            // window.location.href = result.payment_link;  // Redirect to Remita payment page
+
         } catch (error) {
             console.error("Error subscribing:", error);
             setFlashMessage(error.message || "An unexpected error occurred");
@@ -198,6 +150,7 @@ export default function Pricing() {
         }
     }, []);
 
+
     return (
         <div className="Landing-page MMha-page subscript-page">
 
@@ -215,14 +168,14 @@ export default function Pricing() {
                             <p>All-in-one certificate management package available for a limited time.</p>
                             <button>free <span>/one month</span></button>
                             <ul>
-                                <li><CheckIcon /> Access to portal</li>
-                                <li><CheckIcon /> Add UNLIMITED certificate categories</li>
-                                <li><CheckIcon /> Upload UNLIMITED certificates daily</li>
+                                <li><CheckIcon /> Access to Portal for 15 days after Registration</li>
+                                <li><CheckIcon /> Add 3 certificate categories daily</li>
+                                <li><CheckIcon /> Upload 5 certificates daily</li>
                                 <li><CheckIcon /> Access to deleted certificates and files</li>
-                                <li><CheckIcon /> maximum login users</li>
                                 <li><CheckIcon /> 24/7 support</li>
                             </ul>
-                            <a href="#">Free Trial</a>
+                            {/* <a href="#">Free Trial</a> */}
+                            <Link to="/signup">Free Trial</Link>
                         </div>
                         {plans.map((plan) => (
                             <div className="oahhs_Card" key={plan.id}>
