@@ -937,6 +937,9 @@
 .Nwass_Cont_btn button:nth-child(4){
   background-color: #95D5B2;
 }
+.Nwass_Cont_btn button:nth-child(5){
+  background-color: #75a58b;
+}
 
 
 /* Gena_SGGar */
@@ -1625,10 +1628,11 @@
 
 .Reg_Box_Foot p{
   margin-top: 20px;
+  font-size: 15px !important;
+
 }
 .Reg_Box_Foot p a{
   color: #FE6601;
-  font-size: 15px !important;
 }
 .Reg_Box_Foot p a:hover{
   text-decoration: underline !important;
@@ -1683,7 +1687,7 @@
 .input-container input:focus ~ label {
   top: 10px;
   font-size: 11px !important;
-  color: #A9A3B3 !important;
+  color: #fff !important;
   font-weight: normal !important;
 }
 
@@ -3755,6 +3759,7 @@ text-align: center;
   margin: 40px 0px;
   margin-left: 10%;
   font-size: 16px !important;
+  margin-bottom: 100px;
 }
 @media screen and (max-width:1000px){
   .whyoo-cmvp-container{
@@ -3939,9 +3944,6 @@ text-align: center;
     flex-direction: column !important;
     margin-top: 50px !important;
   }
-  .oahhs_Card:nth-child(2){
-    margin-top: 0px !important;
-  }
 
   .oaiia{
     padding-top: 0px !important;
@@ -3958,6 +3960,7 @@ text-align: center;
   background-position: center;
   background-repeat: no-repeat;
   font-size: 16px !important;
+  transition: all 0.5s ease-in-out;
 }
 
 .oahhs_Card h3{
@@ -3983,6 +3986,7 @@ text-align: center;
   border-radius: 50px;
   font-size: 20px;
   font-weight: 700;
+  transition: all 0.5s ease-in-out;
 }
 @media screen and (max-width:500px){
   .oahhs_Card button{
@@ -4031,12 +4035,13 @@ text-align: center;
   background: linear-gradient(to right, #1B4332, #44A97E);
   border-radius: 8px;
   font-size: 20px;
+  color: #fff !important;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 @media screen and (max-width:500px){
   .oahhs_Card a{
@@ -4045,14 +4050,15 @@ text-align: center;
 }
 .oahhs_Card a:hover{
   background: linear-gradient(to right, #44A97E, #1B4332);
+  color: #fff !important;
 }
 
-.oahhs_Card:nth-child(2){
+.oahhs_Card:hover{
   border: 2px solid #95D5B2;
   margin-top: -50px;
 }
 
-.oahhs_Card:nth-child(2) button{
+.oahhs_Card:hover button{
   background: linear-gradient(to right, #1B4332, #44A97E);
   box-shadow: 3px 3px 5px #255e45;
 }

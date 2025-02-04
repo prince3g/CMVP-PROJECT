@@ -7,7 +7,7 @@ const FAQ = () => {
     {
       question: 'What is the purpose of the platform?',
       answer:
-        'The platform is designed to provide a secure, cloud-based system for businesses to effectively manage, store, and track issued certificates. It aims to enhance traceability, security, and data protection, while preventing certificate forgery.',
+        'The platform is designed to provide a secure, cloud-based system for businesses to effectively manage, store, and track issued certificates (Records). It aims to enhance traceability, security, and data protection, while preventing certificate forgery.',
     },
     {
       question: 'Who can benefit from using the platform?',

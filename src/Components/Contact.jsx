@@ -63,7 +63,7 @@ export default function HelpPage() {
 
     return (
         <div className="CnMMha-page">
-               <div className="TThero-Blam cont-ban">
+               <div className="TThero-Blam">
                 <div className="site-container">
                     <h2 className="big-text">Contact us</h2>
                     </div>

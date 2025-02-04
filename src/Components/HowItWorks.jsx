@@ -21,7 +21,7 @@ function HowItWorks() {
     <div className='How_Seccoo'>
 
     <div className='How_Seccoo_Vid'>
-        <video src={Video} controls></video>
+        {/* <video src={Video} controls></video> */}
     </div>
 
     </div>

@@ -224,10 +224,7 @@ export default function Privacy() {
         <p>We share your personal information with:</p>
         <ul>
           <li>Your Employer: To track information on uploaded certificates and when certificates are verified by others.</li>
-          <li>
-            The Public: To verify specific information about issued certificates and whether they originated from your
-            organization.
-          </li>
+         
           <li>
             Third-Party Service Providers: Such as IT support or platform hosting, under strict confidentiality agreements.
           </li>
