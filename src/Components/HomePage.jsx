@@ -72,7 +72,8 @@ function HomePage() {
                 <button data-aos="fade-up" data-aos-delay="100">Inspection Certificates</button>
                 <button data-aos="fade-up" data-aos-delay="200">Calibration Certificates</button>
                 <button data-aos="fade-up" data-aos-delay="300">Training Certificates</button>
-                <button data-aos="fade-up" data-aos-delay="400">Results, etc.</button>
+                <button data-aos="fade-up" data-aos-delay="400">Issued Licences</button>
+                <button data-aos="fade-up" data-aos-delay="500">Results, etc.</button>
             </div>
             </div>
         </div>
