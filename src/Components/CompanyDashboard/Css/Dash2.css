@@ -230,3 +230,33 @@
     font-size: 12px;
     font-weight: 700;
 }
+
+
+
+.btn-bg2{
+    background: #0D2818 !important;
+    color: #fff !important;
+}
+
+.btn-bg2:hover{
+    background: #164529 !important;
+}
+
+p.paopa{
+    color: #0D2818 !important;
+}
+
+.erroroo{
+    font-size: 14px !important;
+}
+
+
+.kjaiik2{
+    margin-top: 40px !important;
+    margin-bottom: 50px !important;
+}
+
+.kjaiik2 .oahhs_Card{
+    background-color: #0D2818 !important;
+    color: #fff !important;
+}

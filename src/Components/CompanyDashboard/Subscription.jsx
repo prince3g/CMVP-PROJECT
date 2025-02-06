@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import config from "../../config";
-import MinusIcon from '../../assets/Img/minus-icon.svg';
-import CheckIcon from '../../assets/Img/check-icon.svg';
+import CheckIcon from '@mui/icons-material/Check';
 
-import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
-import UploadFileIcon from '@mui/icons-material/UploadFile';
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import CheckCmvp from '../../assets/Img/check-cmvp.svg';
+
 
 
 export default function Subscription() {
+    const [flash, setFlash] = useState(null);
+    
+    const showMessage = (message, type) => {
+        setFlash({ message, type });
+        };
+
     const [plans, setPlans] = useState([]);
     const [isSubscribing, setIsSubscribing] = useState(null);
     const [isLoading, setIsLoading] = useState(false); 
@@ -26,7 +29,7 @@ export default function Subscription() {
                 const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/subscription-plans/`);
                 const data = await response.json();
                 setPlans(data.results); // The actual plans are in `results` array
-                //console.log("Fetched Plans Data: ", data);
+                console.log("Fetched Plans Data: ", data.results);
             } catch (error) {
                 console.error("Error fetching subscription plans:", error);
             }
@@ -64,33 +67,31 @@ export default function Subscription() {
             }
         };
         fetchSubscriptionDetails();
-    }, []); // Empty dependency array, runs on component mount
+    }, []); 
 
 
-
-    const handleSubscribeClick = async (planId) => {
-        setIsSubscribing(planId); // Start loader for the specific plan
+  const handleSubscribeClick = async (planId) => {
+        setIsSubscribing(planId);
         const authToken = localStorage.getItem("authToken");
         const authUserId = localStorage.getItem("authUserId");
-
+    
         if (!authToken) {
             setFlashMessage("Please login or register to continue");
             setTimeout(() => {
                 setFlashMessage("");
                 navigate("/login");
             }, 3000);
-            setIsSubscribing(null); // Stop loader
+            setIsSubscribing(null);
             return;
         }
-
+    
         const payload = {
             user: authUserId,
             subscription_plan: planId,
-            transaction_id: "your_transaction_id"
+            subscribed_duration: 1  // Default to 1 month
         };
-
+    
         try {
-
             const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscriptions/`, {
                 method: "POST",
                 headers: {
@@ -99,50 +100,56 @@ export default function Subscription() {
                 },
                 body: JSON.stringify(payload)
             });
-
+    
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.detail || "Failed to subscribe");
             }
-
+    
             const result = await response.json();
-            localStorage.setItem("subscription_plan", result.subscription_plan);
+
             navigate("/dashboard");
+            // window.location.href = result.payment_link;  // Redirect to Remita payment page
+
         } catch (error) {
             console.error("Error subscribing:", error);
             setFlashMessage(error.message || "An unexpected error occurred");
             setTimeout(() => setFlashMessage(""), 3000);
         } finally {
-            setIsSubscribing(null); // Stop loader
+            setIsSubscribing(null);
         }
     };
+    
 
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const transactionStatus = queryParams.get("status");
+        const transactionId = queryParams.get("transactionId");
+    
+        if (transactionStatus && transactionId) {
+            fetch(`${config.API_BASE_URL}/api/subscription/auth/payment-confirmation/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("authToken")}`
+                },
+                body: JSON.stringify({
+                    status: transactionStatus,
+                    transactionId: transactionId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                setFlashMessage(data.message);
+                setTimeout(() => navigate("/dashboard"), 3000);
+            })
+            .catch(error => {
+                console.error("Error confirming payment:", error);
+                setFlashMessage("Payment confirmation failed.");
+            });
+        }
+    }, []);
 
-
-    const [paymentData, setpaymentData] = useState({
-        key: "", // enter your key here
-        customerId: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        amount: null,
-        narration: "",
-      });
-      let data = {
-        ...paymentData,
-        onSuccess: function (response) {
-          // function callback when payment is successful
-          console.log("callback Successful Response", response);
-        },
-        onError: function (response) {
-          // function callback when payment fails
-          console.log("callback Error Response", response);
-        },
-        onClose: function () {
-          // function callback when payment modal is closed
-          console.log("closed");
-        },
-      };
 
 
     return (
@@ -150,177 +157,57 @@ export default function Subscription() {
                     <div  className="Pricing_Sec">
                     <div className="Pricing_top">
                         <h3 className="big-text">Subscription Plans</h3>
-                        <p>Subscription plans for certificate management and verification portal (CMVP).</p>
+                        <p className="paopa">Subscription plans for certificate management and verification portal (CMVP).</p>
                     </div>
-                    <div className="Plans_Sec">
-                        {plans.length > 0 ? (
-                            plans.map((plan) => (
-                                <div key={plan.id} className="plan_box">
-                                    <div className="Pricing_sub">
-                                        <h3>CMVP Plan</h3>
-                                        {/* <div className="pricing_Top_Btns">
-                                            {["1 Month", "3 Months", "6 Months", "1 Year"].map((duration) => (
-                                                <button key={duration} className="plan_btn">
-                                                    {duration}
-                                                </button>
-                                            ))}
-                                        </div> */}
-                                    </div>
-                                    <div className="plan_box_Top">
-                                        <div className="plan_box_Top_1">
-                                            <h3>{plan.name}</h3>
-                                        </div>
-                                        <div className="plan_box_Top_1">
-                                    <h3 className="plan_price">${plan.price}</h3>
-                                    <Link
-                                        to="#"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            handleSubscribeClick(plan.unique_subscription_plan_id);
-                                        }}
-                                        className="btn-bg"
-                                        >
-                                        {isSubscribing === plan.unique_subscription_plan_id ? "Subscribing..." : "Subscribe"}
-                                    </Link>
-                                    {flashMessage && <div className="flash-message">{flashMessage}</div>}
-                                </div>
 
-                                    </div>
-                                    <div className="plan_box_Body">
-                                        <table className="plan_table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Feature</th>
-                                                    <th>Active</th>
-                                                    <th>Not Active</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Access to portal</td>
-                                                    <td>
-                                                        {plan.features.access_deleted_certificates_files ? (
-                                                            <span className="Check_Span">
-                                                                <img src={CheckIcon} alt="Check Icon" />
-                                                            </span>
-                                                        ) : (
-                                                            <span>
-                                                                <img src={MinusIcon} alt="Minus Icon" />
-                                                            </span>
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {!plan.features.access_deleted_certificates_files ? (
-                                                            <span className="Check_Span">
-                                                                <img src={MinusIcon} alt="Minus Icon" />
-                                                            </span>
-                                                        ) : (
-                                                            <span>
-                                                                <img src={CheckIcon} alt="Check Icon" />
-                                                            </span>
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Add up to {plan.features.num_certificate_categories} certificate categories</td>
-                                                    <td>
-                                                        <span className="Check_Span">
-                                                            <img src={CheckIcon} alt="Check Icon" />
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        <span>
-                                                            <img src={MinusIcon} alt="Minus Icon" />
-                                                        </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Upload up to {plan.features.num_daily_certificate_upload} certificates daily</td>
-                                                    <td>
-                                                        <span className="Check_Span">
-                                                            <img src={CheckIcon} alt="Check Icon" />
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        <span>
-                                                            <img src={MinusIcon} alt="Minus Icon" />
-                                                        </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Access to deleted certificates and files</td>
-                                                    <td>
-                                                        {plan.features.access_deleted_certificates_files ? (
-                                                            <span className="Check_Span">
-                                                                <img src={CheckIcon} alt="Check Icon" />
-                                                            </span>
-                                                        ) : (
-                                                            <span>
-                                                                <img src={MinusIcon} alt="Minus Icon" />
-                                                            </span>
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {!plan.features.access_deleted_certificates_files ? (
-                                                            <span className="Check_Span">
-                                                                <img src={MinusIcon} alt="Minus Icon" />
-                                                            </span>
-                                                        ) : (
-                                                            <span>
-                                                                <img src={CheckIcon} alt="Check Icon" />
-                                                            </span>
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>{plan.features.maximum_login_users} maximum login users</td>
-                                                    <td>
-                                                        <span className="Check_Span">
-                                                            <img src={CheckIcon} alt="Check Icon" />
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        <span>
-                                                            <img src={MinusIcon} alt="Minus Icon" />
-                                                        </span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>24/7 support</td>
-                                                    <td>
-                                                        {plan.features["24/7_support"] ? (
-                                                            <span className="Check_Span">
-                                                                <img src={CheckIcon} alt="Check Icon" />
-                                                            </span>
-                                                        ) : (
-                                                            <span>
-                                                                <img src={MinusIcon} alt="Minus Icon" />
-                                                            </span>
-                                                        )}
-                                                    </td>
-                                                    <td>
-                                                        {!plan.features["24/7_support"] ? (
-                                                            <span className="Check_Span">
-                                                                <img src={MinusIcon} alt="Minus Icon" />
-                                                            </span>
-                                                        ) : (
-                                                            <span>
-                                                                <img src={CheckIcon} alt="Check Icon" />
-                                                            </span>
-                                                        )}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
-                            <p>Loading plans...</p>
-                        )}
+
+                    <div className="oahhs_Sec kjaiik2">
+                    <div className="oahhs_Card current-sub-card">
+                            <h3>FREE plan</h3>
+                            <p>All-in-one certificate management package available for a limited time.</p>
+                            <button>free <span>/one month</span></button>
+                            <ul>
+                                <li><CheckIcon /> Access to Portal for 15 days after Registration</li>
+                                <li><CheckIcon /> Add 3 certificate categories daily</li>
+                                <li><CheckIcon /> Upload 5 certificates daily</li>
+                                <li><CheckIcon /> Access to deleted certificates and files</li>
+                                <li><CheckIcon /> 24/7 support</li>
+                            </ul>
+                            {/* <a href="#">Free Trial</a> */}
+                            <Link to="/signup">Free Trial</Link>
+                        </div>
+                        {plans.map((plan) => (
+                            <div className="oahhs_Card" key={plan.id}>
+                                <h3>{plan.name.toUpperCase()}</h3>
+                                <p>Custom plan tailored for your certificate management needs.</p>
+                                <button>NGN {parseFloat(plan.price_per_month).toLocaleString()} <span>/per month</span></button>
+                                <ul>
+                                    <li><CheckIcon /> Access to portal</li>
+                                    <li><CheckIcon /> Add up to {plan.features.num_certificate_categories} certificate categories</li>
+                                    <li><CheckIcon /> Upload up to {plan.features.num_daily_certificate_upload} certificates daily</li>
+                                    {plan.features.access_deleted_certificates_files && <li><CheckIcon /> Access to deleted certificates and files</li>}
+                                    {plan.features["24/7_support"] && <li><CheckIcon /> 24/7 support</li>}
+                                </ul>
+                                {/* <a href="#" onClick={() => handleSubscribeClick(plan.id)}>Subscribe</a> */}
+
+                                <Link
+                                    to="#"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleSubscribeClick(plan.unique_subscription_plan_id);
+                                    }}
+                                    className="btn-bg"
+                                    >
+                                    {isSubscribing === plan.unique_subscription_plan_id ? "Subscribing..." : "Subscribe"}
+                                </Link>
+                                {flashMessage && <div className="flash-message">{flashMessage}</div>}
+                            </div>
+                        ))}
                     </div>
-                </div>
 
+
+                                </div>
+                  
 
     );
 }

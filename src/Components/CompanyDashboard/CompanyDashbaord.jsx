@@ -37,7 +37,7 @@ export default function CompanyDashbaord() {
       {/* Button should only show when BackgroundSelecttion is hidden */}
       {!showBackgroundSelection && (
         <button 
-          className="Close_BGG_SEC_Box btn-bg" 
+          className="Close_BGG_SEC_Box btn-bg2" 
           onClick={handleBackgroundSelectionToggle}
         >
           <img src={SettingIcon} alt="Settings Icon" />

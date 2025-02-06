@@ -662,7 +662,7 @@ export default function PortalPage() {
                     </div>
 
                     <div className={`Upload_env_main ${isUploadEnvHidden ? 'Hide_Envi_Box' : ''}`}>
-                        <button className="CertUpload_Btn btn-bg" onClick={handleUploadButtonClick}>
+                        <button className="CertUpload_Btn btn-bg2" onClick={handleUploadButtonClick}>
                             <CloudUploadIcon /> Upload Certificate
                         </button>
 

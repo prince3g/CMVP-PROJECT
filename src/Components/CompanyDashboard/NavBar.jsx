@@ -233,7 +233,7 @@ useEffect(() => {
                                             localStorage.clear(); // Clear token
                                             navigate("/"); // Redirect to login
                                         }
-                                    }} className="Logout_Dash_Btn btn-bg">
+                                    }} className="Logout_Dash_Btn btn-bg2">
                                         Logout
                                     </button>
 

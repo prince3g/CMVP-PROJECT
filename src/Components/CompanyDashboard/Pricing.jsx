@@ -96,14 +96,14 @@ export default function Pricing() {
                 />
             )}
                 <h2>Subscription Plans</h2>
-                <p>Your Subscription plan for certificate management and verification portal (CMVP).</p>
+                <p className="paopa">Your Subscription plan for certificate management and verification portal (CMVP).</p>
             </div>
 
                     
                              <div className="Plans_Sec">
                                 {errorMessage ? (
                                     <div className="error_message">
-                                        <p>{errorMessage}</p>
+                                        <p className="erroroo">{errorMessage}</p>
                                     </div>
                                 ) : plan ? (
                                 <div className="plan_box">
