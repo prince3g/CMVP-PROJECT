@@ -101,8 +101,18 @@ function Navbar({ className }) {
 
   const handleMobileNavClose = () => {
     setIsMobileNavOpen(false);
+
+    if (isMobile) {
+      setIsDropdownVisible(true); // Always open on mobile
+    } else {
+      setIsDropdownVisible((prevState) => !prevState);
+    }
+    setActiveToggle((prevState) => !prevState);
+    
   };
 
+
+  
   return (
     <div className={`Navbar ${className} ${isScrolled ? "Scrolled_Nav" : ""} ${isMobileNavOpen ? "Mobile_Toggle_Nav" : ""}`}>
       <div className="site-container">

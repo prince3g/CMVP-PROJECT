@@ -11,6 +11,7 @@ import Terms from './Components/Terms';
 import Privacy from './Components/Privacy';
 import Contact from './Components/Contact';
 import Pricing from './Components/Pricing';
+import Payment from './Components/Payment';
 import HowItWorks from './Components/HowItWorks';
 import FAQ from './Components/FAQ';
 import AboutUs from './Components/AboutUs';
@@ -52,13 +53,15 @@ function App() {
   const isTermsOrPrivacyPage =
     location.pathname === "/terms-of-use" || location.pathname === "/privacy-policy";
 
-  const navbarClass = isAuthPage
-    ? "Reg_Nav"
-    : isVerificationPage
-    ? "Verification_Nav"
-    : isDashboardPage || isAdminDashboardPage || isTermsOrPrivacyPage
-    ? ""
-    : "";
+  const isPaymentPage = location.pathname === "/payment";
+
+  // Assigning classes dynamically
+  const navbarClass = [
+    isAuthPage ? "Reg_Nav" : "",
+    isVerificationPage ? "Verification_Nav" : "",
+    isPaymentPage ? "Reg_Nav payment-navbar" : "",
+    isDashboardPage || isAdminDashboardPage || isTermsOrPrivacyPage ? "" : ""
+  ].join(" ").trim();
 
   return (
     <div className="App">
@@ -75,6 +78,7 @@ function App() {
           <Route path="/privacy-policy" element={<Privacy />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/payment" element={<Payment />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/about-cmvp" element={<AboutUs />} />
@@ -92,10 +96,11 @@ function App() {
         </Routes>
       </div>
       {!isAuthPage &&
-        !isVerificationPage &&
-        !isDashboardPage &&
-        !isAdminDashboardPage &&
-        !isTermsOrPrivacyPage && <Footer />}
+      !isVerificationPage &&
+      !isDashboardPage &&
+      !isAdminDashboardPage &&
+      !isTermsOrPrivacyPage &&
+      !isPaymentPage && <Footer />} 
     </div>
   );
 }

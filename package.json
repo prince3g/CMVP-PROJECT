@@ -25,6 +25,7 @@
     "react-loading-skeleton": "^3.5.0",
     "react-router-dom": "^7.1.1",
     "react-router-hash-link": "^2.4.3",
+    "sweetalert2": "^11.15.10",
     "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
