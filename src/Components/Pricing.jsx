@@ -70,85 +70,87 @@ export default function Pricing() {
     }, []); 
 
 
-  const handleSubscribeClick = async (planId) => {
-        setIsSubscribing(planId);
-        const authToken = localStorage.getItem("authToken");
-        const authUserId = localStorage.getItem("authUserId");
-    
-        if (!authToken) {
-            setFlashMessage("Please login or register to continue");
-            setTimeout(() => {
-                setFlashMessage("");
-                navigate("/login");
-            }, 3000);
-            setIsSubscribing(null);
-            return;
-        }
-    
-        const payload = {
-            user: authUserId,
-            subscription_plan: planId,
-            subscribed_duration: 1  // Default to 1 month
-        };
-    
-        try {
-            const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscriptions/`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${authToken}`
-                },
-                body: JSON.stringify(payload)
-            });
-    
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail || "Failed to subscribe");
-            }
-    
-            const result = await response.json();
 
-            navigate("/dashboard");
-            // window.location.href = result.payment_link;  // Redirect to Remita payment page
+//   const handleSubscribeClick = async (planId) => {
+//         setIsSubscribing(planId);
+//         const authToken = localStorage.getItem("authToken");
+//         const authUserId = localStorage.getItem("authUserId");
+    
+//         if (!authToken) {
+//             setFlashMessage("Please login or register to continue");
+//             setTimeout(() => {
+//                 setFlashMessage("");
+//                 navigate("/login");
+//             }, 3000);
+//             setIsSubscribing(null);
+//             return;
+//         }
+    
+//         const payload = {
+//             user: authUserId,
+//             subscription_plan: planId,
+//             subscribed_duration: 1  // Default to 1 month
+//         };
+    
+//         try {
+//             const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscriptions/`, {
+//                 method: "POST",
+//                 headers: {
+//                     "Content-Type": "application/json",
+//                     "Authorization": `Bearer ${authToken}`
+//                 },
+//                 body: JSON.stringify(payload)
+//             });
+    
+//             if (!response.ok) {
+//                 const errorData = await response.json();
+//                 throw new Error(errorData.detail || "Failed to subscribe");
+//             }
+    
+//             const result = await response.json();
 
-        } catch (error) {
-            console.error("Error subscribing:", error);
-            setFlashMessage(error.message || "An unexpected error occurred");
-            setTimeout(() => setFlashMessage(""), 3000);
-        } finally {
-            setIsSubscribing(null);
-        }
-    };
+//             navigate("/dashboard");
+//             // window.location.href = result.payment_link;  // Redirect to Remita payment page
+
+//         } catch (error) {
+//             console.error("Error subscribing:", error);
+//             setFlashMessage(error.message || "An unexpected error occurred");
+//             setTimeout(() => setFlashMessage(""), 3000);
+//         } finally {
+//             setIsSubscribing(null);
+//         }
+//     };
     
 
-    useEffect(() => {
-        const queryParams = new URLSearchParams(window.location.search);
-        const transactionStatus = queryParams.get("status");
-        const transactionId = queryParams.get("transactionId");
-    
-        if (transactionStatus && transactionId) {
-            fetch(`${config.API_BASE_URL}/api/subscription/auth/payment-confirmation/`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem("authToken")}`
-                },
-                body: JSON.stringify({
-                    status: transactionStatus,
-                    transactionId: transactionId
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                setFlashMessage(data.message);
-                setTimeout(() => navigate("/dashboard"), 3000);
-            })
-            .catch(error => {
-                console.error("Error confirming payment:", error);
-                setFlashMessage("Payment confirmation failed.");
-            });
-        }
-    }, []);
+const handleSubscribeClick = (plan) => {
+    setIsSubscribing(plan.unique_subscription_plan_id);
+
+    console.log("plan")
+    console.log(plan)
+    console.log("plan")
+
+    const authToken = localStorage.getItem("authToken");
+    const authUserId = localStorage.getItem("authUserId");
+
+    if (!authToken) {
+        setFlashMessage("Please login or register to continue");
+        setTimeout(() => {
+            setFlashMessage("");
+            navigate("/login");
+        }, 3000);
+        setIsSubscribing(null);
+        return;
+    }
+
+    // Store subscription details in state and navigate to the payment page
+    navigate("/payment", { state: { 
+        user: authUserId,
+        subscription_plan: plan.unique_subscription_plan_id,
+        plan_name: plan.name,
+        plan_price: plan.price_per_month,
+        plan_features: plan.features,
+    }});
+};
 
 
     return (
@@ -191,7 +193,7 @@ export default function Pricing() {
                                 </ul>
                                 {/* <a href="#" onClick={() => handleSubscribeClick(plan.id)}>Subscribe</a> */}
 
-                                <Link
+                                {/* <Link
                                     to="#"
                                     onClick={(e) => {
                                         e.preventDefault();
@@ -200,8 +202,20 @@ export default function Pricing() {
                                     className="btn-bg"
                                     >
                                     {isSubscribing === plan.unique_subscription_plan_id ? "Subscribing..." : "Subscribe"}
+                                </Link> */}
+
+                                <Link
+                                    to="#"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleSubscribeClick(plan);
+                                    }}
+                                    className="btn-bg"
+                                >
+                                    Subscribe
                                 </Link>
-                                {flashMessage && <div className="flash-message">{flashMessage}</div>}
+
+                                                                {flashMessage && <div className="flash-message">{flashMessage}</div>}
                             </div>
                         ))}
                     </div>
