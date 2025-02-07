@@ -102,6 +102,12 @@ function Navbar({ className }) {
   const handleMobileNavClose = () => {
     setIsMobileNavOpen(false);
 
+    
+  };
+
+  const DrophandleMobileNavClose = () => {
+    setIsMobileNavOpen(false);
+
     if (isMobile) {
       setIsDropdownVisible(true); // Always open on mobile
     } else {
@@ -110,8 +116,6 @@ function Navbar({ className }) {
     setActiveToggle((prevState) => !prevState);
     
   };
-
-
   
   return (
     <div className={`Navbar ${className} ${isScrolled ? "Scrolled_Nav" : ""} ${isMobileNavOpen ? "Mobile_Toggle_Nav" : ""}`}>
@@ -154,17 +158,17 @@ function Navbar({ className }) {
               {/* Dropdown Menu */}
               {(isDropdownVisible || isMobile) && (
                 <div className="Drop_Down">
-                  <Link to="/about-cmvp" onClick={handleMobileNavClose}>
+                  <Link to="/about-cmvp" onClick={DrophandleMobileNavClose}>
                     <InfoIcon />
                     About CMVP
                   </Link>
                   <br />
-                  <Link to="/faq" onClick={handleMobileNavClose}>
+                  <Link to="/faq" onClick={DrophandleMobileNavClose}>
                     <QuestionAnswerIcon />
                     FAQ
                   </Link>
                   <br />
-                  <Link to="/how-it-works" onClick={handleMobileNavClose}>
+                  <Link to="/how-it-works" onClick={DrophandleMobileNavClose}>
                     <SettingsIcon />
                     How it works
                   </Link>
