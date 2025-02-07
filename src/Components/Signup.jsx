@@ -326,8 +326,8 @@ const Signup = () => {
                 <div className="Reg_Input hgahs-ooa">
                 <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
                   <p>
-                    By clicking "Sign Up," you agree to our{" "}
-                    <a href="/terms-of-use" target='_blank'>Terms of Use</a> and our{" "}
+                   I agree that I have read, concent to CMVP{" "}
+                    <a href="/terms-of-use" target='_blank'>Terms of Use</a> and {" "}
                     <a href="/privacy-policy" target='_blank'>Privacy Policy</a>.
 
                   </p>

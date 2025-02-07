@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import Swal from "sweetalert2";
 import RemitaBDG from '../assets/Img/remita-bdg.png';
 import CheckIcon from '@mui/icons-material/Check';
 
@@ -7,15 +7,37 @@ function Payment() {
     const [isYearly, setIsYearly] = useState(false);
     const [count, setCount] = useState(1);
 
-    // Toggle between Monthly and Yearly
+    // Base price setup
+    const monthlyPrice = 9495;
+    const yearlyPrice = monthlyPrice * 12;
+    
+    // Calculate amount based on selection
+    const amount = isYearly ? yearlyPrice * count : monthlyPrice * count;
+    const vat = amount * 0.075; // 7.5% VAT
+    const total = amount + vat;
+
+    // Subscription benefits list
+    const subscriptionBenefits = [
+        "Access to Portal for 15 days after Registration",
+        "Add 3 certificate categories daily",
+        "Upload 5 certificates daily",
+        "Access to deleted certificates and files",
+        "24/7 support"
+    ];
+
+    // Toggle Monthly/Yearly selection
     const handleToggle = () => {
-        setIsYearly(prevState => !prevState);
+        setIsYearly(prevState => {
+            setCount(1); // Reset count when toggling
+            return !prevState;
+        });
     };
 
-    // Increase or decrease count between 1 and 20
+    // Handle count increase/decrease
     const handleCountChange = (type) => {
         setCount(prevCount => {
-            if (type === "increase" && prevCount < 20) return prevCount + 1;
+            const maxCount = isYearly ? 1 : 12; // Max 1 year, max 12 months
+            if (type === "increase" && prevCount < maxCount) return prevCount + 1;
             if (type === "decrease" && prevCount > 1) return prevCount - 1;
             return prevCount;
         });
@@ -24,16 +46,12 @@ function Payment() {
     // Handle payment confirmation
     const handlePaymentConfirmation = () => {
         Swal.fire({
-            title: "Payment Confirmed!",
-            text: "We have received your payment and will update your subscription within 24 hours.",
+            title: "Thank you!",
+            text: "We will confirm your payment and update your subscription within 48 hours",
             icon: "success",
             confirmButtonText: "OK",
-            showClass: {
-                popup: "animate__animated animate__fadeInDown"
-            },
-            hideClass: {
-                popup: "animate__animated animate__fadeOutUp"
-            }
+            showClass: { popup: "animate__animated animate__fadeInDown" },
+            hideClass: { popup: "animate__animated animate__fadeOutUp" }
         });
     };
 
@@ -41,6 +59,8 @@ function Payment() {
         <div className="Payment-sec">
             <div className="site-container">
                 <div className="payment-main">
+                    
+                    {/* Plan Selection */}
                     <div className="payment-main-top">
                         <h3>Get Basic Plan</h3>
                         <p>
@@ -54,6 +74,8 @@ function Payment() {
                     </div>
 
                     <div className="payment-body">
+                        
+                        {/* Payment Method Section */}
                         <div className="payment-part-1">
                             <div className="payment-part-1-Main">
                                 <h3>Payment method</h3>
@@ -63,6 +85,7 @@ function Payment() {
                                 </div>
                                 <form className="bank-dlt-form">
                                     <h5>Account Details</h5>
+
                                     <div className="bank-dlt-form-input">
                                         <label>Bank Name:</label>
                                         <input type="text" readOnly value="First Bank" />
@@ -70,7 +93,7 @@ function Payment() {
 
                                     <div className="bank-dlt-form-input">
                                         <label>Account Name:</label>
-                                        <input type="text" readOnly value="Proliance Limited" />
+                                        <input type="text" readOnly value="Proliance LTD" />
                                     </div>
 
                                     <div className="bank-dlt-form-input">
@@ -84,22 +107,24 @@ function Payment() {
                                     </div>
 
                                     <div className="bank-dlt-form-input">
-                                        <label>Amount:</label>
-                                        <input type="text" readOnly value="9495" />
+                                        <label>TIN:</label>
+                                        <input type="text" readOnly value="20657895-0001" />
                                     </div>
                                 </form>
                             </div>
                         </div>
 
+                        {/* Subscription Details Section */}
                         <div className="payment-part-2">
                             <ul>
-                                <li><CheckIcon /> Access to Portal for 15 days after Registration</li>
-                                <li><CheckIcon /> Add 3 certificate categories daily</li>
-                                <li><CheckIcon /> Upload 5 certificates daily</li>
-                                <li><CheckIcon /> Access to deleted certificates and files</li>
-                                <li><CheckIcon /> 24/7 support</li>
+                                {subscriptionBenefits.map((benefit, index) => (
+                                    <li key={index}>
+                                        <CheckIcon /> {benefit}
+                                    </li>
+                                ))}
                             </ul>
 
+                            {/* Number of Months/Years Selection */}
                             <h2>
                                 <b>Number of {isYearly ? "Year(s)" : "Month(s)"}</b>
                                 <button>
@@ -109,21 +134,31 @@ function Payment() {
                                 </button>
                             </h2>
 
-                            <h3>
-                                <span>Charge today</span>
-                                <span>NGN9495</span>
+                            {/* Pricing Breakdown */}
+                            <h3 className="ash-1">
+                                <span>Amount</span>
+                                <span>NGN{amount.toLocaleString()}</span>
                             </h3>
 
+                            <h3 className="ash-2">
+                                <span>VAT (7.5%)</span>
+                                <span>NGN{vat.toLocaleString()}</span>
+                            </h3>
+
+                            <h3 className="ash-3">
+                                <span>Total</span>
+                                <span>NGN{total.toLocaleString()}</span>
+                            </h3>
+
+                            {/* Confirmation Button */}
                             <button className="confrim-btn" onClick={handlePaymentConfirmation}>
                                 I’ve Sent the Money
                             </button>
-
-                            <h6>We will confirm your payment within 24hrs and update your subscription accordingly.</h6>
                         </div>
-                    </div>
 
-                </div>
-            </div>
+                    </div> {/* End of payment-body */}
+                </div> {/* End of payment-main */}
+            </div> {/* End of site-container */}
         </div>
     );
 }

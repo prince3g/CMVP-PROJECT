@@ -3050,8 +3050,7 @@ text-align: center;
   position: relative;
   width: 100%;
   height: auto;
-  margin-top: 20px;
-  border-top: 1px solid #E2E2E2;
+  margin-top: 30px;
   padding-top: 20px;
 }
 
@@ -3082,7 +3081,7 @@ text-align: center;
 .V_Form_Input label{
   font-size: 13px;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom:3px;
   display: block;
 }
 .V_Form_Input input{
@@ -3095,7 +3094,7 @@ text-align: center;
   padding: 0px 20px;
   font-size: 15px;
   color: #000;
-  border: 1px solid #E2E2E2;
+  border: 1px solid #929292;
 }
 .V_Form_Input input.certNum_Inpt,
 .V_Form_Input input:focus{
@@ -3127,8 +3126,13 @@ text-align: center;
   cursor: pointer;
 }
 
-
-
+.btn-bg-oo{
+  background-color: #52B788;
+  color: #fff;
+}
+.btn-bg-oo:hover{
+  background-color: #2D6A4F;
+}
 .HGa_Grid{
   position: relative;
   width: 100%;
@@ -3332,13 +3336,13 @@ text-align: center;
     color: #1c1c1c !important;
   }
 }
+
 .very_footer a{
-  font-size: 11px;
+  color: #2D6A4F;
   font-weight: 500;
-  display: flex;
 }
 .very_footer a:hover{
-  text-decoration: underline !important;
+  text-decoration: underline;
 }
 .Showresult .very_footer span,
 .Showresult .very_footer{
@@ -3520,14 +3524,16 @@ text-align: center;
 
 .hgahs-ooa{
   display: flex;
-  gap:10px;
-  grid-gap: 10px;
+  align-items: flex-start;
+  gap:5px;
+  grid-gap: 5px;
+  
 }
 
 .hgahs-ooa input{
   width: auto !important;
   height: auto !important;
-  margin-top: 0px !important;
+  margin-top: 8px !important;
 }
 
 
@@ -3899,6 +3905,7 @@ text-align: center;
   background-color: transparent !important;
   color: #52B788 !important;
   padding: 80px 0px !important;
+  padding-top: 150px !important;
 }
 
 .Kang::after,
@@ -4383,8 +4390,8 @@ text-align: center;
   height: auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  grid-gap: 20px;
+  gap: 10px;
+  grid-gap: 10px;
 }
 
 .payment-part-2 ul li{
@@ -4393,13 +4400,13 @@ text-align: center;
   align-items: flex-start;
   gap: 10px;
   grid-gap: 10px;
-  font-size: 16px;
+  font-size: 13px;
 }
 
 .payment-part-2 ul li svg{
   margin-top: 5px;
   color: #52B788;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 
@@ -4407,11 +4414,11 @@ text-align: center;
   position: relative;
   width: 100%;
   height: auto;
-  margin-top: 50px;
+  margin-top: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 500;
 }
 
@@ -4421,14 +4428,14 @@ text-align: center;
   align-items: center;
   background-color: transparent;
   border:1px solid #fff;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
 .payment-part-2 h2 button span{
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -4441,27 +4448,34 @@ text-align: center;
   position: relative;
   width: 100%;
   height: auto;
-  margin-top: 40px;
-  padding: 20px 0px;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
+  padding: 10px 0px;
+  border-top: 1px solid rgba(255,255,255,0.4);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 15px;
   text-transform: uppercase;
   font-weight: 700;
 }
 
-.payment-part-2 h3 span:last-child{
+.payment-part-2 h3.ash-1{
+  margin-top: 40px !important;
+}
+
+.payment-part-2 h3.ash-2{
+  font-size: 10px !important;
+}
+
+.payment-part-2 h3.ash-3 span:last-child{
   font-size: 25px;
+  color: #FE6601;
 }
 
 .confrim-btn{
   position: relative;
   width: 100%;
   height: auto;
-  padding: 30px 10px;
+  padding: 20px 10px;
   margin-top: 40px;
   display: flex;
   align-items: center;
@@ -4503,4 +4517,34 @@ text-align: center;
 .swal2-confirm.swal2-styled{
   background-color: #04471C !important;
   border-color: #04471C !important;
+}
+
+
+
+
+
+
+/* ahh-h6 */
+
+.ahh-h6{
+  position: relative;
+  margin-top: 40px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+  color: #4B4B4B;
+}
+
+
+.ajuh-h4{
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  color: #52B788;
+}
+
+.italic-p{
+  font-style: italic !important;
+  font-size: 13px !important;
+  margin-top:50px;
+   color: #555555;
 }

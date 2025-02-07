@@ -64,46 +64,44 @@ function Verification() {
 
 
 
-  const handleFormSubmit = async (event) => {
-      event.preventDefault();
+const handleFormSubmit = async (event) => {
+  event.preventDefault();
 
-      if (certificateNumber && issuedDate) {
-          setLoading(true); // Start the loader
-          try {
-              // Format issued_date to 'YYYY-MM-DD' in local time
-              const formattedDate = issuedDate.getFullYear() + '-' + 
-                                    String(issuedDate.getMonth() + 1).padStart(2, '0') + '-' + 
-                                    String(issuedDate.getDate()).padStart(2, '0');
-  
-              // Call API to verify the certificate
-              const response = await fetch(`${config.API_BASE_URL}/api/certificates/verify-certificate/${orgID}/`, {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({
-                      certificate_id: certificateNumber,
-                      issued_date: formattedDate, // Use the locally formatted date
-                  }),
-              });
-  
-              const data = await response.json();
-              if (response.ok) {
-                  setResponseData(data); // Save the response data
+  if (certificateNumber.trim() && issuedDate) {  // Trim spaces before validation
+      setLoading(true); // Start the loader
+      try {
+          // Format issued_date to 'YYYY-MM-DD'
+          const formattedDate = issuedDate.getFullYear() + '-' + 
+                                String(issuedDate.getMonth() + 1).padStart(2, '0') + '-' + 
+                                String(issuedDate.getDate()).padStart(2, '0');
 
+          // Call API to verify the certificate
+          const response = await fetch(`${config.API_BASE_URL}/api/certificates/verify-certificate/${orgID}/`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                  certificate_id: certificateNumber.trim(), // Trim spaces before sending
+                  issued_date: formattedDate,
+              }),
+          });
 
-
-                  setShowResult(true);
-              } else {
-                  console.error('Verification Failed :', data.message);
-                  setErrorMessage(data.message || 'An error occurred');
-              }
-          } catch (error) {
-              console.error('Error verifying certificate:', error);
-              setErrorMessage('Error verifying certificate: ' + error.message);
-          } finally {
-              setLoading(false); // Stop the loader
+          const data = await response.json();
+          if (response.ok) {
+              setResponseData(data);
+              setShowResult(true);
+          } else {
+              console.error('Verification Failed :', data.message);
+              setErrorMessage(data.message || 'An error occurred');
           }
+      } catch (error) {
+          console.error('Error verifying certificate:', error);
+          setErrorMessage('Error verifying certificate: ' + error.message);
+      } finally {
+          setLoading(false); // Stop the loader
       }
-  };
+  }
+};
+
 
 
 // Fetch organization data
@@ -172,8 +170,8 @@ const handleGoBack = () => {
       <div className="Comp_Intro_Sec">
         <div className="COm_oopal">
       
-          <h2 className="big-text hggga-text"><span>{organizationData_name} </span><br></br>  verification portal</h2>
-          <p>Your trusted platform for verifying our issued certificates.</p>
+          <h2 className="big-text hggga-text">{organizationData_name} </h2>
+          <h4 className="ajuh-h4">Verification Portal</h4>
         </div>
 
         <div className="seargs_sec">
@@ -181,15 +179,16 @@ const handleGoBack = () => {
             <div className="HGa_Grid">
               <div className="V_Form_Input">
                 <label>Certificate number</label>
-              <input 
+                <input 
                   type="text" 
                   placeholder="Enter certificate number" 
                   value={certificateNumber}
-                  onChange={(e) => setCertificateNumber(e.target.value)}
-                  // className="certNum_Inpt"
+                  onChange={(e) => setCertificateNumber(e.target.value.replace(/\s/g, ""))} // Remove spaces dynamically
+                  onKeyDown={(e) => e.key === " " && e.preventDefault()} // Prevent space key
                   required
-                />
+              />
               </div>
+              
 
               <div className="V_Form_Input">
                 <label>Enter date</label>
@@ -217,13 +216,17 @@ const handleGoBack = () => {
         )}
 
            <div className="V_Form_Input">
-              <button type="submit" disabled={loading} className="btn-bg" >
+              <button type="submit" disabled={loading} className="btn-bg-oo" >
                     {loading ? "Verifying..." : "Verify certificate"}
                  </button>
               </div>
 
            </form>
         </div>
+
+        <p className="italic-p">... your trusted platform for verifying  issued certificates.</p>
+
+
       </div>
      </div>
 
@@ -241,7 +244,7 @@ const handleGoBack = () => {
 
 
           <footer className="very_footer">
-          <p>Powered by CMVP</p>
+          <p>Powered by <a href="www.cmvp.net">cmvp.net</a></p>
           <span>© {currentYear}</span>
           </footer>
 

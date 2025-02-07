@@ -529,7 +529,7 @@ const handleSoftDelete = async (certificate_id) => {
                                     />
 
                                     <div className="Submit_Sec">
-                                        <button type="submit" disabled={loading} className="btn-bg">
+                                        <button type="submit" disabled={loading} className="btn-bg2">
                                             {loading ? "Updating Certificate..." : "Save changes"}
                                         </button>
                                     </div>

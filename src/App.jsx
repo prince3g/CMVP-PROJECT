@@ -60,14 +60,14 @@ function App() {
     isAuthPage ? "Reg_Nav" : "",
     isVerificationPage ? "Verification_Nav" : "",
     isPaymentPage ? "Reg_Nav payment-navbar" : "",
-    isDashboardPage || isAdminDashboardPage || isTermsOrPrivacyPage ? "" : ""
+    isTermsOrPrivacyPage ? "Reg_Nav payment-navbar" : "" // Add class when on Terms/Privacy page
   ].join(" ").trim();
 
   return (
     <div className="App">
       <ScrollToTop />
-      {!isDashboardPage && !isAdminDashboardPage && !isTermsOrPrivacyPage && (
-        <Navbar className={navbarClass} />
+      {!isDashboardPage && !isAdminDashboardPage && (
+        <Navbar className={navbarClass} /> // Show navbar on Terms & Privacy pages
       )}
       <div className="App-Pages">
         <Routes>
@@ -82,11 +82,11 @@ function App() {
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/about-cmvp" element={<AboutUs />} />
-
+  
           <Route path="/verification-code" element={<VerificationCode />} />
           <Route path="/verification-code/:code" element={<VerificationCode />} />
           <Route path="/verification-code/:code/:email" element={<VerificationCode />} />
-
+  
           <Route path="/verification" element={<Verification />} />
           <Route path="/verification/:orgID/:OrgName" element={<Verification />} />
           <Route path="/forgot-password" element={<ForgotPassPage />} />
@@ -99,7 +99,6 @@ function App() {
       !isVerificationPage &&
       !isDashboardPage &&
       !isAdminDashboardPage &&
-      !isTermsOrPrivacyPage &&
       !isPaymentPage && <Footer />} 
     </div>
   );

@@ -9,7 +9,7 @@ export default function DashFooter() {
     return (
         <div className="Dashfooter">
                 <p>© {currentYear} CMVP</p>
-                <p>Powered by Proliance LTD</p>
+                {/* <p>Powered by Proliance LTD</p> */}
         </div>
     )
 

@@ -601,7 +601,7 @@ export default function PortalPage() {
                                     />
 
                                     <div className="Submit_Sec">
-                                        <button type="submit" disabled={loading} className="btn-bg">
+                                        <button type="submit" disabled={loading} className="btn-bg btn-bg2">
                                             {loading ? "Submitting..." : "Save changes"}
                                         </button>
                                     </div>

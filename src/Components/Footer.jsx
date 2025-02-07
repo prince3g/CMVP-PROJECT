@@ -100,12 +100,12 @@ function Footer() {
               <Link to="/faq">FAQ</Link>
             </div>
             <div className="foot_cnt_Nav">
-              <a href="/terms-of-use" target="_blank" rel="noopener noreferrer">
+              <Link to="/terms-of-use">
                 Terms of Use
-              </a>
-              <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
+              </Link>
+              <Link to="/privacy-policy">
                 Privacy Policy
-              </a>
+              </Link>
             </div>
 
             <div className="connect-sec">

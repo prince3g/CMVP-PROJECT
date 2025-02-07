@@ -236,6 +236,16 @@ p,h1,h2,h3,h4,h5,h6,ul,li,a,button,input,span,textarea, select{
   border-color: #FE6601 !important;
 }
 
+
+.btn-bg2{
+  background: #0D2818 !important;
+  color: #fff !important;
+}
+
+.btn-bg2:hover{
+  background: #164529 !important;
+  color: #fff !important;
+}
 .big-text{
   font-size: 50px;
   font-weight: 700;
