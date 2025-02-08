@@ -22,6 +22,9 @@ import ForgotPassPageReset from './Components/ForgotPassPageReset';
 import CompanyDashbaord from './Components/CompanyDashboard/CompanyDashbaord';
 import AdminDashbaord from './Components/AdminDashboard/AdminDashboard';
 
+
+import Cookies from './assets/Cookies';
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -65,6 +68,10 @@ function App() {
 
   return (
     <div className="App">
+
+      <Cookies />
+
+
       <ScrollToTop />
       {!isDashboardPage && !isAdminDashboardPage && (
         <Navbar className={navbarClass} /> // Show navbar on Terms & Privacy pages

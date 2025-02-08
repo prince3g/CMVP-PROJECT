@@ -87,7 +87,7 @@ export default function SubscriptionPage() {
                                         ].map(({ label, duration }) => (
                                             <button
                                                 key={label}
-                                                className={`plan_btn ${
+                                                className={`plan_btn oo_btnO ${
                                                     selectedDurations[plan.id] === duration ? "active" : ""
                                                 }`}
                                                 onClick={() => handleDurationSelect(plan.id, duration)}
