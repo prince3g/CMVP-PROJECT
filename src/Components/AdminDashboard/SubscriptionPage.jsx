@@ -159,7 +159,12 @@ export default function SubscriptionPage() {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Add up to {plan.features.num_daily_certificate_upload} certificate daily</td>
+                                                    <td>
+                                                    {plan.features.num_daily_certificate_upload === "UNLIMITED"
+                                                    ? "Add unlimited certificates daily"
+                                                    : `Add up to ${plan.features.num_daily_certificate_upload} certificates daily`}
+                                                    </td>
+
                                                     <td>
                                                     {plan.features.num_daily_certificate_upload > 5 || plan.features.num_daily_certificate_upload === "UNLIMITED"  ? (
                                                             <span className="Check_Span">
@@ -184,7 +189,12 @@ export default function SubscriptionPage() {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Add up to {plan.features.num_certificate_categories} certificate categories</td>
+                                                    <td>
+                                                    {plan.features.num_daily_certificate_upload === "UNLIMITED"
+                                                    ? "Add unlimited certificate categories"
+                                                    : `Add up to ${plan.features.num_certificate_categories} certificate categories`}
+                                                    </td>
+
                                                     <td>
                                                     {plan.features.num_certificate_categories >= 5 || plan.features.num_certificate_categories === "UNLIMITED"  ? (
                                                             <span className="Check_Span">
