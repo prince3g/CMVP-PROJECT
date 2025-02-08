@@ -101,6 +101,8 @@ function Navbar({ className }) {
 
   const handleMobileNavClose = () => {
     setIsMobileNavOpen(false);
+    setIsDropdownVisible(false);
+    setActiveToggle(false);
 
     
   };
