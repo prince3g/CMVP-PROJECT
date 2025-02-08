@@ -11,6 +11,10 @@ import FlashMessage from "../FlashMessage/FlashMessage.jsx";
 
 export default function DeletedUploadedCert() {
     const organizationID = localStorage.getItem("authUserId");
+        const [currentPage, setCurrentPage] = useState(1);
+        const [nextPage, setNextPage] = useState(null);
+        const [prevPage, setPrevPage] = useState(null);
+    
 
     const [isUploadBoxTogglerActive, setIsUploadBoxTogglerActive] = useState(false);
     const [isUploadEnvHidden, setIsUploadEnvHidden] = useState(false);
@@ -32,6 +36,16 @@ export default function DeletedUploadedCert() {
                 const response = await axios.get(`${config.API_BASE_URL}/api/certificates/soft-deleted-certificates/${organizationID}/`);
                 setCertificates(response.data.results); // Use 'results' from the response
                 setCertificateList(response.data.results || []); // Default to an empty array
+
+
+                console.log("response.data.results")
+                console.log(response.data.results)
+                console.log("response.data.results)"
+
+                )
+                setNextPage(response.data.next);
+                setPrevPage(response.data.previous);
+                setCurrentPage(page);
 
                 // console.log("response.data.results")
                 // console.log(response.data.results)
@@ -233,12 +247,10 @@ export default function DeletedUploadedCert() {
                 </div>
 
                 <div className="pagination">
-        <a href="#">&laquo;</a>
-        <a href="#">1</a>
-        <a href="#" class="active">2</a>
-        <a href="#">3</a>
-        <a href="#">&raquo;</a>
-      </div>
+                    <button disabled={!prevPage} onClick={() => setCurrentPage(prev => prev - 1)}>« Previous</button>
+                    <span>Page {currentPage}</span>
+                    <button disabled={!nextPage} onClick={() => setCurrentPage(prev => prev + 1)}>Next »</button>
+                </div>
       
             </div>
         </div>

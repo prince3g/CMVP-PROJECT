@@ -250,6 +250,7 @@ export default function UploadedCert() {
 
                 setCertificateList(response.data.results || []);
                 setNumCertificateUploaded(response.data.count);
+                
                 setNextPage(response.data.next);
                 setPrevPage(response.data.previous);
                 setCurrentPage(page);
