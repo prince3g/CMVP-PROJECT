@@ -151,6 +151,8 @@ export default function Subscription() {
     }, []);
 
 
+    const isLoggedIn = localStorage.getItem("authToken")
+
 
     return (
 
@@ -162,7 +164,7 @@ export default function Subscription() {
 
 
                     <div className="oahhs_Sec kjaiik2">
-                    <div className="oahhs_Card current-sub-card">
+                    <div className={`oahhs_Card ${isLoggedIn ? "current-sub-card" : ""}`}>
                             <h3>FREE plan</h3>
                             <p>All-in-one certificate management package available for a limited time.</p>
                             <button>free <span>/one month</span></button>
@@ -197,7 +199,7 @@ export default function Subscription() {
                                     {plan.features.access_deleted_certificates_files && <li><CheckIcon /> Access to deleted certificates and files</li>}
                                     {plan.features["24/7_support"] && <li><CheckIcon /> 24/7 support</li>}
                                 </ul>
-                                
+
                                 <Link
                                     to="#"
                                     onClick={(e) => {

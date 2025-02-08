@@ -13,22 +13,41 @@ export default function RegUsers() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [deletingId, setDeletingId] = useState(null); // Track ongoing deletions
+  const [nextPage, setNextPage] = useState(null);
+  const [prevPage, setPrevPage] = useState(null);
+  
+  const [currentPageUrl, setCurrentPageUrl] = useState(
+    `${config.API_BASE_URL}/api/accounts/auth/subscription/organizations/subscriptions/`
+  );
+
+  const fetchData = (url) => {
+    setLoading(true);
+    axios.get(url)
+    .then((response) => {
+    // console.log("Fetched Data:", response.data);
+      setData(response.data.results || []);
+      setNextPage(response.data.next);
+      setPrevPage(response.data.previous);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error("Error fetching data:", err);
+      setError(err.message);
+      setLoading(false);
+    });
+  
+  };
 
   useEffect(() => {
-    // Fetch data from the API
-    axios
-      .get(
-        `${config.API_BASE_URL}/api/accounts/auth/subscription/organizations/subscriptions/`
-      )
-      .then((response) => {
-        setData(response.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
+    fetchData(currentPageUrl);
+  }, [currentPageUrl]);
+
+  const handlePageChange = (url) => {
+    if (url) {
+      setCurrentPageUrl(url);
+    }
+  };
+
 
   // Function to handle delete
   const handleDelete = (id) => {
@@ -166,13 +185,27 @@ export default function RegUsers() {
           </table>
         </div>
 
-        <div className="pagination dack-pgn">
-        <a href="#">&laquo;</a>
-        <a href="#">1</a>
-        <a href="#" class="active">2</a>
-        <a href="#">3</a>
-        <a href="#">&raquo;</a>
-      </div>
+
+          {/* Pagination Controls */}
+          <div className="pagination dack-pgn">
+            <button
+              onClick={() => handlePageChange(prevPage)}
+              disabled={!prevPage || loading}
+              className={!prevPage || loading ? "disabled" : ""}
+            >
+              &laquo; Previous
+            </button>
+
+            <span>Page {new URL(currentPageUrl).searchParams.get("page") || 1}</span>
+
+            <button
+              onClick={() => handlePageChange(nextPage)}
+              disabled={!nextPage || loading}
+              className={!nextPage || loading ? "disabled" : ""}
+            >
+              Next &raquo;
+            </button>
+          </div>
 
       </div>
     </div>
