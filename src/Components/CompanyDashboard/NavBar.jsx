@@ -155,12 +155,7 @@ useEffect(() => {
                             </Link>
                         </li>
 
-                        <li>
-                            <Link to="/dashboard/profile" className={location.pathname === '/dashboard/profile' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/dashboard/profile')}>
-                            <span> <PersonIcon/></span>
-                                <p>Profile</p>
-                            </Link>
-                        </li>
+                    
 
                         
                         <li>
@@ -175,6 +170,14 @@ useEffect(() => {
                             <Link to="/dashboard/subscription" className={location.pathname === '/dashboard/subscription' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/dashboard/subscription')}>
                             <span> <AttachMoneyIcon /></span>
                                 <p>Subscription Plans</p>
+                            </Link>
+                        </li>
+
+
+                        <li>
+                            <Link to="/dashboard/profile" className={location.pathname === '/dashboard/profile' ? 'ActiveLNav_Icon' : ''} onClick={() => handleLinkClick('/dashboard/profile')}>
+                            <span> <PersonIcon/></span>
+                                <p>Profile</p>
                             </Link>
                         </li>
 

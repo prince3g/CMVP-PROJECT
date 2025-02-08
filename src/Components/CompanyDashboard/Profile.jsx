@@ -159,12 +159,9 @@ export default function Profile({ orgId }) {
                     className={`Upload_Box_Toggler ${isUploadBoxTogglerActive ? 'Active_Upload_Box_Toggler' : ''}`}
                     onClick={toggleUploadEnvVisibility}
                 >
-                    Portal profile<img src={ AngleDownIcon} alt="Angle Down Icon" />
+                     Profile<img src={ AngleDownIcon} alt="Angle Down Icon" />
                 </h3>
-                <div className="Upload_Conunter">
-                    <span>50%</span>
-                    <p><b>Portal</b> usage</p>
-                </div>
+               
             </div>
 
             <div className={`Upload_env_main ${isUploadEnvHidden ? 'Hide_Envi_Box' : ''}`}>
@@ -179,8 +176,8 @@ export default function Profile({ orgId }) {
                                     {/* <span><img src={PhotoEditIcon} alt="Edit Icon" /></span> {config.API_BASE_URL}{imgSrc} */}
                                 </label>
                                 <div className="user-details">
-                                    <h4>{companyName} Portal Profile </h4>
-                                    <div className="Copy_Url_Sec">
+                                    <h4>{companyName} Company Profile </h4>
+                                    <div className="Copy_Url_Sec jhhaj-op">
                                         <div className="Copy_Url_box" onClick={handleCopy}>
                                             <div className="Copy_Url_box_Main">
                                                 <h3>{copyMessage}</h3>
@@ -193,6 +190,7 @@ export default function Profile({ orgId }) {
                                             </button>
                                         </div>
                                     </div>
+                                    <p className="pop-PP">Click "save button" to reflect changes</p>
                                 </div>
                             </div>
                         </div>
@@ -209,7 +207,7 @@ export default function Profile({ orgId }) {
 
                             <div className="top-dash-2-main top-dash-2-main-1 active-top-dash-2-main">
                                 <div className="form-header">
-                                    <h3>Portal profile Settings </h3>
+                                    <h3>Company Profile Settings </h3>
                                 </div>
                                 <form className="site-form" onSubmit={handleSubmit}>
                                     <div className="d-grid">
@@ -324,11 +322,11 @@ export default function Profile({ orgId }) {
                                         </select>
                                     </div>
                                     <div className="form-input">
-                                        <button type="submit" className="profile_submit_btn btn-bg">
+                                        <button type="submit" className="profile_submit_btn btn-bg btn-bg2">
                                             {isLoading ? (
                                                 <span className="loader">Updating Data...</span>
                                             ) : (
-                                                'Save Profile'
+                                                'Save Changes'
                                             )}
                                         </button>
                                     </div>
