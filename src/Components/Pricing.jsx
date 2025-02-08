@@ -186,24 +186,22 @@ const handleSubscribeClick = (plan) => {
                                 <button>NGN {parseFloat(plan.price_per_month).toLocaleString()} <span>/per month</span></button>
                                 <ul>
                                     <li><CheckIcon /> Access to portal</li>
+                                    <li>{plan.features.num_daily_certificate_upload === "UNLIMITED"
+                                        ? "Create unlimited certificates daily"
+                                        : `Create ${plan.features.num_daily_certificate_upload} certificates daily`}
+                                    </li>
+                                    <li>
+                                        {plan.features.num_daily_certificate_upload === "UNLIMITED"
+                                        ? "Add unlimited certificate categories"
+                                        : `Add ${plan.features.num_daily_certificate_upload} certificate categories`}
+                                    </li>
                                     <li><CheckIcon /> Add up to {plan.features.num_certificate_categories} certificate categories</li>
                                     <li><CheckIcon /> Upload up to {plan.features.num_daily_certificate_upload} certificates daily</li>
+                                    
+
                                     {plan.features.access_deleted_certificates_files && <li><CheckIcon /> Access to deleted certificates and files</li>}
                                     {plan.features["24/7_support"] && <li><CheckIcon /> 24/7 support</li>}
                                 </ul>
-                                {/* <a href="#" onClick={() => handleSubscribeClick(plan.id)}>Subscribe</a> */}
-
-                                {/* <Link
-                                    to="#"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        handleSubscribeClick(plan.unique_subscription_plan_id);
-                                    }}
-                                    className="btn-bg"
-                                    >
-                                    {isSubscribing === plan.unique_subscription_plan_id ? "Subscribing..." : "Subscribe"}
-                                </Link> */}
-
                                 <Link
                                     to="#"
                                     onClick={(e) => {
@@ -215,7 +213,8 @@ const handleSubscribeClick = (plan) => {
                                     Subscribe
                                 </Link>
 
-                                                                {flashMessage && <div className="flash-message">{flashMessage}</div>}
+                                {flashMessage && <div className="flash-message">{flashMessage}</div>}
+
                             </div>
                         ))}
                     </div>
