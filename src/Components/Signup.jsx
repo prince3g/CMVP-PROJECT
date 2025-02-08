@@ -206,11 +206,11 @@ const Signup = () => {
 
               <form className="Reg_Form" onSubmit={handleFormSubmit}>
                 <div className="Reg_Input">
-                <label>Company Email</label>
+                <label>Registration Email (Your Company Email )</label>
                   <input
                     type="email"
                     name="email"
-                    placeholder="Enter Company Email"
+                    placeholder="Enter Registration Email"
                     value={formData.email}
                     onChange={handleInputChange}
                     required
@@ -244,11 +244,11 @@ const Signup = () => {
                 </div>
 
                 <div className="Reg_Input">
-                    <label>Company Official Mail</label>
+                    <label>Company Official Email</label>
                     <input
                       type="text"
                       name="company_official_mail"
-                      placeholder="Enter Company Official Mail"
+                      placeholder="Enter Company Official Email"
                       value={formData.company_official_mail}
                       onChange={handleInputChange}
                     />
