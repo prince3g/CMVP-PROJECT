@@ -250,6 +250,7 @@ export default function UploadedCert() {
 
                 setCertificateList(response.data.results || []);
                 setNumCertificateUploaded(response.data.count);
+
                 setNextPage(response.data.next);
                 setPrevPage(response.data.previous);
                 setCurrentPage(page);
@@ -671,6 +672,11 @@ const handleSoftDelete = async (certificate_id) => {
                 <span>Page {currentPage}</span>
                 <button disabled={!nextPage} onClick={() => setCurrentPage(prev => prev + 1)}> »</button>
             </div>
+            <div className="pagination">
+                    <button disabled={!prevPage} onClick={() => setCurrentPage(prev => prev - 1)}>« Previous</button>
+                    <span>Page {currentPage}</span>
+                    <button disabled={!nextPage} onClick={() => setCurrentPage(prev => prev + 1)}>Next »</button>
+                </div>
       
         </div>
             </div>

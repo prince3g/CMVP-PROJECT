@@ -189,6 +189,7 @@ const SubscriptionTable = () => {
 
 
       {/* Pagination Controls */}
+      {/* Pagination Controls */}
       <div className="pagination dack-pgn">
         <button
           onClick={() => handlePageChange(prevPage)}
@@ -206,6 +207,24 @@ const SubscriptionTable = () => {
           className={!nextPage || loading ? "disabled" : ""}
         >
            &raquo;
+        </button>
+      </div>
+        <button
+          onClick={() => handlePageChange(prevPage)}
+          disabled={!prevPage || loading}
+          className={!prevPage || loading ? "disabled" : ""}
+        >
+          &laquo; Previous
+        </button>
+
+        <span>Page {new URL(currentPageUrl).searchParams.get("page") || 1}</span>
+
+        <button
+          onClick={() => handlePageChange(nextPage)}
+          disabled={!nextPage || loading}
+          className={!nextPage || loading ? "disabled" : ""}
+        >
+          Next &raquo;
         </button>
       </div>
       
