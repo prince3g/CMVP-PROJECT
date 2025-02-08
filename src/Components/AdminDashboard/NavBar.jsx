@@ -162,10 +162,7 @@ export default function NavBar() {
                                 </Link>
                             </div>
 
-                            <div className="Search_Sec">
-                                <input type="text" placeholder="Search"></input>
-                                <button className="mobile_Search_toggler" onClick={toggleSearch}><img src={SearchIcon} alt="Search Icon"></img></button>
-                            </div>
+                      
                         </div>
 
                         <div className="R_NN_V_Sec">

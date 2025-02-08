@@ -124,6 +124,7 @@ const SubscriptionTable = () => {
                   <td>{organization.num_certificates_uploaded}</td>
                   <td>
                     <div className="action-btns">
+                      <button className="activate-btn">Activate</button>
                       <Link
                         to={{
                           pathname: "/admin-dashboard/user-profile",
@@ -151,7 +152,7 @@ const SubscriptionTable = () => {
                         }}
                         className="prof-bank-btn"
                       >
-                        View Profile
+                        Profile
                       </Link>
                       <button onClick={() => handleDelete(organization.id)}>
                         Remove
@@ -164,6 +165,15 @@ const SubscriptionTable = () => {
           </tbody>
         </table>
       </div>
+
+      <div className="pagination dack-pgn">
+        <a href="#">&laquo;</a>
+        <a href="#">1</a>
+        <a href="#" class="active">2</a>
+        <a href="#">3</a>
+        <a href="#">&raquo;</a>
+      </div>
+      
     </div>
   );
 };

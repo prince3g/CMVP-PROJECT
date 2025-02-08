@@ -6,6 +6,8 @@ import config from "../../config";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
+import SearchIcon from './Img/searchicon.svg';
+
 export default function RegUsers() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -79,6 +81,11 @@ export default function RegUsers() {
           <h2>Registered Users</h2>
         </div>
 
+        <div className="Search_Sec admin-Search_Sec">
+                                        <input type="text" placeholder="Search"></input>
+                                        <button className="mobile_Search_toggler" ><img src={SearchIcon} alt="Search Icon"></img></button>
+                                    </div>
+
         <div className="Sec-table">
           <table border="1" cellPadding="10" cellSpacing="0">
             <thead>
@@ -88,6 +95,7 @@ export default function RegUsers() {
                 <th>Email</th>
                 <th>Phone number</th>
                 <th>Address</th>
+                <th>RC Number</th>
                 <th>Registration Date</th>
                 <th>Current Plan</th>
                 <th>Action</th>
@@ -101,6 +109,7 @@ export default function RegUsers() {
                   <td>{organization.email}</td>
                   <td>{organization.phone}</td>
                   <td>{organization.address}</td>
+                  <td>00012</td>
                   <td>
                     {new Date(
                       organization.date_joined
@@ -156,6 +165,15 @@ export default function RegUsers() {
             </tbody>
           </table>
         </div>
+
+        <div className="pagination dack-pgn">
+        <a href="#">&laquo;</a>
+        <a href="#">1</a>
+        <a href="#" class="active">2</a>
+        <a href="#">3</a>
+        <a href="#">&raquo;</a>
+      </div>
+
       </div>
     </div>
   );

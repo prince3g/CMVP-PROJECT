@@ -341,3 +341,45 @@ p,h1,h2,h3,h4,h5,h6,ul,li,a,button,input,span,textarea, select{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.pagination {
+  display: inline-block;
+  margin-top: 25px;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.pagination a:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.pagination a.active {
+  background-color: #164529;
+  color: white;
+  border: 1px solid #164529;
+}

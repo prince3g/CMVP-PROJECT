@@ -171,7 +171,7 @@ const handleSubscribeClick = (plan) => {
                             <button>free <span>/one month</span></button>
                             <ul>
                                 <li><CheckIcon /> Access to Portal for 15 days after Registration</li>
-                                <li><CheckIcon /> Add 3 certificate categories daily</li>
+                                <li><CheckIcon /> Add up to 3 certificate categories</li>
                                 <li><CheckIcon /> Upload 5 certificates daily</li>
                                 <li><CheckIcon /> Access to deleted certificates and files</li>
                                 <li><CheckIcon /> 24/7 support</li>
