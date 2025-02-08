@@ -26,6 +26,7 @@
 
 .AdminDashbaord .search-sec{
     background-color: transparent !important;
+    
 }
 
 .AdminDashbaord .Search_Sec input{
@@ -224,14 +225,15 @@
 
 
 .prof-bank-btn{
-    background: #16db65 !important;
     transition: all 0.3s ease-in-out;
-    border: 1px solid #16db65 !important;
+    border: 1px solid #FFD766 !important;
+    color: #FFD766 !important;
+    background: transparent !important;
 }
 
 .prof-bank-btn:hover{
-    background: transparent !important;
-    color: #16db65 !important;
+    background: #FFD766 !important;
+    color: #000 !important;
 }
 
 
@@ -1292,6 +1294,45 @@ border-color: #7AA238;
 
 .oo_btnO{
     background-color: transparent !important;
-    border:1px solid rgba(255, 255, 255, 0.5) !important;
+    border:1px solid rgba(255, 255, 255, 0.2) !important;
     color: #fff !important;
+    font-size: 12px !important;
+}
+
+
+
+
+
+
+.admin-Search_Sec{
+    display: inline-flex !important;
+    margin-top: 10px !important;
+}
+
+.admin-Search_Sec button:hover{
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+
+.dack-pgn a{
+    color: #fff !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.dack-pgn a:hover{
+    background-color: rgba(255, 255, 255, 0.2) !important;;
+}
+
+.dack-pgn a.active{
+    background-color: #7BF2AB !important;
+    color: #000 !important;
+}
+
+.activate-btn{
+    border-color: #7BF2AB !important;
+    color: #7BF2AB !important;
+}
+.activate-btn:hover{
+    background-color: #7BF2AB  !important;
+    color: #000 !important;
 }
