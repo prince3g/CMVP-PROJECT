@@ -186,11 +186,12 @@ const handleSubscribeClick = (plan) => {
                                 <button>NGN {parseFloat(plan.price_per_month).toLocaleString()} <span>/per month</span></button>
                                 <ul>
                                     <li><CheckIcon /> Access to portal</li>
-                                    <li>{plan.features.num_daily_certificate_upload === "UNLIMITED"
+                                    <li><CheckIcon /> {plan.features.num_daily_certificate_upload === "UNLIMITED"
                                         ? "Create unlimited certificates daily"
                                         : `Create ${plan.features.num_daily_certificate_upload} certificates daily`}
                                     </li>
-                                    <li>
+
+                                    <li><CheckIcon /> 
                                         {plan.features.num_daily_certificate_upload === "UNLIMITED"
                                         ? "Add unlimited certificate categories"
                                         : `Add ${plan.features.num_daily_certificate_upload} certificate categories`}
