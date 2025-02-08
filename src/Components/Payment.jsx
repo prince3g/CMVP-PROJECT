@@ -1,14 +1,21 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import RemitaBDG from '../assets/Img/remita-bdg.png';
 import CheckIcon from '@mui/icons-material/Check';
 
 function Payment() {
+
+    const location = useLocation();
+    const { user, subscription_plan, plan_name, plan_price, plan_features } = location.state || {};
+
+
+
     const [isYearly, setIsYearly] = useState(false);
     const [count, setCount] = useState(1);
 
     // Base price setup
-    const monthlyPrice = 9495;
+    const monthlyPrice = plan_price;
     const yearlyPrice = monthlyPrice * 12;
     
     // Calculate amount based on selection
@@ -17,13 +24,14 @@ function Payment() {
     const total = amount + vat;
 
     // Subscription benefits list
-    const subscriptionBenefits = [
-        "Access to Portal for 15 days after Registration",
-        "Add 3 certificate categories daily",
-        "Upload 5 certificates daily",
-        "Access to deleted certificates and files",
-        "24/7 support"
-    ];
+    const subscriptionBenefits = Object.entries(plan_features).map(([key, value]) => {
+        // Format the key properly and convert boolean values to readable text
+        let formattedKey = key.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+        let formattedValue = typeof value === "boolean" ? (value ? "Yes" : "No") : value;
+        
+        return `${formattedKey}: ${formattedValue}`;
+    });
+    
 
     // Toggle Monthly/Yearly selection
     const handleToggle = () => {
@@ -55,6 +63,7 @@ function Payment() {
         });
     };
 
+
     return (
         <div className="Payment-sec">
             <div className="site-container">
@@ -62,7 +71,7 @@ function Payment() {
                     
                     {/* Plan Selection */}
                     <div className="payment-main-top">
-                        <h3>Get Basic Plan</h3>
+                        <h3>{plan_name}</h3>
                         <p>
                             <span>Monthly</span>
                             <button 

@@ -162,17 +162,6 @@ export default function PortalPage() {
         }
     };
 
-    // const handleImageUpload = (event) => {
-    //     const file = event.target.files[0];
-    //     if (file) {
-    //         setSelectedFile(file);
-    //         const reader = new FileReader();
-    //         reader.onloadend = () => {
-    //             setImagePreview(reader.result);
-    //         };
-    //         reader.readAsDataURL(file);
-    //     }
-    // };
 
     const handleDrop = (event) => {
         event.preventDefault();
@@ -245,23 +234,7 @@ export default function PortalPage() {
         }
     };
     
-    // const handleInputChange = (event) => {
-    //     setSelectedCategory(event.target.value);
-
-    //     // console.log("event.target.value")
-    //     // console.log(event.target.value)
-    //     // console.log("event.target.value")
-
-
-    //     const { name, value } = event.target;
-    //     setCertificateData(prevState => ({
-    //         ...prevState,
-    //         [name]: value
-    //     }));
-    // };
-
-
-    
+   
     const handleSubmit = async (event) => {
         event.preventDefault();
         setLoading(true);
@@ -279,10 +252,6 @@ export default function PortalPage() {
         const formData = new FormData();
         formData.append("organization", certificateData.organization_id); 
 
-
-        // console.log("111selectedCategory111")
-        // console.log(selectedCategory)
-        // console.log("111selectedCategory111")
 
         formData.append("certificate_category", selectedCategory); 
         formData.append("certificate_id", certificateData.number);
@@ -305,12 +274,6 @@ export default function PortalPage() {
             formData.append("pdf_file", selectedFile);
         }
 
-        // console.log("formData")
-        // // Iterate over entries and log key-value pairs
-        // for (const [key, value] of formData.entries()) {
-        //     console.log(`${key}: ${value}`); 
-        // }
-        // console.log("formData")
     
         try {
             const response = await axios.post(`${config.API_BASE_URL}/api/certificates/create/`, formData, {
