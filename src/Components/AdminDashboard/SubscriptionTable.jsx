@@ -188,6 +188,7 @@ const SubscriptionTable = () => {
       </div>
 
 
+
       {/* Pagination Controls */}
       <div className="pagination dack-pgn">
         <button
@@ -212,6 +213,7 @@ const SubscriptionTable = () => {
     </div>
   );
 };
+
 
 export default SubscriptionTable;
 
