@@ -100,10 +100,8 @@ export default function Pricing() {
                 onClose={() => setFlash(null)} // Remove flash message after timeout
                 />
             )}
-                <h2>Your Current Subscription</h2>
-                <p className="paopa">Your current subscription plan for CMVP!</p>
-                <h2>Your Subscription Plans</h2>
-                {/* <p className="paopa">Your Subscription plan for certificate management and verification portal (CMVP).</p> */}
+                <h2>Your  Subscriptions and Billings</h2>
+                
             </div>
 
 
@@ -173,12 +171,12 @@ export default function Pricing() {
 
                     
                 <div className="pagination">
-        <a href="#">&laquo;</a>
-        <a href="#">1</a>
-        <a href="#" class="active">2</a>
-        <a href="#">3</a>
-        <a href="#">&raquo;</a>
-      </div>
+                <button>&laquo;</button>
+                <button>1</button>
+                <button class="active">2</button>
+                <button>3</button>
+                <button>&raquo;</button>
+              </div>
 
 
                 </div>

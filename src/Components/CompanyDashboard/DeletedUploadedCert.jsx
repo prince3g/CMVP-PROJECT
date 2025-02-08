@@ -233,12 +233,12 @@ export default function DeletedUploadedCert() {
                 </div>
 
                 <div className="pagination">
-        <a href="#">&laquo;</a>
-        <a href="#">1</a>
-        <a href="#" class="active">2</a>
-        <a href="#">3</a>
-        <a href="#">&raquo;</a>
-      </div>
+                <button>&laquo;</button>
+                <button>1</button>
+                <button class="active">2</button>
+                <button>3</button>
+                <button>&raquo;</button>
+              </div>
       
             </div>
         </div>

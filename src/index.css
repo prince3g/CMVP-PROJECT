@@ -361,6 +361,7 @@ p,h1,h2,h3,h4,h5,h6,ul,li,a,button,input,span,textarea, select{
   margin-top: 25px;
 }
 
+.pagination button,
 .pagination a {
   color: black;
   float: left;
@@ -372,12 +373,16 @@ p,h1,h2,h3,h4,h5,h6,ul,li,a,button,input,span,textarea, select{
   border-radius: 5px;
   font-size: 13px;
   font-weight: 500;
+  cursor: pointer;
+  background-color: transparent;
 }
 
+.pagination button:hover,
 .pagination a:hover{
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.pagination button.active,
 .pagination a.active {
   background-color: #164529;
   color: white;

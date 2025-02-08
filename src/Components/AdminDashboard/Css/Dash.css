@@ -1313,16 +1313,18 @@ border-color: #7AA238;
     background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-
+.dack-pgn button,
 .dack-pgn a{
     color: #fff !important;
     border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
+.dack-pgn button:hover,
 .dack-pgn a:hover{
     background-color: rgba(255, 255, 255, 0.2) !important;;
 }
 
+.dack-pgn button.active,
 .dack-pgn a.active{
     background-color: #7BF2AB !important;
     color: #000 !important;
