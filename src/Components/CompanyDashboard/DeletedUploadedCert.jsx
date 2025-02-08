@@ -231,15 +231,6 @@ export default function DeletedUploadedCert() {
                         <Skeleton count={5} height={40} />
                     )}
                 </div>
-
-                <div className="pagination">
-                <button>&laquo;</button>
-                <button>1</button>
-                <button class="active">2</button>
-                <button>3</button>
-                <button>&raquo;</button>
-              </div>
-      
             </div>
         </div>
     );

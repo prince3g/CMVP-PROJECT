@@ -186,13 +186,26 @@ export default function RegUsers() {
         </div>
 
 
-        <div className="pagination dack-pgn">
-                <button>&laquo;</button>
-                <button>1</button>
-                <button class="active">2</button>
-                <button>3</button>
-                <button>&raquo;</button>
-              </div>
+          {/* Pagination Controls */}
+          <div className="pagination dack-pgn">
+            <button
+              onClick={() => handlePageChange(prevPage)}
+              disabled={!prevPage || loading}
+              className={!prevPage || loading ? "disabled" : ""}
+            >
+              &laquo;
+            </button>
+
+            <span>Page {new URL(currentPageUrl).searchParams.get("page") || 1}</span>
+
+            <button
+              onClick={() => handlePageChange(nextPage)}
+              disabled={!nextPage || loading}
+              className={!nextPage || loading ? "disabled" : ""}
+            >
+             &raquo;
+            </button>
+          </div>
 
       </div>
     </div>

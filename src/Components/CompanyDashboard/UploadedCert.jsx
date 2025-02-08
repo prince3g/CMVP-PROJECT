@@ -666,13 +666,11 @@ const handleSoftDelete = async (certificate_id) => {
                     
             </table>
 
-             <div className="pagination">
-                <button>&laquo;</button>
-                <button>1</button>
-                <button class="active">2</button>
-                <button>3</button>
-                <button>&raquo;</button>
-              </div>
+            <div className="pagination">
+                <button disabled={!prevPage} onClick={() => setCurrentPage(prev => prev - 1)}>« </button>
+                <span>Page {currentPage}</span>
+                <button disabled={!nextPage} onClick={() => setCurrentPage(prev => prev + 1)}> »</button>
+            </div>
       
         </div>
             </div>
