@@ -25,6 +25,7 @@ export default function Pricing() {
 
     const [plans, setPlans] = useState([]);
     const [plan, setPlan] = useState(null); // Use null initially for a single object
+
     useEffect(() => {
         const fetchSubscriptionDetails = async () => {
             const authToken = localStorage.getItem("authToken");
@@ -50,6 +51,10 @@ export default function Pricing() {
     
                     const data = await response.json();
                     setPlan(data); // Set the single object to the state
+
+                    // console.log("data")
+                    // console.log(data)
+                    // console.log("data")
                     localStorage.setItem("subscriptionDetails", JSON.stringify(data)); 
                     // console.log("Subscription Details: ", data);
     
@@ -95,8 +100,8 @@ export default function Pricing() {
                 onClose={() => setFlash(null)} // Remove flash message after timeout
                 />
             )}
-                <h2>Subscription Plans</h2>
-                <p className="paopa">Your Subscription plan for certificate management and verification portal (CMVP).</p>
+                <h2>Your Current Subscription</h2>
+                <p className="paopa">Your current subscription plan for CMVP!</p>
             </div>
 
                     
@@ -122,7 +127,7 @@ export default function Pricing() {
                                             <h3>{plan.subscription_plan.name}</h3>
                                         </div>
                                         <div className="plan_box_Top_1">
-                                            <h3 className="plan_price">${plan.subscription_plan.price}</h3>
+                                            <h3 className="plan_price">${plan.subscription_plan.price_per_month}</h3>
                                             <Link 
                                                 to={`/edit-plan?id=${plan.subscription_plan.id}&price=${plan.subscription_plan.price}&name=${encodeURIComponent(plan.subscription_plan.name)}
                                                 &twentyFourSevenSupport=${encodeURIComponent(plan.subscription_plan.features["24/7_support"] || '')}`}>

@@ -125,9 +125,9 @@ export default function Pricing() {
 const handleSubscribeClick = (plan) => {
     setIsSubscribing(plan.unique_subscription_plan_id);
 
-    console.log("plan")
-    console.log(plan)
-    console.log("plan")
+    // console.log("plan")
+    // console.log(plan)
+    // console.log("plan")
 
     const authToken = localStorage.getItem("authToken");
     const authUserId = localStorage.getItem("authUserId");
@@ -153,6 +153,8 @@ const handleSubscribeClick = (plan) => {
 };
 
 
+const isLoggedIn = localStorage.getItem("authToken")
+
     return (
         <div className="Landing-page MMha-page subscript-page">
 
@@ -165,12 +167,13 @@ const handleSubscribeClick = (plan) => {
                     </div>
 
                     <div className="oahhs_Sec">
-                    <div className="oahhs_Card current-sub-card">
+                    {/* <div className="oahhs_Card current-sub-card"> */}
+                    <div className={`oahhs_Card ${isLoggedIn ? "current-sub-card" : ""}`}>
                             <h3>FREE plan</h3>
                             <p>All-in-one certificate management package available for a limited time.</p>
                             <button>free <span>/one month</span></button>
                             <ul>
-                                <li><CheckIcon /> Access to Portal for 15 days after Registration</li>
+                                <li><CheckIcon /> Access to Portal for 8 days after Registration</li>
                                 <li><CheckIcon /> Add up to 3 certificate categories</li>
                                 <li><CheckIcon /> Upload 5 certificates daily</li>
                                 <li><CheckIcon /> Access to deleted certificates and files</li>
@@ -196,7 +199,7 @@ const handleSubscribeClick = (plan) => {
                                         ? "Add unlimited certificate categories"
                                         : `Add ${plan.features.num_daily_certificate_upload} certificate categories`}
                                     </li>
-                                    
+
                                     {/* <li><CheckIcon /> Add up to {plan.features.num_certificate_categories} certificate categories</li>
                                     <li><CheckIcon /> Upload up to {plan.features.num_daily_certificate_upload} certificates daily</li>
                                      */}

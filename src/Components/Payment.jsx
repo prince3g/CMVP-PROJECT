@@ -10,7 +10,6 @@ function Payment() {
     const { user, subscription_plan, plan_name, plan_price, plan_features } = location.state || {};
 
 
-
     const [isYearly, setIsYearly] = useState(false);
     const [count, setCount] = useState(1);
 
@@ -24,11 +23,21 @@ function Payment() {
     const total = amount + vat;
 
     // Subscription benefits list
+    const featureLabels = {
+        storage: "Storage",
+        twentyFourSevenSupport: "24/7 Support",
+        num_certificate_categories: "Number of Certificate Categories",
+        num_daily_certificate_upload: "Number of Daily Certificate Uploads",
+        access_deleted_certificates_files: "Access to Deleted Certificates & Files",
+    };
+    
     const subscriptionBenefits = Object.entries(plan_features).map(([key, value]) => {
-        // Format the key properly and convert boolean values to readable text
-        let formattedKey = key.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
-        let formattedValue = typeof value === "boolean" ? (value ? "Yes" : "No") : value;
+        // Get a friendly label, default to formatted key if not in dictionary
+        let formattedKey = featureLabels[key] || key.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
         
+        // Convert boolean values to "Yes" or "No"
+        let formattedValue = typeof value === "boolean" ? (value ? "Yes" : "Yes") : value;
+    
         return `${formattedKey}: ${formattedValue}`;
     });
     
