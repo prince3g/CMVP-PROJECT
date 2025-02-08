@@ -100,149 +100,91 @@ export default function Pricing() {
                 onClose={() => setFlash(null)} // Remove flash message after timeout
                 />
             )}
-                <h2>Your Current Subscription</h2>
-                <p className="paopa">Your current subscription plan for CMVP!</p>
+                <h2>Your  Subscriptions and Billings</h2>
+                
             </div>
 
-                    
-                             <div className="Plans_Sec">
-                                {errorMessage ? (
-                                    <div className="error_message">
-                                        <p className="erroroo">{errorMessage}</p>
-                                    </div>
-                                ) : plan ? (
-                                <div className="plan_box">
-                                    <div className="Pricing_sub">
-                                        <h3>{plan.subscription_plan.name}</h3>
-                                        {/* <div className="pricing_Top_Btns">
-                                            {["1 Month", "3 Months", "6 Months", "1 Year"].map((duration) => (
-                                                <button key={duration} className="plan_btn">
-                                                    {duration}
-                                                </button>
-                                            ))}
-                                        </div> */}
-                                    </div>
-                                    <div className="plan_box_Top">
-                                        <div className="plan_box_Top_1">
-                                            <h3>{plan.subscription_plan.name}</h3>
-                                        </div>
-                                        <div className="plan_box_Top_1">
-                                            <h3 className="plan_price">${plan.subscription_plan.price_per_month}</h3>
-                                            <Link 
-                                                to={`/edit-plan?id=${plan.subscription_plan.id}&price=${plan.subscription_plan.price}&name=${encodeURIComponent(plan.subscription_plan.name)}
-                                                &twentyFourSevenSupport=${encodeURIComponent(plan.subscription_plan.features["24/7_support"] || '')}`}>
-                                                Subscribe
-                                            </Link>
-                                        </div>
-                                    </div>
-                                    <div className="plan_box_Body">
-                                    <table className="plan_table">
-                                        <thead>
-                                            <tr>
-                                                <th>Feature</th>
-                                                <th>Active</th>
-                                                <th>Not Active</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>24/7 Support</td>
-                                                <td>
-                                                    {plan.subscription_plan.features["24/7_support"] ? (
-                                                        <span className="Check_Span">
-                                                            <img src={CheckIcon} alt="Check Icon" />
-                                                        </span>
-                                                    ) : (
-                                                        <span>
-                                                            <img src={MinusIcon} alt="Minus Icon" />
-                                                        </span>
-                                                    )}
-                                                </td>
-                                                <td>
-                                                    {!plan.subscription_plan.features["24/7_support"] ? (
-                                                        <span className="Check_Span">
-                                                            <img src={MinusIcon} alt="Minus Icon" />
-                                                        </span>
-                                                    ) : (
-                                                        <span>
-                                                            <img src={CheckIcon} alt="Check Icon" />
-                                                        </span>
-                                                    )}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Maximum Login Users</td>
-                                                <td>
-                                                    <span className="Check_Span">
-                                                        <img src={CheckIcon} alt="Check Icon" />
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span>
-                                                        <img src={MinusIcon} alt="Minus Icon" />
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Number of Certificate Categories</td>
-                                                <td>
-                                                    <span className="Check_Span">
-                                                        <img src={CheckIcon} alt="Check Icon" />
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span>
-                                                        <img src={MinusIcon} alt="Minus Icon" />
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Number of Daily Certificate Uploads</td>
-                                                <td>
-                                                    <span className="Check_Span">
-                                                        <img src={CheckIcon} alt="Check Icon" />
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <span>
-                                                        <img src={MinusIcon} alt="Minus Icon" />
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Access Deleted Certificates Files</td>
-                                                <td>
-                                                    {plan.subscription_plan.features["access_deleted_certificates_files"] ? (
-                                                        <span className="Check_Span">
-                                                            <img src={CheckIcon} alt="Check Icon" />
-                                                        </span>
-                                                    ) : (
-                                                        <span>
-                                                            <img src={MinusIcon} alt="Minus Icon" />
-                                                        </span>
-                                                    )}
-                                                </td>
-                                                <td>
-                                                    {!plan.subscription_plan.features["access_deleted_certificates_files"] ? (
-                                                        <span className="Check_Span">
-                                                            <img src={MinusIcon} alt="Minus Icon" />
-                                                        </span>
-                                                    ) : (
-                                                        <span>
-                                                            <img src={CheckIcon} alt="Check Icon" />
-                                                        </span>
-                                                    )}
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
 
+
+            <div className="Table_Sec">
+                 <div className="Cart_select_Sec kkja-de">
+                                        <select>
+                                            <option value="">Last 3 months</option>
+                                            <option value="">Last 6 months</option>
+                                            <option value="">Last 12 months</option>
+                                        </select>
                                     </div>
+
+
+                    <table className="Upload_Table">
+                        <thead>
+                            <tr>
+                                <th>S/N</th>
+                                <th>Date of Subscription</th>
+                                <th>Plan</th>
+                                <th>Duration</th>
+                                <th>Ammount</th>
+                                <th>Vat (7.5%)</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                             <td>1</td>
+                             <td>12/12/2025</td>
+                             <td>Basic Plan</td>
+                             <td>3 months</td>
+                             <td>NGN3,000</td>
+                             <td>NGN 3,885.12</td>
+                             <td>NGN 4,000</td>
+                             <td>Active</td>
+                             <td>
+                             <div className="Uploaded_Cert_Div">
+                                    <button className="down_Inv_LAbel">Download Invoice</button>
                                 </div>
-                            ) : (
-                                <p>Loading plan details...</p>
-                            )}
-                            </div>
+                                </td>
+
+                            </tr>
+
+                            <tr>
+                             <td>2</td>
+                             <td>12/12/2025</td>
+                             <td>Basic Plan</td>
+                             <td>3 months</td>
+                             <td>NGN3,000</td>
+                             <td>NGN 3,885.12</td>
+                             <td>NGN 4,000</td>
+                             <td>Inactive</td>
+                             <td>
+                             <div className="Uploaded_Cert_Div">
+                                    <button className="down_Inv_LAbel">Download Invoice</button>
+                                </div>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+
+                    
+                <div className="pagination">
+                <button>&laquo;</button>
+                <button>1</button>
+                <button class="active">2</button>
+                <button>3</button>
+                <button>&raquo;</button>
+              </div>
+
+
+                </div>
+
+
+
+                    
+                      
                     </div>
     )
 }

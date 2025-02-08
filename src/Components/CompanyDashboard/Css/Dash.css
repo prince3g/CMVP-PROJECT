@@ -3114,3 +3114,34 @@
 .Drop_gafs_main button:hover{
     background-color: #0a6332;
 }
+
+
+.down_Inv_LAbel{
+    background-color: #7BF2AB !important;
+    border-color: #7BF2AB !important;
+    color: #000 !important;
+}
+.down_Inv_LAbel:hover{
+    background-color: #5dcf8b !important;
+    border-color: #5dcf8b !important; 
+}
+
+
+
+
+
+/* kkja-de */
+
+.kkja-de{
+    margin-bottom: 10px !important;
+}
+
+.pop-PP{
+    font-size: 12px !important;
+    font-style: italic !important;
+}
+
+.jhhaj-op.Copy_Url_Sec{
+    display: block !important;
+}
+

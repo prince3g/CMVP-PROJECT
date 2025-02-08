@@ -25,6 +25,11 @@ import AdminDashbaord from './Components/AdminDashboard/AdminDashboard';
 
 import Cookies from './assets/Cookies';
 
+
+import Invoice from './assets/Invoice';
+
+
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -53,6 +58,8 @@ function App() {
   const isDashboardPage = location.pathname.startsWith("/dashboard");
   const isAdminDashboardPage = location.pathname.startsWith("/admin-dashboard");
 
+  const isInvoicePage = location.pathname === "/invoice";
+
   const isTermsOrPrivacyPage =
     location.pathname === "/terms-of-use" || location.pathname === "/privacy-policy";
 
@@ -73,8 +80,8 @@ function App() {
 
 
       <ScrollToTop />
-      {!isDashboardPage && !isAdminDashboardPage && (
-        <Navbar className={navbarClass} /> // Show navbar on Terms & Privacy pages
+      {!isDashboardPage && !isAdminDashboardPage && !isInvoicePage && (
+        <Navbar className={navbarClass} />
       )}
       <div className="App-Pages">
         <Routes>
@@ -100,13 +107,18 @@ function App() {
           <Route path="/forgotten_pass_reset/:uidb64/:token/" element={<ForgotPassPageReset />} />
           <Route path="/dashboard/*" element={<CompanyDashbaord />} />
           <Route path="/admin-dashboard/*" element={<AdminDashbaord />} />
+
+
+          <Route path="/invoice" element={<Invoice/>} />
+
         </Routes>
       </div>
       {!isAuthPage &&
       !isVerificationPage &&
       !isDashboardPage &&
       !isAdminDashboardPage &&
-      !isPaymentPage && <Footer />} 
+      !isPaymentPage &&
+      !isInvoicePage && <Footer />}
     </div>
   );
 }

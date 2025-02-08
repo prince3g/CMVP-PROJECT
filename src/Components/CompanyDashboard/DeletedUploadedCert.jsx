@@ -37,19 +37,10 @@ export default function DeletedUploadedCert() {
                 setCertificates(response.data.results); // Use 'results' from the response
                 setCertificateList(response.data.results || []); // Default to an empty array
 
-
-                console.log("response.data.results")
-                console.log(response.data.results)
-                console.log("response.data.results)"
-
-                )
                 setNextPage(response.data.next);
                 setPrevPage(response.data.previous);
                 setCurrentPage(page);
 
-                // console.log("response.data.results")
-                // console.log(response.data.results)
-                // console.log("response.data.results")
             } catch (error) {
                 console.error("Error fetching certificates:", error);
             }
