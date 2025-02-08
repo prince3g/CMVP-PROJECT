@@ -169,15 +169,6 @@ export default function Pricing() {
                     </table>
 
 
-                    
-                <div className="pagination">
-                <button>&laquo;</button>
-                <button>1</button>
-                <button className="active">2</button>
-                <button>3</button>
-                <button>&raquo;</button>
-              </div>
-
 
                 </div>
 
