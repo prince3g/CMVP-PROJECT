@@ -173,7 +173,7 @@ export default function Pricing() {
                 <div className="pagination">
                 <button>&laquo;</button>
                 <button>1</button>
-                <button class="active">2</button>
+                <button className="active">2</button>
                 <button>3</button>
                 <button>&raquo;</button>
               </div>

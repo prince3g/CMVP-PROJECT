@@ -1321,7 +1321,7 @@ border-color: #7AA238;
 
 .dack-pgn button:hover,
 .dack-pgn a:hover{
-    background-color: rgba(255, 255, 255, 0.2) !important;;
+    background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 .dack-pgn button.active,
@@ -1329,7 +1329,9 @@ border-color: #7AA238;
     background-color: #7BF2AB !important;
     color: #000 !important;
 }
-
+.dack-pgn  span{
+    color: rgba(255, 255, 255, 0.6) !important;
+}
 .activate-btn{
     border-color: #7BF2AB !important;
     color: #7BF2AB !important;
