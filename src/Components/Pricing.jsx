@@ -196,9 +196,10 @@ const handleSubscribeClick = (plan) => {
                                         ? "Add unlimited certificate categories"
                                         : `Add ${plan.features.num_daily_certificate_upload} certificate categories`}
                                     </li>
-                                    <li><CheckIcon /> Add up to {plan.features.num_certificate_categories} certificate categories</li>
-                                    <li><CheckIcon /> Upload up to {plan.features.num_daily_certificate_upload} certificates daily</li>
                                     
+                                    {/* <li><CheckIcon /> Add up to {plan.features.num_certificate_categories} certificate categories</li>
+                                    <li><CheckIcon /> Upload up to {plan.features.num_daily_certificate_upload} certificates daily</li>
+                                     */}
 
                                     {plan.features.access_deleted_certificates_files && <li><CheckIcon /> Access to deleted certificates and files</li>}
                                     {plan.features["24/7_support"] && <li><CheckIcon /> 24/7 support</li>}
