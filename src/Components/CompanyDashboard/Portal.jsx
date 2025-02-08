@@ -106,6 +106,7 @@ export default function PortalPage() {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
                     }
                 });
+                
                 setUploadedCount(response.data.count);
                 setOrganizationDataLogo(response.data.logo)
             } catch (error) {

@@ -31,6 +31,7 @@ function Payment() {
         access_deleted_certificates_files: "Access to Deleted Certificates & Files",
     };
     
+    
     const subscriptionBenefits = Object.entries(plan_features).map(([key, value]) => {
         // Get a friendly label, default to formatted key if not in dictionary
         let formattedKey = featureLabels[key] || key.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
