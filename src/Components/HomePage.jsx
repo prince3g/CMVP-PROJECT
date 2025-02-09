@@ -42,10 +42,10 @@ function HomePage() {
         <div className='hero-main'>
             <div className='hero-dlt'>
                 <div>
-                <h1 className='big-text'>Digital Certificate
+                <h1 className='big-text'>Online Certificate Management and
                 Verification
                 </h1>
-                <p>Experience secure and efficient digital certificate verification and management with our advanced and user-friendly portal.</p>
+                <p>Experience secure and efficient digital certificate verification and management with our advanced and user-friendly online portal.</p>
 
                 <div className='hero-btns'>
                     <Link to="/signup" className='HH_get_Std'>Get Started</Link>

@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import config from "../config";
 
-import PageFixeImg from '../assets/Img/fixed_bg.jpg';
+import PageFixeImg from '../assets/Img/fixed_bg.png';
 import MarkedImg from '../assets/Img/marked.svg';
 
 import CompLogo from '../assets/Img/comp_logo.png';
