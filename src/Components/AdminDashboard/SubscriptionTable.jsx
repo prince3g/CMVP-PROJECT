@@ -5,35 +5,39 @@ import "./Css/Dash.css";
 import config from "../../config";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css"; // Optional: for better styles
-
+import SearchIcon from './Img/searchicon.svg';
 
 const SubscriptionTable = () => {
+
+  const [searching, setSearching] = useState(false); // Loader for search
+  const [searchQuery, setSearchQuery] = useState(""); // Search input state
+
+
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [nextPage, setNextPage] = useState(null);
   const [prevPage, setPrevPage] = useState(null);
-  
+  const [searchTerm, setSearchTerm] = useState(""); // New state for search input
   const [currentPageUrl, setCurrentPageUrl] = useState(
     `${config.API_BASE_URL}/api/accounts/auth/subscription/organizations/subscriptions/`
   );
+  const [activatingOrgId, setActivatingOrgId] = useState(null); // Track which organization is being activated/deactivated
 
   const fetchData = (url) => {
     setLoading(true);
     axios.get(url)
-    .then((response) => {
-      // console.log("Fetched Data:", response.data);
-      setData(response.data.results || []);
-      setNextPage(response.data.next);
-      setPrevPage(response.data.previous);
-      setLoading(false);
-    })
-    .catch((err) => {
-      console.error("Error fetching data:", err);
-      setError(err.message);
-      setLoading(false);
-    });
-  
+      .then((response) => {
+        setData(response.data.results || []);
+        setNextPage(response.data.next);
+        setPrevPage(response.data.previous);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+        setError(err.message);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -46,7 +50,6 @@ const SubscriptionTable = () => {
     }
   };
 
-
   const handleDelete = (id) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this organization?"
@@ -55,9 +58,7 @@ const SubscriptionTable = () => {
       axios
         .delete(`${config.API_BASE_URL}/api/accounts/auth/organization/${id}`)
         .then(() => {
-          setData((prevData) =>
-            prevData.filter((org) => org.id !== id)
-          );
+          setData((prevData) => prevData.filter((org) => org.id !== id));
           alert("Organization removed successfully!");
         })
         .catch((err) => {
@@ -65,6 +66,31 @@ const SubscriptionTable = () => {
           alert("Failed to delete the organization.");
         });
     }
+  };
+
+  const handleActivateDeactivate = (organization) => {
+    const { id, is_active } = organization;
+    const newStatus = !is_active;
+    setActivatingOrgId(id); // Set the organization ID being processed
+
+    axios
+      .patch(`${config.API_BASE_URL}/api/accounts/auth/organizations/${organization.unique_subscriber_id}/update-by-subscriber-id/`,
+        { is_active: newStatus }
+      )
+      .then(() => {
+        setData((prevData) =>
+          prevData.map((org) =>
+            org.id === id ? { ...org, is_active: newStatus } : org
+          )
+        );
+      })
+      .catch((err) => {
+        console.error("Error updating organization status:", err);
+        alert("Failed to update organization status.");
+      })
+      .finally(() => {
+        setActivatingOrgId(null); // Reset the organization ID being processed
+      });
   };
 
   const calculateDaysDifference = (endDate) => {
@@ -76,8 +102,51 @@ const SubscriptionTable = () => {
     return diffDays > 1 ? diffDays : 0;
   };
 
+
+  const handleSearch = () => {
+    if (!searchQuery.trim()) {
+      fetchData(currentPageUrl); // Reload original data if input is empty
+      return;
+    }
+
+    setSearching(true);
+
+    axios.get(`${config.API_BASE_URL}/api/accounts/auth/search/organizations/searching/?name=${encodeURIComponent(searchQuery)}`)
+    
+      .then((response) => {
+        setData(response.data.results || []);
+      })
+      .catch((err) => {
+        console.error("Search error:", err);
+        setError("Failed to fetch search results.");
+      })
+      .finally(() => {
+        setSearching(false);
+      });
+  };
+
+  
   return (
     <div className="JJha-DhA">
+
+      
+      {/* Search Section */}
+      <div className="Search_Sec admin-Search_Sec">
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button className="mobile_Search_toggler" onClick={handleSearch}>
+          <img src={SearchIcon} alt="Search Icon" />
+        </button>
+      </div>
+
+      {searching && <p className="searching-loader">Searching...</p>}
+
+
+      
       <div className="Dash-Intro subscripp-header">
         <h2>Registered Users with Their Subscription Plans</h2>
         <Link
@@ -141,11 +210,29 @@ const SubscriptionTable = () => {
                       ? new Date(organization.subscription_end_time).toLocaleDateString("en-GB")
                       : "Not Subscribed"}
                   </td>
-                  <td className="active-BGD">Active</td>
+                  <td>
+                    <button
+                      className={organization.is_active ? "active-BGD" : "expired-BGD"}
+                    >
+                      {organization.is_active ? "Active" : "Inactive"}
+                    </button>
+                  </td>
                   <td>{organization.num_certificates_uploaded}</td>
                   <td>
                     <div className="action-btns">
-                      <button className="activate-btn">Activate</button>
+                      <button
+                        className={organization.is_active ? "activate-btn active" : "activate-btn inactive"}
+                        onClick={() => handleActivateDeactivate(organization)}
+                        disabled={activatingOrgId === organization.id}
+                      >
+                        {activatingOrgId === organization.id
+                          ? organization.is_active
+                            ? "Deactivating..."
+                            : "Activating..."
+                          : organization.is_active
+                          ? "Deactivate"
+                          : "Activate"}
+                      </button>
                       <Link
                         to={{
                           pathname: "/admin-dashboard/user-profile",
@@ -187,8 +274,6 @@ const SubscriptionTable = () => {
         </table>
       </div>
 
-
-
       {/* Pagination Controls */}
       <div className="pagination dack-pgn">
         <button
@@ -206,14 +291,11 @@ const SubscriptionTable = () => {
           disabled={!nextPage || loading}
           className={!nextPage || loading ? "disabled" : ""}
         >
-           &raquo;
+          &raquo;
         </button>
       </div>
-      
     </div>
   );
 };
 
-
 export default SubscriptionTable;
-

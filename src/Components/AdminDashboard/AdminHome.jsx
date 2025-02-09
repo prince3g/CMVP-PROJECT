@@ -21,10 +21,10 @@ export default function AdminHome() {
 
                 </div>
 
-                <div className="Search_Sec admin-Search_Sec">
-                                <input type="text" placeholder="Search"></input>
-                                <button className="mobile_Search_toggler" ><img src={SearchIcon} alt="Search Icon"></img></button>
-                            </div>
+                {/* <div className="Search_Sec admin-Search_Sec">
+                    <input type="text" placeholder="Search"></input>
+                    <button className="mobile_Search_toggler" ><img src={SearchIcon} alt="Search Icon"></img></button>
+                </div> */}
 
                 <SubscriptionTable />
         </div>
