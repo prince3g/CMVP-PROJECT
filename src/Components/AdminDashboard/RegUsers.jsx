@@ -193,7 +193,7 @@ export default function RegUsers() {
               disabled={!prevPage || loading}
               className={!prevPage || loading ? "disabled" : ""}
             >
-              &laquo; Previous
+              &laquo;
             </button>
 
             <span>Page {new URL(currentPageUrl).searchParams.get("page") || 1}</span>
@@ -203,7 +203,7 @@ export default function RegUsers() {
               disabled={!nextPage || loading}
               className={!nextPage || loading ? "disabled" : ""}
             >
-              Next &raquo;
+              &raquo;
             </button>
           </div>
 
