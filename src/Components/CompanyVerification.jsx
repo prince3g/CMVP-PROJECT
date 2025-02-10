@@ -55,7 +55,7 @@ export default function CompanyVerification() {
                         <ul>
                             {filteredCompanies.map((company, index) => (
                                 <li key={index}>
-                                    <a href={company.link} target="_blank" rel="noopener noreferrer">
+                                    <a href={company.link}  rel="noopener noreferrer">
                                         <img src={company.logo} alt={company.name} width="40" height="40" style={{ marginRight: '10px' }} />
                                         <span>{company.name}</span>
                                     </a>
