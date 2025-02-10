@@ -675,7 +675,6 @@ const handleSoftDelete = async (certificate_id) => {
     
         </div>
             </div>
-
         </div>
     );
 }

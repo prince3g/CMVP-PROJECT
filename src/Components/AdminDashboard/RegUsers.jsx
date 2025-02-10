@@ -9,6 +9,10 @@ import "react-loading-skeleton/dist/skeleton.css";
 import SearchIcon from './Img/searchicon.svg';
 
 export default function RegUsers() {
+  const [searching, setSearching] = useState(false); // Loader for search
+  const [searchQuery, setSearchQuery] = useState(""); // Search input state
+
+  
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -73,6 +77,31 @@ export default function RegUsers() {
     }
   };
 
+  const handleSearch = () => {
+    if (!searchQuery.trim()) {
+      fetchData(currentPageUrl); // Reload original data if input is empty
+      return;
+    }
+
+    setSearching(true);
+
+    axios.get(`${config.API_BASE_URL}/api/accounts/auth/search/organizations/searching/?name=${encodeURIComponent(searchQuery)}`)
+    
+      .then((response) => {
+        setData(response.data.results || []);
+      })
+      .catch((err) => {
+        console.error("Search error:", err);
+        setError("Failed to fetch search results.");
+      })
+      .finally(() => {
+        setSearching(false);
+      });
+  };
+
+
+
+
   if (loading) {
     return (
       <div className="DDD-Seco">
@@ -100,10 +129,21 @@ export default function RegUsers() {
           <h2>Registered Users</h2>
         </div>
 
-        <div className="Search_Sec admin-Search_Sec">
-                                        <input type="text" placeholder="Search"></input>
-                                        <button className="mobile_Search_toggler" ><img src={SearchIcon} alt="Search Icon"></img></button>
-                                    </div>
+      {/* Search Section */}
+      <div className="Search_Sec admin-Search_Sec">
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button className="mobile_Search_toggler" onClick={handleSearch}>
+          <img src={SearchIcon} alt="Search Icon" />
+        </button>
+      </div>
+
+      {searching && <p className="searching-loader">Searching...</p>}
+
 
         <div className="Sec-table">
           <table border="1" cellPadding="10" cellSpacing="0">
