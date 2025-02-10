@@ -4625,13 +4625,19 @@ text-align: center;
   justify-content: center;
 }
 
+@media screen and (max-width:900px){
+  .Main-Top-Commmmp-very-Page{
+    width: 100% !important;
+  }
+}
+
 .Main-Top-Commmmp-very-Page h1{
   margin-bottom: 15px;
 }
 
 .copmmp-search-sec{
   position: relative;
-  width: 80%;
+  width:70%;
   height: auto;
   margin-top: 30px;
   display:grid;
@@ -4645,6 +4651,11 @@ text-align: center;
   border: 2px solid transparent;
   transition: all 0.3s ease-in-out;
 }
+@media screen and (max-width:500px){
+  .copmmp-search-sec{
+    width: 100% !important;
+  }
+}
 .copmmp-search-sec:hover{
   background-color: transparent;
   border-color: #95D5B2;
@@ -4656,6 +4667,7 @@ text-align: center;
   height: 40px;
   background-color: transparent;
   padding: 0px 20px;
+  padding-right: 10px;
 }
 
 .copmmp-search-sec button{
@@ -4706,7 +4718,12 @@ text-align: center;
     gap: 20px;
     grid-template-rows: auto;
 }
-
+@media screen and (max-width:400px){
+  .list-of-reg-companies ul{
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
 .list-of-reg-companies ul li{
   position: relative;
   width: 100%;
