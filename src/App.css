@@ -4565,3 +4565,227 @@ text-align: center;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* verify-certificate-btn */
+
+.verify-certificate-btn{
+  border-color: #FE6601 !important;
+  background-color: #FE6601 !important;
+  color: #fff !important;
+}
+
+.verify-certificate-btn:hover{
+  color: #FE6601 !important;
+  background-color: transparent !important;
+}
+
+
+
+
+/* Commmmp-very-Page */
+
+.Commmmp-very-Page{
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 150px 0px;
+}
+
+.Top-Commmmp-very-Page{
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.Main-Top-Commmmp-very-Page{
+  position: relative;
+  width: 750px;
+  height: auto;
+  text-align: center;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width:900px){
+  .Main-Top-Commmmp-very-Page{
+    width: 100% !important;
+  }
+}
+
+.Main-Top-Commmmp-very-Page h1{
+  margin-bottom: 15px;
+}
+
+.copmmp-search-sec{
+  position: relative;
+  width:70%;
+  height: auto;
+  margin-top: 30px;
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  grid-gap: 10px;
+  background-color: #EFF2F6;
+  border-radius: 40px;
+  overflow: hidden;
+  padding:7px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease-in-out;
+}
+@media screen and (max-width:500px){
+  .copmmp-search-sec{
+    width: 100% !important;
+  }
+}
+.copmmp-search-sec:hover{
+  background-color: transparent;
+  border-color: #95D5B2;
+}
+
+.copmmp-search-sec input{
+  position: relative;
+  width: 100%;
+  height: 40px;
+  background-color: transparent;
+  padding: 0px 20px;
+  padding-right: 10px;
+}
+
+.copmmp-search-sec button{
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background-color: #04471C;
+  border:1px solid #04471C;
+  border-radius: 50%;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+.card-counts{
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.card-counts span{
+  font-size: 14px;
+  font-weight: 700;
+}
+.list-of-reg-companies{
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-top:50px;
+}
+.list-of-reg-companies ul{
+  position: relative;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+    gap: 20px;
+    grid-template-rows: auto;
+}
+@media screen and (max-width:400px){
+  .list-of-reg-companies ul{
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
+.list-of-reg-companies ul li{
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.list-of-reg-companies ul li a{
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  gap: 10px;
+  grid-gap: 10px;
+  background: #fff;
+	border-radius: 7px;
+  -webkit-box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 10px 34px -16px rgb(0 0 0 / 8%), 0 6px 4px hsl(0deg 0% 64% / 6%);
+  -moz-box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 10px 34px -16px rgb(0 0 0 / 8%), 0 6px 4px hsl(0deg 0% 64% / 6%);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 5%), 0 10px 34px -16px rgb(0 0 0 / 8%), 0 6px 4px hsl(0deg 0% 64% / 6%);
+  transition: all 0.3s ease-in-out;
+}
+
+.list-of-reg-companies ul li a:hover{
+  transform: translateY(-7px);
+}
+
+.list-of-reg-companies ul li a span{
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.list-of-reg-companies ul li a img{
+  width: 80%;
+  max-height: 50px;
+  object-fit: contain;
+  object-position: center;
+}
+
+
+.ccard-pagss{
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+
+
+
+.not-aviis-as{
+  position: relative;
+  font-style: italic;
+  font-size: 14px;
+  text-align: center;
+  color: #fd4f4f;
+}

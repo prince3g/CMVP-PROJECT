@@ -15,6 +15,7 @@ import Payment from './Components/Payment';
 import HowItWorks from './Components/HowItWorks';
 import FAQ from './Components/FAQ';
 import AboutUs from './Components/AboutUs';
+import CompanyVerification from './Components/CompanyVerification';
 import VerificationCode from './Components/VerificationCode';
 import Verification from './Components/Verification';
 import ForgotPassPage from './Components/ForgotPassPage';
@@ -61,7 +62,7 @@ function App() {
   const isInvoicePage = location.pathname === "/invoice";
 
   const isTermsOrPrivacyPage =
-    location.pathname === "/terms-of-use" || location.pathname === "/privacy-policy";
+    location.pathname === "/terms-of-use" || location.pathname === "/privacy-policy" || location.pathname === "/company-verification";
 
   const isPaymentPage = location.pathname === "/payment";
 
@@ -98,6 +99,7 @@ function App() {
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/about-cmvp" element={<AboutUs />} />
+          <Route path="/company-verification" element={<CompanyVerification />} />
   
           <Route path="/verification-code" element={<VerificationCode />} />
           <Route path="/verification-code/:code" element={<VerificationCode />} />

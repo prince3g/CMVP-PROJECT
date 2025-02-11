@@ -11,6 +11,8 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import MenuIcon from '@mui/icons-material/Menu';
 
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+
 function Navbar({ className }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [activeToggle, setActiveToggle] = useState(false);
@@ -165,6 +167,11 @@ function Navbar({ className }) {
                     About CMVP
                   </Link>
                   <br />
+                  <Link to="/contact-us" onClick={DrophandleMobileNavClose}>
+                    <ContactPhoneIcon />
+                    Contact Us
+                  </Link>
+                  <br />
                   <Link to="/faq" onClick={DrophandleMobileNavClose}>
                     <QuestionAnswerIcon />
                     FAQ
@@ -178,8 +185,9 @@ function Navbar({ className }) {
               )}
 
               {/* Other Navigation Links */}
-              <Link to="/contact-us" onClick={handleMobileNavClose}>Contact Us</Link>
-              <Link to="/pricing" className="bordered-link" onClick={handleMobileNavClose}>Subscription Plans</Link>
+              <Link to="/pricing" onClick={handleMobileNavClose}>Subscription Plans</Link>
+
+             
 
               {/* Authentication Links */}
               {isLoggedIn ? (
@@ -193,6 +201,9 @@ function Navbar({ className }) {
                   <Link to="/signup" className="bordered-link sign-up-btn" onClick={handleMobileNavClose}>Sign Up</Link>
                 </>
               )}
+
+            <Link to="/company-verification" className="verify-certificate-btn" onClick={handleMobileNavClose}>Verify Certificate</Link>
+           
             </div>
           </div>
         </div>
