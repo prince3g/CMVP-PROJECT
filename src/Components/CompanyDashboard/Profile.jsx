@@ -17,8 +17,8 @@ export default function Profile({ orgId }) {
         };
     
 
-    const organizationID = localStorage.getItem("authUserId");
-    const organizationName = localStorage.getItem("authName");
+    const organizationID = sessionStorage.getItem("authUserId");
+    const organizationName = sessionStorage.getItem("authName");
 
     const [isLoading, setIsLoading] = useState(false);
     const [companyName, setCompanyName] = useState("");

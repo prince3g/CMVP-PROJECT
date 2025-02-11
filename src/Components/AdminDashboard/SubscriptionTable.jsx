@@ -69,18 +69,22 @@ const SubscriptionTable = () => {
   };
 
   const handleActivateDeactivate = (organization) => {
-    const { id, is_verified } = organization;
-    const newStatus = !is_verified;
+    const { id, is_activated } = organization;
+    const newStatus = !is_activated;
     setActivatingOrgId(id); // Set the organization ID being processed
+
+    console.log("is_activated")
+    console.log(is_activated)
+    console.log("is_activated")
 
     axios
       .patch(`${config.API_BASE_URL}/api/accounts/auth/organizations/${organization.unique_subscriber_id}/update-by-subscriber-id/`,
-        { is_verified: newStatus }
+        { is_activated: newStatus }
       )
       .then(() => {
         setData((prevData) =>
           prevData.map((org) =>
-            org.id === id ? { ...org, is_verified: newStatus } : org
+            org.id === id ? { ...org, is_activated: newStatus } : org
           )
         );
       })
@@ -212,24 +216,24 @@ const SubscriptionTable = () => {
                   </td>
                   <td>
                     <button
-                      className={organization.is_active ? "active-BGD" : "expired-BGD"}
+                      className={organization.is_activated ? "active-BGD" : "expired-BGD"}
                     >
-                      {organization.is_active ? "Active" : "Inactive"}
+                      {organization.is_activated ? "Active" : "Inactive"}
                     </button>
                   </td>
                   <td>{organization.num_certificates_uploaded}</td>
                   <td>
                     <div className="action-btns">
                       <button
-                        className={organization.is_active ? "activate-btn active" : "activate-btn inactive"}
+                        className={organization.is_activated ? "activate-btn active" : "activate-btn inactive"}
                         onClick={() => handleActivateDeactivate(organization)}
                         disabled={activatingOrgId === organization.id}
                       >
                         {activatingOrgId === organization.id
-                          ? organization.is_verified
+                          ? organization.is_activated
                             ? "Deactivating..."
                             : "Activating..."
-                          : organization.is_verified
+                          : organization.is_activated
                           ? "Deactivate"
                           : "Activate"}
                       </button>

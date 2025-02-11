@@ -321,9 +321,9 @@ export default function BackgroundSelection() {
         backgroundImage: item.backgroundImage
       })));
 
-      console.log("response.data.result")
-      console.log(response.data.results)
-      console.log("response.data.result")
+      // console.log("response.data.result")
+      // console.log(response.data.results)
+      // console.log("response.data.result")
 
     } catch (error) {
       console.error("Error fetching images", error);
@@ -457,7 +457,7 @@ export default function BackgroundSelection() {
     setShowBackgroundSelection(true); 
   };
 
-  const company_name = localStorage.getItem("authName");
+  const company_name = sessionStorage.getItem("authName");
 
 
 // const handleSetBackground = async () => {

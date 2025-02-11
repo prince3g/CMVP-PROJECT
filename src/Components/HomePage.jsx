@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import Typewriter from 'typewriter-effect';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -12,6 +12,13 @@ import GGIMga from '../assets/Img/GGIMga.png';
 import CheckCmvp from '../assets/Img/check-cmvp.svg';
 
 function HomePage() {
+    
+    useEffect(() => {
+        if (!sessionStorage.getItem("hasReloaded")) {
+        sessionStorage.setItem("hasReloaded", "true");
+        window.location.reload();
+        }
+    }, []);
 
     const [isVideoPopupVisible, setVideoPopupVisible] = useState(false);
     const videoRef = useRef(null);

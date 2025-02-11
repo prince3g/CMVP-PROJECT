@@ -50,13 +50,13 @@ const VerificationCode = () => {
       console.log("Response:", response.data);
 
       if (response.status === 200) {
-        localStorage.setItem("authToken", response.data.access);
-        localStorage.setItem("authEmail", response.data.email);
-        localStorage.setItem("authUserId", response.data.unique_subscriber_id);
-        localStorage.setItem("authName", response.data.name);
-        localStorage.setItem("authPhone", response.data.phone);
-        localStorage.setItem("authAddress", response.data.address);
-        localStorage.setItem("loginTime", response.data.login_time);
+        sessionStorage.setItem("authToken", response.data.access);
+        sessionStorage.setItem("authEmail", response.data.email);
+        sessionStorage.setItem("authUserId", response.data.unique_subscriber_id);
+        sessionStorage.setItem("authName", response.data.name);
+        sessionStorage.setItem("authPhone", response.data.phone);
+        sessionStorage.setItem("authAddress", response.data.address);
+        sessionStorage.setItem("loginTime", response.data.login_time);
 
         showMessage("Email verification successful!", "success");
         navigate("/");

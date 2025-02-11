@@ -23,11 +23,13 @@ import './Css/Dash.css';
 
 
 export default function NavBar() {
+
+
     
     const [daysLeft, setDaysLeft] = useState(null);
     const [organizationDatalogo, setOrganizationDataLogo] = useState(null); 
-    const organizationID =  localStorage.getItem("authUserId");
-    const organizationName =  localStorage.getItem("authName");
+    const organizationID =  sessionStorage.getItem("authUserId");
+    const organizationName =  sessionStorage.getItem("authName");
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [isSubscribed, setIsSubscribed] = useState(false);
@@ -65,7 +67,7 @@ export default function NavBar() {
     const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+    const token = sessionStorage.getItem("authToken");
     if (!token) {
       // Redirect to login if no token
       navigate("/");
@@ -73,32 +75,33 @@ export default function NavBar() {
   }, [navigate]);
 
 
-
-
 useEffect(() => {
     const fetchDates = async () => {
 
+        if (organizationID) {
         try {
-            
             // Fetch organization data (for trial end date)
             const organizationResponse = await fetch(`${config.API_BASE_URL}/api/accounts/auth/organizations/${organizationID}/`);
             const organizationData = await organizationResponse.json();
-            // Fetch subscription data
-            const subscriptionResponse = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscription/${organizationID}/`);
-            const subscriptionData = await subscriptionResponse.json();
 
+            setIsSubscribed(organizationData.is_subscribed);
+            setOrganizationDataLogo(organizationData.logo);
 
-            setIsSubscribed(organizationData.is_subscribed)
-            setOrganizationDataLogo(organizationData.logo)
-    
             let endDate;
-   
 
             if (organizationData.is_subscribed) {
-                // User is subscribed, use subscription end date
+                // Only fetch subscription data if subscribed
+                const subscriptionResponse = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscription/${organizationID}/`);
+                const subscriptionData = await subscriptionResponse.json();
                 endDate = new Date(subscriptionData.end_date);
+
+                sessionStorage.setItem("number_of_allowed_cert_upload", subscriptionData.allowed_num_0f_cert_upload);
+
+                // console.log(subscriptionData)
+
             } else {
-                // User is not subscribed, use trial end date
+                // Use trial end date if not subscribed
+                
                 endDate = new Date(organizationData.trial_end_date);
             }
 
@@ -107,10 +110,16 @@ useEffect(() => {
             const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
             setDaysLeft(daysRemaining);
 
-
+            if(daysRemaining >= 1 && !organizationData.is_subscribed){
+                sessionStorage.setItem("number_of_allowed_cert_upload", 5);
+            }
+            else if(daysRemaining < 1 && !organizationData.is_subscribed){
+                sessionStorage.setItem("number_of_allowed_cert_upload", 0);
+            }
         } catch (error) {
             console.error("Error fetching dates:", error);
         }
+    }
     };
 
     fetchDates();

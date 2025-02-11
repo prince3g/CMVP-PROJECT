@@ -17,7 +17,7 @@ export default function UploadedCert() {
     const [prevPage, setPrevPage] = useState(null);
 
 
-    const organizationID = localStorage.getItem("authUserId");
+    const organizationID = sessionStorage.getItem("authUserId");
 
     const [flash, setFlash] = useState(null);
 
@@ -25,7 +25,7 @@ export default function UploadedCert() {
       setFlash({ message, type });
     };
 
-    const organizationName = localStorage.getItem("authName");
+    const organizationName = sessionStorage.getItem("authName");
 
     const [isUploadBoxTogglerActive, setIsUploadBoxTogglerActive] = useState(false);
     const [isUploadEnvHidden, setIsUploadEnvHidden] = useState(false);
@@ -77,7 +77,7 @@ export default function UploadedCert() {
         try {
             const response = await axios.get(`${config.API_BASE_URL}/api/certificates/create/${certificate_id}/`, {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
                 },
             });
     
@@ -161,7 +161,7 @@ export default function UploadedCert() {
         event.preventDefault();
         setLoading(true);
 
-        const organizationID = localStorage.getItem("authUserId");
+        const organizationID = sessionStorage.getItem("authUserId");
 
         const formData = new FormData();
         formData.append("organization", organizationID); 
@@ -187,7 +187,7 @@ export default function UploadedCert() {
             const response = await axios.patch(`${config.API_BASE_URL}/api/certificates/create/${certificateID}/`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
-                    "Authorization": `Bearer ${localStorage.getItem("authUserId")}`
+                    "Authorization": `Bearer ${sessionStorage.getItem("authUserId")}`
                 }
             });
 
@@ -213,37 +213,13 @@ export default function UploadedCert() {
     };
 
 
-
-    // useEffect(() => {
-    //     const fetchCertificateData = async () => {
-    //         try {
-    //             const response = await axios.get(`${config.API_BASE_URL}/api/certificates/organization/${organizationID}/`, {
-    //                 headers: {
-    //                     Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-    //                 },
-    //             });
-                
-    //             setCertificateList(response.data.results || []); // Default to an empty array
-
-    //             setNumCertificateUploaded(response.data.count); // Default to an empty array
-    //         } catch (error) {
-    //             //console.error("Error fetching certificate data:", error);
-    //             showMessage('Error fetching certificate data', 'failure')
-    //             setCertificateList([]); // Fallback to an empty array
-    //         }
-    //     };
-    
-    //     fetchCertificateData();
-    // }, [organizationID]);
-
-
     useEffect(() => {
         const fetchCertificateData = async (page = 1) => {
             setLoading(true);
             try {
                 const response = await axios.get(`${config.API_BASE_URL}/api/certificates/organization/${organizationID}/`, {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+                        Authorization: `Bearer ${sessionStorage.getItem("authToken")}`,
                     },
                     params: { page },
                 });
@@ -279,12 +255,6 @@ const handleSoftDelete = async (certificate_id) => {
     try {
         // Make the request to perform the soft delete
         await axios.post(`${config.API_BASE_URL}/api/certificates/${certificate_id}/delete/`, null, {
-
-            
-            // headers: {
-            //     // "Authorization": `Bearer ${localStorage.getItem("token")}`
-            //     "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzMxNTA0NzMwLCJpYXQiOjE3MzE1MDQ0MzAsImp0aSI6IjM3ZDk0M2VlZmFmMzRkNTc5YmU4MmIwY2YwMTE2MGU1IiwidXNlcl9pZCI6Mn0.RS28FEgjmx0Mg9W30P9yYToFIe3oNqhaU9KJyRiuIGM`
-            // }
         });
 
         // Remove the deleted certificate from the state list
@@ -348,8 +318,6 @@ const handleSoftDelete = async (certificate_id) => {
                 setCertificateCategories(response.data); // Store categories
 
             } catch (error) {
-               //  console.error("Error fetching certificate categories:", error);
-               // alert("Failed to fetch certificate categories. Please try again.");
                 showMessage('Failed to fetch certificate categories. Please try again.', 'failure')
             }
         };

@@ -14,6 +14,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 
 function Navbar({ className }) {
+
+  useEffect(() => {
+      if (!sessionStorage.getItem("hasReloaded")) {
+        sessionStorage.setItem("hasReloaded", "true");
+        window.location.reload();
+      }
+    }, []);
+
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [activeToggle, setActiveToggle] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -89,7 +97,7 @@ function Navbar({ className }) {
   // Manage authentication state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem("authToken"));
+    setIsLoggedIn(!!sessionStorage.getItem("authToken"));
   }, []);
 
   const handleLogout = () => {

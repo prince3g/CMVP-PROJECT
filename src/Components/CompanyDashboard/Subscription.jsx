@@ -29,19 +29,17 @@ export default function Subscription() {
                 const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/subscription-plans/`);
                 const data = await response.json();
                 setPlans(data.results); // The actual plans are in `results` array
-                //console.log("Fetched Plans Data: ", data.results);
+                console.log("Fetched Plans Data: ", data.results);
             } catch (error) {
                 console.error("Error fetching subscription plans:", error);
             }
         };
         fetchPlans();
 
-
-
         // Check if the user is logged in and fetch subscription details
         const fetchSubscriptionDetails = async () => {
-            const authToken = localStorage.getItem("authToken");
-            const authUserId = localStorage.getItem("authUserId");
+            const authToken = sessionStorage.getItem("authToken");
+            const authUserId = sessionStorage.getItem("authUserId");
 
             if (authToken && authUserId) {
                 try {
@@ -58,7 +56,7 @@ export default function Subscription() {
 
                     const data = await response.json();
 
-                    localStorage.setItem("subscriptionDetails", JSON.stringify(data)); // Store subscription data in local storage
+                    sessionStorage.setItem("subscriptionDetails", JSON.stringify(data)); // Store subscription data in local storage
                     //console.log("Subscription Details: ", data);
 
                 } catch (error) {
@@ -72,8 +70,8 @@ export default function Subscription() {
 
   const handleSubscribeClick = async (planId) => {
         setIsSubscribing(planId);
-        const authToken = localStorage.getItem("authToken");
-        const authUserId = localStorage.getItem("authUserId");
+        const authToken = sessionStorage.getItem("authToken");
+        const authUserId = sessionStorage.getItem("authUserId");
     
         if (!authToken) {
             setFlashMessage("Please login or register to continue");
@@ -108,7 +106,7 @@ export default function Subscription() {
     
             const result = await response.json();
 
-            localStorage.setItem("is_subscribed", true); // Store subscription data in local storage
+            sessionStorage.setItem("is_subscribed", true); // Store subscription data in local storage
 
             navigate("/dashboard");
             // window.location.href = result.payment_link;  // Redirect to Remita payment page
@@ -133,7 +131,7 @@ export default function Subscription() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem("authToken")}`
+                    "Authorization": `Bearer ${sessionStorage.getItem("authToken")}`
                 },
                 body: JSON.stringify({
                     status: transactionStatus,
@@ -153,7 +151,7 @@ export default function Subscription() {
     }, []);
 
 
-    const isLoggedIn = localStorage.getItem("authToken")
+    const isLoggedIn = sessionStorage.getItem("authToken")
 
 
     return (

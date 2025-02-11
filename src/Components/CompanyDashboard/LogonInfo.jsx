@@ -4,8 +4,8 @@ import config from '../../config.jsx';
 import AngleDownIcon from './Img/angle-down.svg';
 
 export default function LogonInfo() {
-    const organizationID = localStorage.getItem("authUserId");
-    const organizationName = localStorage.getItem("authName");
+    const organizationID = sessionStorage.getItem("authUserId");
+    const organizationName = sessionStorage.getItem("authName");
 
     const [uploadedCount, setUploadedCount] = useState(0);
     const [deletedCount, setDeletedCount] = useState(0);
@@ -24,7 +24,7 @@ export default function LogonInfo() {
     const [loginTime, setLoginTime] = useState("");
 
     useEffect(() => {
-        const storedLoginTime = localStorage.getItem("loginTime");
+        const storedLoginTime = sessionStorage.getItem("loginTime");
         setLoginTime(storedLoginTime || "Not Available");
 
         // Function to parse "hh:mm AM/PM" into a Date object
@@ -69,7 +69,7 @@ export default function LogonInfo() {
             try {
                 const response = await axios.get(`${config.API_BASE_URL}/api/certificates/organization/${organizationID}/`, {
                     headers: {
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                        "Authorization": `Bearer ${sessionStorage.getItem("token")}`
                     }
                 });
                 setUploadedCount(response.data.count);
@@ -83,7 +83,7 @@ export default function LogonInfo() {
             try {
                 const response = await axios.get(`${config.API_BASE_URL}/api/certificates/soft-deleted-certificates/${organizationID}/`, {
                     headers: {
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                        "Authorization": `Bearer ${sessionStorage.getItem("token")}`
                     }
                 });
                 setDeletedCount(response.data.results.length);

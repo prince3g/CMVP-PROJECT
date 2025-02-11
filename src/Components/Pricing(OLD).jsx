@@ -40,8 +40,8 @@ export default function Pricing() {
 
         // Check if the user is logged in and fetch subscription details
         const fetchSubscriptionDetails = async () => {
-            const authToken = localStorage.getItem("authToken");
-            const authUserId = localStorage.getItem("authUserId");
+            const authToken = sessionStorage.getItem("authToken");
+            const authUserId = sessionStorage.getItem("authUserId");
 
             if (authToken && authUserId) {
                 try {
@@ -58,7 +58,7 @@ export default function Pricing() {
 
                     const data = await response.json();
 
-                    localStorage.setItem("subscriptionDetails", JSON.stringify(data)); // Store subscription data in local storage
+                    sessionStorage.setItem("subscriptionDetails", JSON.stringify(data)); // Store subscription data in local storage
                     //console.log("Subscription Details: ", data);
 
                 } catch (error) {
@@ -72,8 +72,8 @@ export default function Pricing() {
 
   const handleSubscribeClick = async (planId) => {
         setIsSubscribing(planId);
-        const authToken = localStorage.getItem("authToken");
-        const authUserId = localStorage.getItem("authUserId");
+        const authToken = sessionStorage.getItem("authToken");
+        const authUserId = sessionStorage.getItem("authUserId");
     
         if (!authToken) {
             setFlashMessage("Please login or register to continue");
@@ -131,7 +131,7 @@ export default function Pricing() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem("authToken")}`
+                    "Authorization": `Bearer ${sessionStorage.getItem("authToken")}`
                 },
                 body: JSON.stringify({
                     status: transactionStatus,

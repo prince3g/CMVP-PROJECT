@@ -19,9 +19,17 @@ import FlashMessage from "../FlashMessage/FlashMessage.jsx";
 
 export default function PortalPage() {
 
-    const organizationID =  localStorage.getItem("authUserId");
-    const organizationName =  localStorage.getItem("authName");
-    const organizationSubscribed =  localStorage.getItem("is_subscribed");
+    
+    useEffect(() => {
+        if (!sessionStorage.getItem("hasReloaded")) {
+        sessionStorage.setItem("hasReloaded", "true");
+        window.location.reload();
+        }
+    }, []);
+
+    const organizationID =  sessionStorage.getItem("authUserId");
+    const organizationName =  sessionStorage.getItem("authName");
+    const organizationSubscribed =  sessionStorage.getItem("is_subscribed");
 
     const [flash, setFlash] = useState(null);
 
@@ -29,8 +37,6 @@ export default function PortalPage() {
       setFlash({ message, type });
     };
 
-
-    const [subscriptionDetails, setSubscriptionDetails] = useState(null); // Store subscription details
     const [numDailyCertificateUpload, setNumDailyCertificateUpload] = useState(0); // State to store num_daily_certificate_upload
     const [uploadedCount, setUploadedCount] = useState(0);
     const [deletedCount, setDeletedCount] = useState(0);
@@ -68,8 +74,8 @@ export default function PortalPage() {
     useEffect(() => {
         // Check if the user is logged in and fetch subscription details
         const fetchSubscriptionDetails = async () => {
-            const authToken = localStorage.getItem("authToken");
-            const authUserId = localStorage.getItem("authUserId");
+            const authToken = sessionStorage.getItem("authToken");
+            const authUserId = sessionStorage.getItem("authUserId");
     
             if (authToken && authUserId && organizationSubscribed) {
                 try {
@@ -87,7 +93,7 @@ export default function PortalPage() {
     
                     const data = await response.json();
                     //localStorage.setItem("subscriptionDetails", JSON.stringify(data)); // Store subscription data in local storage
-                   // console.log("Subscription Details: ", data);
+                   //console.log("Subscription Details: ", data);
 
                     setNumDailyCertificateUpload(data.allowed_num_0f_cert_upload)
     
@@ -105,6 +111,7 @@ export default function PortalPage() {
     useEffect(() => {
         // Fetch the uploaded certificates count
         const fetchUploadedCertificates = async () => {
+            if (organizationID) {
             try {
                 const response = await axios.get(`${config.API_BASE_URL}/api/certificates/organization/${organizationID}/`, {
                     headers: {
@@ -116,12 +123,14 @@ export default function PortalPage() {
             } catch (error) {
                 console.error("Error fetching uploaded certificates count:", error);
             }
+        }
         };
 
         
 
         // Fetch the deleted certificates count
         const fetchDeletedCertificates = async () => {
+            if (organizationID) {
             try {
                 const response = await axios.get(`${config.API_BASE_URL}/api/certificates/soft-deleted-certificates/${organizationID}/`, {
                     headers: {
@@ -133,6 +142,7 @@ export default function PortalPage() {
             } catch (error) {
                 console.error("Error fetching deleted certificates count:", error);
             }
+        }
         };
 
         fetchUploadedCertificates();
@@ -245,7 +255,7 @@ export default function PortalPage() {
         event.preventDefault();
         setLoading(true);
 
-        console.log('selectedCategory:', selectedCategory); // Log the selectedCategory value
+        // console.log('selectedCategory:', selectedCategory); // Log the selectedCategory value
     
         if (!selectedCategory) {
            // alert("Please select a certificate category.");
@@ -343,12 +353,14 @@ export default function PortalPage() {
 
       useEffect(() => {
         const fetchData = async () => {
+            if (organizationID) {
           try {
             const response = await axios.get(`${config.API_BASE_URL}/api/certificates/certificateCategory/${organizationID}`);
             setCategories1(response.data);
           } catch (error) {
             console.error('Error fetching categories:', error);
           }
+        }
         };
     
         fetchData();
@@ -605,7 +617,7 @@ export default function PortalPage() {
                         <div className="Upload_Conunter">
                             <span>0%</span>
                             <p>
-                                You can only upload <b>{numDailyCertificateUpload}</b> certificates a day
+                                You can only upload <b>{numDailyCertificateUpload || sessionStorage.getItem("number_of_allowed_cert_upload")}</b> certificates a day
                             </p>
                         </div>
                     </div>

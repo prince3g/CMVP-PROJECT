@@ -21,8 +21,8 @@ export default function Pricing() {
 
     useEffect(() => {
         const fetchSubscriptionDetails = async () => {
-            const authToken = localStorage.getItem("authToken");
-            const authUserId = localStorage.getItem("authUserId");
+            const authToken = sessionStorage.getItem("authToken");
+            const authUserId = sessionStorage.getItem("authUserId");
 
             if (authToken && authUserId) {
                 try {
@@ -43,9 +43,9 @@ export default function Pricing() {
                     const data = await response.json();
                     setSubscriptions(Array.isArray(data) ? data : [data]); // Ensure it's always an array
                     //localStorage.setItem("subscriptionDetails", JSON.stringify(data)); 
-                    console.log("data")
-                    console.log(data)
-                    console.log("data")
+                    // console.log("data")
+                    // console.log(data)
+                    // console.log("data")
                 } catch (error) {
                     console.error("Error fetching subscription details:", error);
                     setErrorMessage(error.message);

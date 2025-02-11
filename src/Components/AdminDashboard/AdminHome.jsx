@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import './Css/Dash.css';
 
 import SubscriptionTable from './SubscriptionTable';
@@ -9,6 +8,14 @@ import SelectNavigationIcons from './SelectNavigationIcons';
 import SearchIcon from './Img/searchicon.svg';
 
 export default function AdminHome() {
+    
+    useEffect(() => {
+        if (!sessionStorage.getItem("hasReloaded")) {
+          sessionStorage.setItem("hasReloaded", "true");
+          window.location.reload();
+        }
+      }, []);
+
     return(
         <div className="DDD-Seco">
             <div className="klka-Seco">

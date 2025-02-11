@@ -40,8 +40,8 @@ export default function Pricing() {
 
         // Check if the user is logged in and fetch subscription details
         const fetchSubscriptionDetails = async () => {
-            const authToken = localStorage.getItem("authToken");
-            const authUserId = localStorage.getItem("authUserId");
+            const authToken = sessionStorage.getItem("authToken");
+            const authUserId = sessionStorage.getItem("authUserId");
 
             if (authToken && authUserId) {
                 try {
@@ -58,7 +58,7 @@ export default function Pricing() {
 
                     const data = await response.json();
 
-                    localStorage.setItem("subscriptionDetails", JSON.stringify(data)); // Store subscription data in local storage
+                    sessionStorage.setItem("subscriptionDetails", JSON.stringify(data)); // Store subscription data in local storage
                     //console.log("Subscription Details: ", data);
 
                 } catch (error) {
@@ -71,57 +71,6 @@ export default function Pricing() {
 
 
 
-//   const handleSubscribeClick = async (planId) => {
-//         setIsSubscribing(planId);
-//         const authToken = localStorage.getItem("authToken");
-//         const authUserId = localStorage.getItem("authUserId");
-    
-//         if (!authToken) {
-//             setFlashMessage("Please login or register to continue");
-//             setTimeout(() => {
-//                 setFlashMessage("");
-//                 navigate("/login");
-//             }, 3000);
-//             setIsSubscribing(null);
-//             return;
-//         }
-    
-//         const payload = {
-//             user: authUserId,
-//             subscription_plan: planId,
-//             subscribed_duration: 1  // Default to 1 month
-//         };
-    
-//         try {
-//             const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscriptions/`, {
-//                 method: "POST",
-//                 headers: {
-//                     "Content-Type": "application/json",
-//                     "Authorization": `Bearer ${authToken}`
-//                 },
-//                 body: JSON.stringify(payload)
-//             });
-    
-//             if (!response.ok) {
-//                 const errorData = await response.json();
-//                 throw new Error(errorData.detail || "Failed to subscribe");
-//             }
-    
-//             const result = await response.json();
-
-//             navigate("/dashboard");
-//             // window.location.href = result.payment_link;  // Redirect to Remita payment page
-
-//         } catch (error) {
-//             console.error("Error subscribing:", error);
-//             setFlashMessage(error.message || "An unexpected error occurred");
-//             setTimeout(() => setFlashMessage(""), 3000);
-//         } finally {
-//             setIsSubscribing(null);
-//         }
-//     };
-    
-
 const handleSubscribeClick = (plan) => {
     setIsSubscribing(plan.unique_subscription_plan_id);
 
@@ -129,8 +78,8 @@ const handleSubscribeClick = (plan) => {
     // console.log(plan)
     // console.log("plan")
 
-    const authToken = localStorage.getItem("authToken");
-    const authUserId = localStorage.getItem("authUserId");
+    const authToken = sessionStorage.getItem("authToken");
+    const authUserId = sessionStorage.getItem("authUserId");
 
     if (!authToken) {
         setFlashMessage("Please login or register to continue");
@@ -153,7 +102,7 @@ const handleSubscribeClick = (plan) => {
 };
 
 
-const isLoggedIn = localStorage.getItem("authToken")
+const isLoggedIn = sessionStorage.getItem("authToken")
 
     return (
         <div className="Landing-page MMha-page subscript-page">

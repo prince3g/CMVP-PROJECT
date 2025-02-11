@@ -49,13 +49,13 @@ const Login = () => {
       );
   
       const token = response.data;
-      localStorage.setItem("authToken", token.access);
-      localStorage.setItem("authEmail", token.email);
-      localStorage.setItem("authUserId", token.unique_subscriber_id);
-      localStorage.setItem("authName", token.name);
-      localStorage.setItem("authPhone", token.phone);
-      localStorage.setItem("authAddress", token.address);
-      localStorage.setItem("loginTime", token.login_time);
+      sessionStorage.setItem("authToken", token.access);
+      sessionStorage.setItem("authEmail", token.email);
+      sessionStorage.setItem("authUserId", token.unique_subscriber_id);
+      sessionStorage.setItem("authName", token.name);
+      sessionStorage.setItem("authPhone", token.phone);
+      sessionStorage.setItem("authAddress", token.address);
+      sessionStorage.setItem("loginTime", token.login_time);
   
       if (token.email === "ekenehanson@gmail.com" && token.user_role === "super_admin") {
         navigate("/admin-dashboard/");

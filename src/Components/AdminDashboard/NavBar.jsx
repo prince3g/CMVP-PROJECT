@@ -24,7 +24,7 @@ export default function NavBar() {
         const [isLoggedIn, setIsLoggedIn] = useState(false);
     
         useEffect(() => {
-            const token = localStorage.getItem("authToken");
+            const token = sessionStorage.getItem("authToken");
             setIsLoggedIn(!!token);
         }, []);
     
@@ -54,7 +54,7 @@ export default function NavBar() {
     };
     const handleLinkClick1 = (path) => {
         closeSidebar();
-        localStorage.clear();
+        sessionStorage.clear();
         setIsLoggedIn(false);
     };
 
