@@ -92,6 +92,8 @@ function App() {
           <Route path="/privacy-policy" element={<Privacy />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/pricing" element={<Pricing />} />
+
+          
           <Route path="/payment" element={<Payment />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/faq" element={<FAQ />} />

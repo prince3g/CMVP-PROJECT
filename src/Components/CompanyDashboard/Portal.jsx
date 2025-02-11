@@ -21,6 +21,7 @@ export default function PortalPage() {
 
     const organizationID =  localStorage.getItem("authUserId");
     const organizationName =  localStorage.getItem("authName");
+    const organizationSubscribed =  localStorage.getItem("is_subscribed");
 
     const [flash, setFlash] = useState(null);
 
@@ -49,7 +50,6 @@ export default function PortalPage() {
     const [categories1, setCategories1] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
               
-    const [organizationDatalogo, setOrganizationDataLogo] = useState(null); // For organization data
     const [certificateData, setCertificateData] = useState({
         
         organization_id: organizationID,
@@ -71,9 +71,10 @@ export default function PortalPage() {
             const authToken = localStorage.getItem("authToken");
             const authUserId = localStorage.getItem("authUserId");
     
-            if (authToken && authUserId) {
+            if (authToken && authUserId && organizationSubscribed) {
                 try {
-                    const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscription/${authUserId}/`, {
+                    const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscriptions/active/?user=${authUserId}/`, {
+                    
                         method: "GET",
                         headers: {
                             "Authorization": `Bearer ${authToken}`,
@@ -85,13 +86,17 @@ export default function PortalPage() {
                     }
     
                     const data = await response.json();
-                    localStorage.setItem("subscriptionDetails", JSON.stringify(data)); // Store subscription data in local storage
-                    // console.log("Subscription Details: ", data);
+                    //localStorage.setItem("subscriptionDetails", JSON.stringify(data)); // Store subscription data in local storage
+                   // console.log("Subscription Details: ", data);
+
+                    setNumDailyCertificateUpload(data.allowed_num_0f_cert_upload)
     
                 } catch (error) {
+                    
                     console.error("Error fetching subscription details:", error);
                 }
             }
+            setNumDailyCertificateUpload(localStorage.getItem("numDailyCertificateUpload"))
         };
     
         fetchSubscriptionDetails();
@@ -108,7 +113,6 @@ export default function PortalPage() {
                 });
                 
                 setUploadedCount(response.data.count);
-                setOrganizationDataLogo(response.data.logo)
             } catch (error) {
                 console.error("Error fetching uploaded certificates count:", error);
             }
@@ -217,6 +221,7 @@ export default function PortalPage() {
     };
 
     const hideAddCertCarti = () => {
+        window.location.reload();
         setIsAddCertCartiVisible(false);
         setCategoryName('');
     };
@@ -302,17 +307,6 @@ export default function PortalPage() {
         }
     };
 
-    useEffect(() => {
-        // Fetch subscription details from localStorage
-        const storedSubscriptionDetails = localStorage.getItem("subscriptionDetails");
-        if (storedSubscriptionDetails) {
-            const parsedDetails = JSON.parse(storedSubscriptionDetails);
-            setSubscriptionDetails(parsedDetails);
-            // Extract num_daily_certificate_upload
-            const numCerts = parsedDetails.subscription_plan.features.num_daily_certificate_upload;
-            setNumDailyCertificateUpload(numCerts);
-        }
-    }, []); // Runs on component mount
 
 
 
@@ -428,15 +422,6 @@ export default function PortalPage() {
 
                                         <div className="Cert_Form_input Cert_Form_input_Select Cert_Form_input_Selct">
 
-
-                                        {/* <select value={selectedCategory} onChange={handleInputChange}>
-                                            <option value="">Select certificate category</option>
-                                            {categories1.map((category) => (
-                                            <option key={category.id} value={category.unique_certificate_category_id}>
-                                                {category.name} 
-                                            </option>
-                                            ))}
-                                        </select> */}
 
                                         <select
                                             name="certificate_category"

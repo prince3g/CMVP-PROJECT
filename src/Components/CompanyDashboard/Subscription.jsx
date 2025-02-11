@@ -29,7 +29,7 @@ export default function Subscription() {
                 const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/subscription-plans/`);
                 const data = await response.json();
                 setPlans(data.results); // The actual plans are in `results` array
-                console.log("Fetched Plans Data: ", data.results);
+                //console.log("Fetched Plans Data: ", data.results);
             } catch (error) {
                 console.error("Error fetching subscription plans:", error);
             }
@@ -45,7 +45,7 @@ export default function Subscription() {
 
             if (authToken && authUserId) {
                 try {
-                    const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscription/${authUserId}/`, {
+                    const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-multiple-subscriptions/${authUserId}/`, {
                         method: "GET",
                         headers: {
                             "Authorization": `Bearer ${authToken}`,
@@ -107,6 +107,8 @@ export default function Subscription() {
             }
     
             const result = await response.json();
+
+            localStorage.setItem("is_subscribed", true); // Store subscription data in local storage
 
             navigate("/dashboard");
             // window.location.href = result.payment_link;  // Redirect to Remita payment page

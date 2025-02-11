@@ -69,18 +69,18 @@ const SubscriptionTable = () => {
   };
 
   const handleActivateDeactivate = (organization) => {
-    const { id, is_active } = organization;
-    const newStatus = !is_active;
+    const { id, is_verified } = organization;
+    const newStatus = !is_verified;
     setActivatingOrgId(id); // Set the organization ID being processed
 
     axios
       .patch(`${config.API_BASE_URL}/api/accounts/auth/organizations/${organization.unique_subscriber_id}/update-by-subscriber-id/`,
-        { is_active: newStatus }
+        { is_verified: newStatus }
       )
       .then(() => {
         setData((prevData) =>
           prevData.map((org) =>
-            org.id === id ? { ...org, is_active: newStatus } : org
+            org.id === id ? { ...org, is_verified: newStatus } : org
           )
         );
       })
@@ -226,10 +226,10 @@ const SubscriptionTable = () => {
                         disabled={activatingOrgId === organization.id}
                       >
                         {activatingOrgId === organization.id
-                          ? organization.is_active
+                          ? organization.is_verified
                             ? "Deactivating..."
                             : "Activating..."
-                          : organization.is_active
+                          : organization.is_verified
                           ? "Deactivate"
                           : "Activate"}
                       </button>

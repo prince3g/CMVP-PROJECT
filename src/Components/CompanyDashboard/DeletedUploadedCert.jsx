@@ -39,7 +39,8 @@ export default function DeletedUploadedCert() {
 
                 setNextPage(response.data.next);
                 setPrevPage(response.data.previous);
-                setCurrentPage(page);
+                setCurrentPage(1)
+                // setCurrentPage(page);
 
             } catch (error) {
                 console.error("Error fetching certificates:", error);
@@ -157,6 +158,7 @@ export default function DeletedUploadedCert() {
                                     </option>
                                 ))
                             ) : (
+                               
                                 <Skeleton count={1} width="100%" height={40} />
                             )}
                         </select>
@@ -233,7 +235,7 @@ export default function DeletedUploadedCert() {
                     </table>
                     {/* Skeleton Loading for Table Rows */}
                     {certificates.length === 0 && (
-                        <Skeleton count={5} height={40} />
+                        <Skeleton count={1} height={40} />
                     )}
                 </div>
 

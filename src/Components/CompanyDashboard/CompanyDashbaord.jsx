@@ -58,6 +58,7 @@ export default function CompanyDashbaord() {
             <Route path="/" element={<PortalPage />} />
 
           <Route path="/" element={<PortalPage />} />
+
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/uploaded-certificates" element={<UploadedCert />} />
             <Route path="/deleted-certificates" element={<DeletedUploadedCert />} />
