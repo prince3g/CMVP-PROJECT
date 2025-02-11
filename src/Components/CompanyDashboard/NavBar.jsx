@@ -207,17 +207,6 @@ useEffect(() => {
 
                         <div className="R_NN_V_Sec">
 
-                            {/* <div className="Sub_Conunter">
-                           
-                            {daysLeft >= 1 ? (
-                                <>
-                                <span className={daysLeft < 4 ? "blinking-text" : ""}>{daysLeft}</span>
-                                <p><b> {daysLeft > 1 ? "days" : "day"} left</b> for your free trial</p>
-                                </>
-                            ) : (
-                                <p>Your free trial period has expired</p>
-                            )}
-                            </div> */}
 
                             <div className="Sub_Conunter">
                                 {daysLeft >= 1 ? (

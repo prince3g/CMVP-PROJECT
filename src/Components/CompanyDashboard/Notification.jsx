@@ -20,6 +20,7 @@ export default function Notification() {
             setActive(!active);
         }
     };
+    
 
     return (
         <div className="Notification_Page">
