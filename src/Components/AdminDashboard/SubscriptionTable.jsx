@@ -56,7 +56,7 @@ const SubscriptionTable = () => {
     );
     if (confirmDelete) {
       axios
-        .delete(`${config.API_BASE_URL}/api/accounts/auth/organization/${id}`)
+        .delete(`${config.API_BASE_URL}/api/accounts/auth/organization/${id}/`)
         .then(() => {
           setData((prevData) => prevData.filter((org) => org.id !== id));
           alert("Organization removed successfully!");
@@ -73,9 +73,9 @@ const SubscriptionTable = () => {
     const newStatus = !is_activated;
     setActivatingOrgId(id); // Set the organization ID being processed
 
-    console.log("is_activated")
-    console.log(is_activated)
-    console.log("is_activated")
+    // console.log("is_activated")
+    // console.log(is_activated)
+    // console.log("is_activated")
 
     axios
       .patch(`${config.API_BASE_URL}/api/accounts/auth/organizations/${organization.unique_subscriber_id}/update-by-subscriber-id/`,

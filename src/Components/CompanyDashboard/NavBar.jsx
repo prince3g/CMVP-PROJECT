@@ -195,7 +195,7 @@ useEffect(() => {
 
                         <li>
                         <button onClick={() => {
-                            localStorage.clear(); // Clear token
+                            sessionStorage.clear(); // Clear token
                             navigate("/"); // Redirect to login
                         }}>
                            <span> <LogoutIcon /></span>
@@ -231,14 +231,14 @@ useEffect(() => {
 
                              <button onClick={() => {
                                         if (window.confirm("Are you sure you want to log out?")) {
-                                            localStorage.clear(); // Clear token
+                                            sessionStorage.clear(); // Clear token
                                             navigate("/"); // Redirect to login
                                         }
                                     }} className="Logout_Dash_Btn btn-bg2">
                                         Logout
-                                    </button>
+                            </button>
 
-                                    <button className="gSide_Nav_toggler" onClick={toggleSidebar}><MenuIcon /></button>
+                            <button className="gSide_Nav_toggler" onClick={toggleSidebar}><MenuIcon /></button>
 
                         </div>
                     </div>

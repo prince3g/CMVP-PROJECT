@@ -15,13 +15,6 @@ import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 
 function Navbar({ className }) {
 
-  useEffect(() => {
-      if (!sessionStorage.getItem("hasReloaded")) {
-        sessionStorage.setItem("hasReloaded", "true");
-        window.location.reload();
-      }
-    }, []);
-
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [activeToggle, setActiveToggle] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -101,7 +94,7 @@ function Navbar({ className }) {
   }, []);
 
   const handleLogout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     setIsLoggedIn(false);
   };
 
@@ -116,6 +109,10 @@ function Navbar({ className }) {
 
     
   };
+  const handleReload = () => {
+  window.location.reload()
+    
+  };
 
   const DrophandleMobileNavClose = () => {
     setIsMobileNavOpen(false);
@@ -128,6 +125,15 @@ function Navbar({ className }) {
     setActiveToggle((prevState) => !prevState);
     
   };
+
+  
+  useEffect(() => {
+    const hasHardReloaded = sessionStorage.getItem("hasHardReloaded")
+    if (isLoggedIn && !hasHardReloaded) {
+      sessionStorage.setItem("hasHardReloaded", "true");
+      window.location.reload();
+    }
+  }, []);
   
   return (
     <div className={`Navbar ${className} ${isScrolled ? "Scrolled_Nav" : ""} ${isMobileNavOpen ? "Mobile_Toggle_Nav" : ""}`}>
@@ -210,7 +216,8 @@ function Navbar({ className }) {
                 </>
               )}
 
-            <Link to="/company-verification" className="verify-certificate-btn" onClick={handleMobileNavClose}>Verify Certificate</Link>
+            <Link to="/company-verification" className="verify-certificate-btn" onClick={handleMobileNavClose}>Company Verification Links</Link>
+            <Link to="/" className="verify-certificate-btn" onClick={handleReload}>Reload</Link>
            
             </div>
           </div>

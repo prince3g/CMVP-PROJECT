@@ -16,7 +16,6 @@ export default function Profile({ orgId }) {
           setFlash({ message, type });
         };
     
-
     const organizationID = sessionStorage.getItem("authUserId");
     const organizationName = sessionStorage.getItem("authName");
 
@@ -34,6 +33,7 @@ export default function Profile({ orgId }) {
     const [country, setCountry] = useState("");
     const [state, setState] = useState("");
     const [imgSrc, setImgSrc] = useState(userImg);
+    const [organizationDATA, setOrganizationDATA] = useState(userImg);
 
     // Fetch organization data
     useEffect(() => {
@@ -43,6 +43,7 @@ export default function Profile({ orgId }) {
                 if (response.ok) {
                     const data = await response.json();
                     const organizationData = data; // Assuming the data is under 'data' key
+                    setOrganizationDATA(organizationData)
     
                     // Ensure yearIncorporated is in YYYY-MM-DD format
                     const yearIncorporatedFormatted = organizationData.year_incorporated
@@ -63,6 +64,10 @@ export default function Profile({ orgId }) {
                     setCountry(organizationData.nationality || "");
                     setState(organizationData.state || "");
                     setImgSrc(organizationData.logo || "");
+
+                    // console.log("organizationData Logo")
+                    // console.log(organizationDATA.logo)
+                    // console.log("organizationData Logo")
                 } else {
                     console.error("Error fetching organization data");
                 }
@@ -117,8 +122,11 @@ export default function Profile({ orgId }) {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log("Organization updated:", data);
+                //console.log("Organization updated:", data);
                // alert("Organization updated:", data);
+
+            //    const organizationName = sessionStorage.setItem("authName");
+                sessionStorage.setItem("authName", data.name);
                 showMessage('Organization data updated successfully', 'success')
             } else {
                 const data = await response.json();
@@ -171,24 +179,29 @@ export default function Profile({ orgId }) {
                             <div className="top-dash-1-main">
                                 <input type="file" id="file-upload" onChange={handleFileChange} style={{ display: 'none' }} />
                                 <label htmlFor="file-upload" className="user-img">
-                                    <img src={`${config.API_BASE_URL}${imgSrc || PhotoEditIcon}`} alt="User" id="img-display" />
+                                    <img src={`${imgSrc || PhotoEditIcon}`} alt="User" id="img-display" />
                                     {/* <span><img src={`${config.API_BASE_URL}${imgSrc || PhotoEditIcon}`} alt="Edit Icon" /></span> */}
                                     {/* <span><img src={PhotoEditIcon} alt="Edit Icon" /></span> {config.API_BASE_URL}{imgSrc} */}
                                 </label>
                                 <div className="user-details">
                                     <h4>{companyName} Company Profile </h4>
                                     <div className="Copy_Url_Sec jhhaj-op">
+
                                         <div className="Copy_Url_box" onClick={handleCopy}>
                                             <div className="Copy_Url_box_Main">
                                                 <h3>{copyMessage}</h3>
-                                                <input id="portalUrl"
-                                                 type="text" 
-                                                 value={`${config.WEB_PAGE_BASE_URL}/${organizationID}/${organizationName}/`} readOnly />
+                                                <input
+                                                    id="portalUrl"
+                                                    type="text"
+                                                    value={`${config.WEB_PAGE_BASE_URL}/verification/${organizationID}/${organizationName}/`}
+                                                    readOnly
+                                                />
                                             </div>
                                             <button className="Copy_Url_Btn">
                                                 <img src={CopyIcon} alt="Copy Icon" />
                                             </button>
                                         </div>
+                                        
                                     </div>
                                     <p className="pop-PP">Click "save button" to reflect changes</p>
                                 </div>
@@ -273,24 +286,6 @@ export default function Profile({ orgId }) {
                                             onChange={(e) => setRegistrationNumber(e.target.value)}
                                         />
                                     </div>
-                                    {/* <div className="form-input">
-                                        <p>Nationality</p>
-                                        <input
-                                            type="text"
-                                            placeholder="Enter Nationality"
-                                            value={nationality}
-                                            onChange={(e) => setNationality(e.target.value)}
-                                        />
-                                    </div> */}
-                                    {/* <div className="form-input">
-                                        <p>Number of Staff</p>
-                                        <input
-                                            type="Number"
-                                            placeholder="Enter Number of Staff"
-                                            value={staffNumber}
-                                            onChange={(e) => setStaffNumber(e.target.value)}
-                                        />
-                                    </div> */}
                                     <div className="form-input">
                                         <p>City Address</p>
                                         <input

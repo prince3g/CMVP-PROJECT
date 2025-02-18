@@ -122,7 +122,7 @@ const isLoggedIn = sessionStorage.getItem("authToken")
                             <p>All-in-one certificate management package available for a limited time.</p>
                             <button>free <span>/one month</span></button>
                             <ul>
-                                <li><CheckIcon /> Access to Portal for 8 days after Registration</li>
+                                <li><CheckIcon /> Access to Portal for 14 days after Registration</li>
                                 <li><CheckIcon /> Add up to 3 certificate categories</li>
                                 <li><CheckIcon /> Upload 5 certificates daily</li>
                                 <li><CheckIcon /> Access to deleted certificates and files</li>
@@ -175,19 +175,16 @@ const isLoggedIn = sessionStorage.getItem("authToken")
 
 
 
-                                    <div className='hag_Top hhags' data-aos="fade-up">
-                                    <div className='hag_Top_1'>
-                                        <img src={CheckCmvp}></img>
-                                    </div>
-                                    <div className='hag_Top_2'>
-                                        <h2 className='big-text'>Meet your records <span>management compliance</span> needs with <span>CMVP</span></h2>
-                                        <Link to="/about-cmvp">About CMVP</Link>
-                                    </div>
-                                    </div>
-                                </div>
-
-
-                
+                    <div className='hag_Top hhags' data-aos="fade-up">
+                    <div className='hag_Top_1'>
+                        <img src={CheckCmvp}></img>
+                    </div>
+                    <div className='hag_Top_2'>
+                        <h2 className='big-text'>Meet your records <span>management compliance</span> needs with <span>CMVP</span></h2>
+                        <Link to="/about-cmvp">About CMVP</Link>
+                    </div>
+                    </div>
+                </div>
 
                     </div>
                 </div>

@@ -3145,3 +3145,9 @@
     display: block !important;
 }
 
+input#portalUrl {
+    width: 100%;
+    overflow: auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

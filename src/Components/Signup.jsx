@@ -145,6 +145,7 @@ const Signup = () => {
 
       } else {
         setErrorMessage("Failed to create an account. Please try again.");
+        navigate(`/verification-code/:code/${formData.email}`);
       }
     } finally {
       setIsLoading(false);
