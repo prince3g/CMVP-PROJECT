@@ -151,7 +151,7 @@ const handleGoBack = () => {
      <div className='Verification_page'>
 
      <img 
-            src={`${config.API_BASE_URL}${organizationDatalogo}`} 
+            src={`${organizationDatalogo}`} 
             alt="CEO" 
 
             className="oo_comp_Logo"

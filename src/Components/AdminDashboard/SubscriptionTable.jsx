@@ -29,6 +29,9 @@ const SubscriptionTable = () => {
     axios.get(url)
       .then((response) => {
         setData(response.data.results || []);
+
+        // console.log(response.data.results || []);
+
         setNextPage(response.data.next);
         setPrevPage(response.data.previous);
         setLoading(false);

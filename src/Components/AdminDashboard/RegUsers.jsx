@@ -30,7 +30,7 @@ export default function RegUsers() {
     .then((response) => {
     // console.log("Fetched Data:", response.data);
       setData(response.data.results || []);
-      console.log(response.data.results || []);
+     
       setNextPage(response.data.next);
       setPrevPage(response.data.previous);
       setLoading(false);
