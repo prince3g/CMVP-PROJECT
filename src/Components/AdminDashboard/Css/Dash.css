@@ -1340,3 +1340,13 @@ border-color: #7AA238;
     background-color: #7BF2AB  !important;
     color: #000 !important;
 }
+
+
+button.expired-BGD,
+button.active-BGD{
+    background-color: transparent !important;
+}
+
+.Dash-Intro.subscripp-header{
+    margin-top: 20px !important;
+}

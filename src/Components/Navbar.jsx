@@ -201,13 +201,16 @@ function Navbar({ className }) {
               {/* Other Navigation Links */}
               <Link to="/pricing" onClick={handleMobileNavClose}>Subscription Plans</Link>
 
+            <Link to="/company-verification" onClick={handleMobileNavClose}>Company Verification Links</Link>
+
+
              
 
               {/* Authentication Links */}
               {isLoggedIn ? (
                 <>
                   <Link to="/dashboard" className="bordered-link" onClick={handleMobileNavClose}>Account</Link>
-                  <Link to="/login" className="bordered-link" onClick={handleLogout}>Log Out</Link>
+                  <Link to="/login" className="bordered-link sign-up-btn" onClick={handleLogout}>Log Out</Link>
                 </>
               ) : (
                 <>
@@ -216,8 +219,7 @@ function Navbar({ className }) {
                 </>
               )}
 
-            <Link to="/company-verification" className="verify-certificate-btn" onClick={handleMobileNavClose}>Company Verification Links</Link>
-            <Link to="/" className="verify-certificate-btn" onClick={handleReload}>Reload</Link>
+            {/* <Link to="/" className="verify-certificate-btn" onClick={handleReload}>Reload</Link> */}
            
             </div>
           </div>
