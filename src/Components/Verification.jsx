@@ -15,6 +15,10 @@ import Certificate from './Certificate';
 
 
 
+import { Link, useNavigate } from "react-router-dom";
+
+
+
 function Verification() {
 
   const [backgroundImage, setBackgroundImage] = useState(null); // State to store background image URL
@@ -244,7 +248,7 @@ const handleGoBack = () => {
 
 
           <footer className="very_footer">
-          <p>Powered by <a href="www.cmvp.net">cmvp.net</a></p>
+          <p>Powered by <Link to="/">cmvp.net</Link></p>
           <span>© {currentYear}</span>
           </footer>
 
