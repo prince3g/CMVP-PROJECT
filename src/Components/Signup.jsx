@@ -280,6 +280,27 @@ const Signup = () => {
                   />
                 </div>
 
+
+
+                <div className="Reg_Input">
+                  <label>Country</label>
+                  <select>
+                    <option>--Select Country--</option>
+                    <option>Nigeria</option>
+                  </select>
+                </div>
+
+                
+                <div className="Reg_Input">
+                  <label>City</label>
+                  <select>
+                    <option>--Select City--</option>
+                    <option>Umahia Abia state</option>
+                  </select>
+                </div>
+
+
+
                 <div className="Reg_Input Upload-input">
                   <label>Upload Company Logo</label>
                   <input

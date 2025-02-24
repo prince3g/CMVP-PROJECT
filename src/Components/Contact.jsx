@@ -199,10 +199,22 @@ export default function HelpPage() {
                                     {isSubmitting ? "Sending..." : "Send Message"}
                                 </button>
                             </div>
+
+
+                           
                         </form>
                     </div>
                 </div>
+
+                <div className="site-container">
+
+                <div className="gaghsui-sess">
+                <p>All our services are carried out with the clear understanding that our customer data privacy is important, and we are committed to the protection of personal information in accordance with the General Data Protection Regulation (GDPR), the Nigeria Data Protection Act (NDPA), and other relevant global privacy regulations. For more information about our Data & Privacy Policy, please visit <Link to="/privacy-policy">Privacy Policy</Link></p>
+                </div>
+
+                </div>
             </div>
+
 
         </div>
     );
