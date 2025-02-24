@@ -29,7 +29,7 @@ export default function Subscription() {
                 const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/subscription-plans/`);
                 const data = await response.json();
                 setPlans(data.results); // The actual plans are in `results` array
-                console.log("Fetched Plans Data: ", data.results);
+                // console.log("Fetched Plans Data: ", data.results);
             } catch (error) {
                 console.error("Error fetching subscription plans:", error);
             }
@@ -68,58 +68,88 @@ export default function Subscription() {
     }, []); 
 
 
-  const handleSubscribeClick = async (planId) => {
-        setIsSubscribing(planId);
-        const authToken = sessionStorage.getItem("authToken");
-        const authUserId = sessionStorage.getItem("authUserId");
+//   const handleSubscribeClick = async (planId) => {
+//         setIsSubscribing(planId);
+//         const authToken = sessionStorage.getItem("authToken");
+//         const authUserId = sessionStorage.getItem("authUserId");
     
-        if (!authToken) {
-            setFlashMessage("Please login or register to continue");
-            setTimeout(() => {
-                setFlashMessage("");
-                navigate("/login");
-            }, 3000);
-            setIsSubscribing(null);
-            return;
-        }
+//         if (!authToken) {
+//             setFlashMessage("Please login or register to continue");
+//             setTimeout(() => {
+//                 setFlashMessage("");
+//                 navigate("/login");
+//             }, 3000);
+//             setIsSubscribing(null);
+//             return;
+//         }
     
-        const payload = {
-            user: authUserId,
-            subscription_plan: planId,
-            subscribed_duration: 1  // Default to 1 month
-        };
+//         const payload = {
+//             user: authUserId,
+//             subscription_plan: planId,
+//             subscribed_duration: 1  // Default to 1 month
+//         };
     
-        try {
-            const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscriptions/`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${authToken}`
-                },
-                body: JSON.stringify(payload)
-            });
+//         try {
+//             const response = await fetch(`${config.API_BASE_URL}/api/subscription/auth/api/user-subscriptions/`, {
+//                 method: "POST",
+//                 headers: {
+//                     "Content-Type": "application/json",
+//                     "Authorization": `Bearer ${authToken}`
+//                 },
+//                 body: JSON.stringify(payload)
+//             });
     
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail || "Failed to subscribe");
-            }
+//             if (!response.ok) {
+//                 const errorData = await response.json();
+//                 throw new Error(errorData.detail || "Failed to subscribe");
+//             }
     
-            const result = await response.json();
+//             const result = await response.json();
 
-            sessionStorage.setItem("is_subscribed", true); // Store subscription data in local storage
+//             sessionStorage.setItem("is_subscribed", true); // Store subscription data in local storage
 
-            navigate("/dashboard");
-            // window.location.href = result.payment_link;  // Redirect to Remita payment page
+//             navigate("/dashboard");
+//             // window.location.href = result.payment_link;  // Redirect to Remita payment page
 
-        } catch (error) {
-            console.error("Error subscribing:", error);
-            setFlashMessage(error.message || "An unexpected error occurred");
-            setTimeout(() => setFlashMessage(""), 3000);
-        } finally {
-            setIsSubscribing(null);
-        }
-    };
+//         } catch (error) {
+//             console.error("Error subscribing:", error);
+//             setFlashMessage(error.message || "An unexpected error occurred");
+//             setTimeout(() => setFlashMessage(""), 3000);
+//         } finally {
+//             setIsSubscribing(null);
+//         }
+//     };
     
+
+const handleSubscribeClick = (plan) => {
+    setIsSubscribing(plan.unique_subscription_plan_id);
+
+    // console.log("plan")
+    // console.log(plan)
+    // console.log("plan")
+
+    const authToken = sessionStorage.getItem("authToken");
+    const authUserId = sessionStorage.getItem("authUserId");
+
+    if (!authToken) {
+        setFlashMessage("Please login or register to continue");
+        setTimeout(() => {
+            setFlashMessage("");
+            navigate("/login");
+        }, 3000);
+        setIsSubscribing(null);
+        return;
+    }
+
+    // Store subscription details in state and navigate to the payment page
+    navigate("/payment", { state: { 
+        user: authUserId,
+        subscription_plan: plan.unique_subscription_plan_id,
+        plan_name: plan.name,
+        plan_price: plan.price_per_month,
+        plan_features: plan.features,
+    }});
+};
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
@@ -169,7 +199,7 @@ export default function Subscription() {
                             <p>All-in-one certificate management package available for a limited time.</p>
                             <button>free <span>/one month</span></button>
                             <ul>
-                                <li><CheckIcon /> Access to Portal for 15 days after Registration</li>
+                                <li><CheckIcon /> Access to Portal for 14 days after Registration</li>
                                 <li><CheckIcon /> Add 3 certificate categories daily</li>
                                 <li><CheckIcon /> Upload 5 certificates daily</li>
                                 <li><CheckIcon /> Access to deleted certificates and files</li>
@@ -204,7 +234,8 @@ export default function Subscription() {
                                     to="#"
                                     onClick={(e) => {
                                         e.preventDefault();
-                                        handleSubscribeClick(plan.unique_subscription_plan_id);
+                                        handleSubscribeClick(plan);
+                                        // handleSubscribeClick(plan.unique_subscription_plan_id);
                                     }}
                                     className="btn-bg"
                                     >

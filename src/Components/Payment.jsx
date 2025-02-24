@@ -10,6 +10,10 @@ function Payment() {
     const { user, subscription_plan, plan_name, plan_price, plan_features } = location.state || {};
 
 
+    // console.log("location.state")
+    // console.log(location.state)
+    // console.log("location.state")
+
     const [isYearly, setIsYearly] = useState(false);
     const [count, setCount] = useState(1);
 

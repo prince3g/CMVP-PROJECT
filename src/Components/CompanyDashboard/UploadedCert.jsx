@@ -484,7 +484,7 @@ const handleSoftDelete = async (certificate_id) => {
                             </div>
                             <div className="R_CC_Mn">
                                 <div className="R_CC_Mn_Main">
-                                    <h4>Upload file (optional)</h4>
+                                    <h4>Upload file</h4>
                                     <p>
                                         <b>Note:</b> The uploaded file is solely for internal records management purposes and will not be visible to the verifier or the general public.
                                     </p>
